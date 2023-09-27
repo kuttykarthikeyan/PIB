@@ -181,7 +181,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 .foot{
   
     background-color: #072D0B;
-    width: 100%;
+    width: 100vw;
     height:9.5rem;
 }
 .pib{
@@ -190,21 +190,23 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
     border-radius: 40px;
     margin-top: 1em;
 }
-.foot-1{
+.foot-1,.foot-2{
     display: flex;
-    flex-direction: row;
+    width:100vw;
     justify-content: space-between;
     padding-left: 0%;
-    margin-right: 45em;
-    margin-top: 33.2em;
-    margin-left: 2em;
+   
 }
+
 .foot-2{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 1em;
-    margin-right: 23em;
+    height: 60px;
+    align-items: center !important;
+    justify-content: space-around !important;
+}
+
+.foot-2 p{
+    color: #FFF;
+    font-family: 'Adamina', serif; 
 }
 .gov{
     width: 14em;
@@ -224,9 +226,8 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 .pibinfo1{
     display: flex;
     flex-direction: row;
-    margin-left: 20em;
 }
-.rash{
+.pibinfo1 p{
     width: 14em;
     height: 1.5em;
     color: #FFF;
@@ -236,21 +237,12 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
     margin-top: 2em;
     margin-left: 4em;
 }
-.cont{
-    width: 14em;
-    height: 1.5em;
-    color: #FFF;
-    font-family: 'Adamina', serif;
-    margin-top: 0%;
-    font-size:  medium;
-    margin-top: 2em;
-    margin-left: 20em;
-}
+
 .line{
     margin-top: 0.8em;
 }
 .lines{
-    width: 85em;
+    width: 95em;
     margin-left: 4em;
 }
 .follow{
