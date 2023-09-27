@@ -5,22 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Home</title>
 </head>
 <body>
+   
     <nav>
-        <div class="nav1">
-            awdawdw
+<div class="nav1">
+    <div class='options-nav1'>
+    <ul>
+        <li><select class='select-religion'>
+            <option>Religion</option>
+        </select></li>
+    </ul>
+    <ul>
+        <li><select class='select-Language'>
+            <option>Language</option>
+        </select></li>
+    </ul>
+    <button class='search-button'><i class='fa fa-search'></i></button>
+</div>
+</div>
+
+
+        <div class='navmiddle'>
+            <img class='image-nav' src='{% static "pib.jpg" %}'/>
+            <ul class ='namelist'>
+                <li>Press Information Bureau</li>
+                <li class='name-goverment'>Goverment of India <image class='asoka'src="{% static 'asoka.jpg'%}"/></li>
+            </ul>
+        </div>
+        <div class="nav2">
+ <div class='burger'>
+    <button class='button-burger'><i class="fa fa-bars"></i></button>
+ </div>
         </div>
     </nav>
-    <footer class="foot">
-        <div>
-            <img src="" alt="">
-        </div>
-        <span></span>
-        <div>
-
-        </div>
-    </footer>
+    
 </body>
 </html>
