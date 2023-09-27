@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
     <title>Home</title>
 </head>
 <body>
@@ -14,12 +17,32 @@
         </div>
     </nav>
     <footer class="foot">
-        <div>
-            <img src="" alt="">
+        <div class="foot-1">
+            <div class="pibinfo">
+            <img src="{% static 'pib.jpg' %}" class="pib">
+            <p class="gov">Press Information Bureau Government of India</p>
+            </div>
+            <div class="pibinfo1">
+            <p class="rash">The Rashtrapati Bhavan</p>
+            <p class="cont">Contact Us</p>
+            </div>
         </div>
-        <span></span>
-        <div>
-
+        <div class="line">
+            <hr class="lines">
+        </div>
+        <div class="foot-2">
+            <div>
+            <p class="follow">FOLLOW US</p>
+            </div>
+            <div>
+            <p class="privacy">Privacy Policy</p>
+            </div>
+            <div>
+            <p class="access">Accessibility Statement</p>
+            </div>
+            <div>
+            <p class="copy">Copyright Information</p>
+            </div>
         </div>
     </footer>
 </body>

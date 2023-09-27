@@ -1,5 +1,7 @@
 *{
-    color:red;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 
@@ -12,5 +14,107 @@
 .foot{
     background-color: #072D0B;
     width: 100%;
-    height:3rem;
+    height:9.5rem;
+}
+.pib{
+    width: 4em;
+    height: 4em;
+    border-radius: 40px;
+    margin-top: 1em;
+}
+.foot-1{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0%;
+    margin-right: 45em;
+    margin-top: 33.2em;
+    margin-left: 2em;
+}
+.foot-2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-right: 23em;
+}
+.gov{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    margin-top: 0%;
+    font-size: medium;
+    margin-left: 1.2em;
+    margin-top: 2em;
+}
+.pibinfo{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2em;
+}
+.pibinfo1{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20em;
+}
+.rash{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    margin-top: 0%;
+    font-size: medium;
+    margin-top: 2em;
+    margin-left: 4em;
+}
+.cont{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    margin-top: 0%;
+    font-size:  medium;
+    margin-top: 2em;
+    margin-left: 20em;
+}
+.line{
+    margin-top: 0.8em;
+}
+.lines{
+    width: 85em;
+    margin-left: 4em;
+}
+.follow{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    margin-top: 1%;
+    font-size:  medium;
+    margin-left: 4em;
+}
+.privacy{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    font-size:  medium;
+    margin-left: 8em;
+}
+.access{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    font-size:  medium;
+    margin-left: 8em;
+}
+.copy{
+    width: 14em;
+    height: 1.5em;
+    color: #FFF;
+    font-family: 'Adamina', serif;
+    font-size:  medium;
+    margin-left: 16em;
 }
