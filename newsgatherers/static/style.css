@@ -11,7 +11,7 @@ nav{
 .nav1{
     width: 100vw;
     height: 80px;
-    background-color: #EB9A20;
+    background-color: #EB6920;
     display: flex;
     align-items: center;
     justify-content: right;
@@ -144,7 +144,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 .nav2{
     width: 100vw;
     height: 80px;
-    background-color: rgba(28, 7, 45, 0.98);
+    background-color: #0B1530;
     display: flex;
     align-items: center;
     justify-content: flex-end;

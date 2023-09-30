@@ -12,9 +12,8 @@
     <title>Home</title>
 </head>
 <body>
-   
     <nav>
-<div class="nav1">
+        <div class="nav1">
     <div class='options-nav1'>
     <ul>
         <li><select class='select-religion'>
@@ -31,19 +30,23 @@
 </div>
 
 
-        <div class='navmiddle'>
-            <img class='image-nav' src='{% static "pib.jpg" %}'/>
-            <ul class ='namelist'>
+<div class='navmiddle'>
+    <img class='image-nav' src='{% static "pib.jpg" %}'/>
+    <ul class ='namelist'>
                 <li>Press Information Bureau</li>
                 <li class='name-goverment'>Goverment of India <image class='asoka'src="{% static 'asoka.jpg'%}"/></li>
             </ul>
         </div>
         <div class="nav2">
  
-    <button class='button-burger'><i class="fa fa-bars"></i></button>
-
+            <button class='button-burger'><i class="fa fa-bars"></i></button>
+            
         </div>
     </nav>
+    {% block content %}
+
+    
+     {% endblock %} 
 {% comment %} <footer class="foot">
         <div class="foot-1">
             <div class="pibinfo">
