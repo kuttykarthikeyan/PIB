@@ -1,4 +1,4 @@
-{% comment %} {% load static %}
+ {% load static %}
 
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,18 +27,19 @@
 								<div class="w-100">
 									<p class="social-media d-flex justify-content-end">
 										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-										<a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
+        								<a href="{% url 'social:begin' 'google-oauth2' %}" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google"></span></a>
 									</p>
 								</div>
 			      	</div>
 							<form method='post' class="signin-form">
+								{% csrf_token %}
 			      		<div class="form-group mt-3">
-			      			<input type="email" class="form-control" required>
+			      			<input type="email" name='email' class="form-control" required>
 			      			<label class="form-control-placeholder" for="email">Email</label>
 			      		</div>
 		            <div class="form-group">
-		              <input id="password-field" type="password" class="form-control" required>
-		              <label class="form-control-placeholder" name='password' for="password">Password</label>
+		              <input id="password-field" type="password" name='password' class="form-control" required>
+		              <label class="form-control-placeholder"  for="password">Password</label>
 		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 		            </div>
 		            <div class="form-group">
@@ -56,7 +57,7 @@
 									</div> 
 		            </div> {% endcomment %}
 		          </form>
-		          <p class="text-center">Not a member? <a data-toggle="tab" href="#signup">Sign Up</a></p>
+		          <p class="text-center">Not a member? <a data-toggle="tab" href="{% url 'signup' %}">Sign Up</a></p>
 		        </div>
 		      </div>
 				</div>
@@ -70,4 +71,3 @@
   <script src="js/main.js"></script>
 
 	</body>
- {% endcomment %}

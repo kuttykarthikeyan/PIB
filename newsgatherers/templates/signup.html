@@ -22,7 +22,7 @@
 						<div class="login-wrap p-4 p-md-5">
 			      	<div class="d-flex">
 			      		<div class="w-100">
-			      			<h3 class="mb-4">Sign In</h3>
+			      			<h3 class="mb-4">Sign Up</h3>
 			      		</div>
 								<div class="w-100">
 									<p class="social-media d-flex justify-content-end">
@@ -32,6 +32,7 @@
 								</div>
 			      	</div>
 							<form method='post' class="signin-form">
+								{% csrf_token %}
 			      		<div class="form-group mt-3">
 			      			<input type="Firstname" name="firstname" class="form-control" required>
 			      			<label class="form-control-placeholder" for="firstname">First Name</label>
@@ -45,12 +46,18 @@
                             <label class="form-control-placeholder" for="email">Email</label>
                         </div>
 		            <div class="form-group">
-		              <input id="password-field" type="password" class="form-control" required>
-		              <label class="form-control-placeholder" name='password' for="password">Password</label>
+		              <input id="password-field" type="password" name='password' class="form-control" required>
+		              <label class="form-control-placeholder" for="password">Password</label>
+		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+		            </div>
+					<div class="form-group">
+		              <input id="password-field" type="password" name='confirm_password' class="form-control" required>
+		              <label class="form-control-placeholder"  for="password">Confirm Password</label>
 		              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 		            </div>
 		            <div class="form-group">
-		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign In</button>
+		            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
+		            </div>
 		            </div>
 		            {% comment %} <div class="form-group d-md-flex">
 		            	<div class="w-50 text-left">
