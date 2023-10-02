@@ -12,14 +12,14 @@ def login(request):
 
         email= request.POST['email']
         password = request.POST['password']
-        # user = auth.authenticate(email=email,password=password)
+        user = auth.authenticate(email=email,password=password)
 
-        # if user is not None:
-        #     auth.login(request,user)
-        #     return redirect('home')
-        # else:
-        #     messages.info(request,"Inavlid Username or Password")
-        #     return redirect('login')
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request,"Inavlid Username or Password")
+            return redirect('login')
     
     return render(request,'login.html')
 
@@ -48,3 +48,6 @@ def signup(request):
 def logout(request):
     auth.logout(request)
     return redirect('home')
+
+def admin_dashboard(request):
+    return render(request,'admin_dashboard.html')

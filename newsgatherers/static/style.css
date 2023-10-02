@@ -8,10 +8,17 @@ nav{
     width:100vw;
 }
 
+:root{
+    --navHeight: 80px;
+    --side-navHeight: calc(100vh - var(--navHeight));
+    --nav-listHeight:calc((var(--side-navHeight) - 2.5vh));
+    --right-sectionwidth: calc(100vw - 14vw);
+}
+
 .nav1{
     width: 100vw;
-    height: 80px;
-    background-color: #EB6920;
+    height: 40px;
+    background-color: #0B1530;
     display: flex;
     align-items: center;
     justify-content: right;
@@ -24,7 +31,7 @@ nav{
     background: none;
     border: none;
     font-family: 'Adamina', serif;
-    font-size: 16px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -49,7 +56,7 @@ ul{
     background: none;
     border: none;
     font-family: 'Adamina', serif;
-    font-size: 16px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -62,7 +69,7 @@ ul{
     background: none;
     border: none;
     font-family: 'Adamina', serif;
-    font-size: 25px;
+    font-size: 10px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
@@ -70,42 +77,37 @@ ul{
 }
 
 
-/* .button-burger{
-    
-} */
+
 .navmiddle{
-    
     position: absolute;
     width: 100vh;
-    height: 160px;
+    height: 80px;
     top:0;
-    left: 90px;
+    left: 20px;
     z-index: 999;
     display: flex;
     align-items: center;
     justify-content: left;
+    /* justify-content: space-between; */
 }
 
 .name-goverment{
   
     align-items: center;
-    color: #FFF;
+    color: #fff;
     font-family: 'Adamina', serif;
-    font-size: 36px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     line-height: normal; 
 }
 
-
-
-
-
 .namelist{
-height: 100px;
-color: #000;
+height: 30px;
+color: #fff;
 font-family: 'Adamina', serif;
-font-size: 36px;
+font-size: 20px;
+margin-left: 20px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
@@ -118,7 +120,7 @@ flex-direction: column;
 .namelist li{
     display: block;
     justify-content: space-around;
-    margin: 0 20px;
+ 
     position: relative;
     cursor: pointer;
     transition: 0.5s;
@@ -134,16 +136,16 @@ background: url(<path-to-image>), lightgray 40% / cover no-repeat;
 }
 
 .image-nav{
-width: 118.354px;
-height: 110.658px;
+width: 60.354px;
+height: 57.658px;
 flex-shrink: 0;
-border-radius: 158.658px;
+border-radius: 190.658px;
 background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 }
 
 .nav2{
     width: 100vw;
-    height: 80px;
+    height: 40px;
     background-color: #0B1530;
     display: flex;
     align-items: center;
@@ -155,7 +157,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
     margin-right: 60px;
     border: none;
     color: #fff;
-    font-size: 26px;
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -179,10 +181,12 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 
 
 .sidenav {
+    position: absolute;
+    z-index: -1;
   height: 100%;
   width: 14vw;
   position: fixed;
-  z-index: 1;
+  z-index: 999;
   left: 0;
   background-color: #1C072DFA;
   overflow-x: hidden;
@@ -334,4 +338,257 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
     font-family: 'Adamina', serif;
     font-size:  medium;
     margin-left: 16em;
+}
+
+.parent-section{
+    height: calc(100vh - var(--navHeight));;
+    width: 100vw;
+    display: flex;
+}
+
+
+.side-nav{
+    width: 13.3vw;
+    height: var(--nav-listHeight);
+    border-radius: 8px;   
+    border: 0.1px solid #a8a6a6;
+    background: rgba(255, 255, 255, 0.80);
+    box-shadow: 15px 2px 30px 0px rgba(0, 0, 0, 0.12);
+   
+}
+
+
+.Dashboard-heading{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.admin-dashboard-list{
+    width: 100%;
+    height: 28rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.admin-dashboard-list li{
+    list-style: none;
+    /* background-color: rgba(11, 21, 48, 0.98); */
+    width: 75%;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.side-nav-active{
+    background-color: rgba(11, 21, 48, 0.98);;
+    color: #ffffff !important;
+}
+
+.active-a{
+    color: #ffffff !important;
+}
+
+
+
+.admin-dashboard-list a{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+   
+text-decoration: none;
+color: #000;
+text-align: center;
+font-family: 'Inter', sans-serif;
+font-size: 13px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+letter-spacing: 0.105px;
+    
+}
+
+.fa{
+    font-size: 20px;
+}
+
+.right-section{
+    height: var(--nav-listHeight);
+    width:  var(--right-sectionwidth);
+  
+}
+
+.pib_cover{
+    object-fit: cover;
+    position: absolute;
+    z-index: -1;
+    width: var(--right-sectionwidth);
+height: 20vh;
+flex-shrink: 0;
+    border: 1.051px solid #ffffff;
+background: url(<path-to-image>), rgb(255, 255, 255) 50% / cover no-repeat;
+box-shadow: 0px 4.20286px 8.40571px 0px rgba(247, 246, 246, 0.959) inset, 0px 4.20286px 42.02857px 0px rgba(238, 237, 237, 0.959);
+backdrop-filter: blur(52.53571701049805px);
+}
+
+.content-handler{
+    width: 100%;
+    height: calc(var(--nav-listHeight) - 15vh);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    
+}
+
+.contents {
+    /* border-radius: 10px; */
+    /* border: 0.5px solid #c5c1c1; */
+    /* background: #FFF; */
+    /* box-shadow: 0px 40px 40px 0px rgba(0, 0, 0, 0.25); */
+    /* backdrop-filter: blur(40px); */
+    width: 70%;
+    height: calc(var(--nav-listHeight) - 15vh);
+    /* background-color: #ffffff; */
+    z-index: 989;
+    position: absolute;
+    bottom: 2rem;
+    overflow-y: scroll; 
+   
+    box-sizing: border-box;
+}
+
+.news-card {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    z-index: 999;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    flex-wrap: wrap;
+    /* border: 1px  solid #000; */
+    box-shadow: 15px 2px 30px 0px rgba(0, 0, 0, 0.25);
+}
+
+.header-card{
+
+    box-shadow: 1px 0px 0px 0px rgba(230, 229, 229, 0.25);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    color: #3f040e;
+    justify-content: center;
+}
+
+.news-tone-card{
+    width: 100%;
+    height: 30px;
+    justify-content: space-around;
+    align-items: center;
+
+    display: flex;
+    
+}
+
+.news-contents-list{
+width: 60%;
+min-height: 100%;
+display: flex;
+flex-direction: column;
+min-height: 8.5rem;
+justify-content: space-around;
+}
+
+.news-image-card{
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tone-card{
+    width: 27%;
+    height: 100%;
+    align-items: center;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.positive-block,.neutral-block,.negative-block{
+    width: 70%;
+    height: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+text-align: center;
+font-family: Inter;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+}
+
+
+.positive-block{
+    background-color: #259323;
+}
+.negative-block{
+background-color: #D13647;
+}
+.neutral-block{
+    background-color: #1C3470;
+}
+.news-image{
+    object-fit: cover;
+width: 70%;
+height: 60%;
+flex-shrink: 0;
+    background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+}
+
+.tone-percentage{
+    margin-left: 10px;
+    color: #000;   
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    
+}
+
+.news-content-title{
+    color: #0B1530;
+    font-family: 'Inter', sans-serif;
+font-size: 16px;
+
+font-style: normal;
+font-weight: 700;
+line-height: 26px;
+margin-top: 1rem;
+margin-bottom: 1rem;
+}
+
+.news-content-publisher{
+    color: #FF001B;
+    font-family: 'Inter', sans-serif;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
 }
