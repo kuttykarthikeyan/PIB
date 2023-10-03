@@ -19,15 +19,19 @@
             Dashboard</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-laptop"></i>Media Websites</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-circle-play"></i>Youtube Videos</a></li>
-            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>E-Prints</a></li>
+            <div class="side-4">
+            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
+            </div>
         <li ><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>Social Media Analysis</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-chart-line"></i>Future Trends</a></li>
+        <div class="side-4">
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-users"></i>Reports</a></li>
+        </div>
     </ul>
 </div>
 
 <div class='right-section'>
-    <image class='pib_cover' src='{% static  "pib_cover.png" %}' alt='loading'/>
+    <img class='pib_cover' src='{% static  "pib_cover.png" %}' alt='loading'/>
     <div class='content-handler'>
     <div class='contents'>
         {% comment %}  {% endcomment %}
