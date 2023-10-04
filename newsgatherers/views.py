@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
-
+from .models import *
+import pandas as pd
+import json
 
 def home(request):
     return render(request, 'home.html')
@@ -47,4 +49,20 @@ def logout(request):
     return redirect('home')
 
 def admin_dashboard(request):
-    return render(request,'admin_dashboard.html')
+    context = {}
+    latest_news = News.objects.all()
+    for news in latest_news:
+        data = pd.read_csv(news.data, low_memory=False)
+
+    json_data = data.reset_index().to_json(orient ='records')
+    data = []
+    data = json.loads(json_data)
+    print(data)
+    context = {"data":data}
+
+    return render(request,'admin_dashboard.html',context)
+
+
+def article(request,url):
+    print(url)
+    return render(request,'article.html')

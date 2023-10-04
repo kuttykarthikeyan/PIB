@@ -16,7 +16,7 @@ nav{
 }
 
 .nav1{
-    width: 100vw;
+    width: 100%;
     height: 40px;
     background-color: #0B1530;
     display: flex;
@@ -80,10 +80,10 @@ ul{
 
 .navmiddle{
     position: absolute;
-    width: 100vh;
+    width: 100%;
     height: 80px;
     top:0;
-    left: 20px;
+    left: 0;
     z-index: 999;
     display: flex;
     align-items: center;
@@ -144,7 +144,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 }
 
 .nav2{
-    width: 100vw;
+    width: 100%;
     height: 40px;
     background-color: #0B1530;
     display: flex;
@@ -154,7 +154,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 
 .button-burger{
     background: none;
-    margin-right: 60px;
+    margin-right: 10px;
     border: none;
     color: #fff;
     font-size: 16px;
@@ -174,7 +174,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
 }
 
 .name-government {
-    margin-left: 10px; /* Adjust the margin as needed */
+    margin-left: 10px; 
 }
 
 
@@ -193,7 +193,7 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
   padding-top: 20px;
 }
 
-/* Style the sidenav links and the dropdown button */
+
 .sidenav a, .dropdown-btn {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
@@ -208,25 +208,25 @@ background: url(<path-to-image>), lightgray 50% / cover no-repeat;
   outline: none;
 }
 
-/* On mouse-over */
+
 .sidenav a:hover, .dropdown-btn:hover {
   color: #f1f1f1;
 }
 
-/* Main content */
+
 .main {
-  margin-left: 200px; /* Same as the width of the sidenav */
-  font-size: 20px; /* Increased text to enable scrolling */
+  margin-left: 200px; 
+  font-size: 20px; 
   padding: 0px 10px;
 }
 
-/* Add an active class to the active dropdown button */
+
 .active {
   background-color: green;
   color: white;
 }
 
-/* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
+
 .dropdown-container {
   display: none;
   background-color: #262626;
@@ -432,7 +432,7 @@ letter-spacing: 0.105px;
 .pib_cover{
     object-fit: cover;
     z-index: -1;
-    width: var(--right-sectionwidth);
+    width: 100%;
 height: 20vh;
 flex-shrink: 0;
     border: 1.051px solid #ffffff;
@@ -443,7 +443,8 @@ backdrop-filter: blur(52.53571701049805px);
 .content-handler{
     width: 100%;
     height: calc(var(--nav-listHeight) - 15vh);
-    z-index: 5;
+    /* position: absolute;
+    z-index: 5; */
     display: flex;
     justify-content: center;
     
@@ -463,7 +464,7 @@ backdrop-filter: blur(52.53571701049805px);
     bottom: 2rem;
     overflow-y: scroll; 
    
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
 }
 
 .news-card {
@@ -590,9 +591,9 @@ font-style: normal;
 font-weight: 500;
 line-height: normal;
 }
-.side-4{
+/* .side-4{
     display: flex;
     flex-direction: row;
     width: 70%;
-}
+} */
 
