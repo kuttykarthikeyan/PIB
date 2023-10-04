@@ -61,3 +61,8 @@ def admin_dashboard(request):
     context = {"data":data}
 
     return render(request,'admin_dashboard.html',context)
+
+
+def article(request,url):
+    print(url)
+    return render(request,'article.html')
