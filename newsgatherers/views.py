@@ -54,10 +54,16 @@ def admin_dashboard(request):
     for news in latest_news:
         data = pd.read_csv(news.data, low_memory=False)
 
-    json_data = data.reset_index().to_json(orient ='records')
+    read_df = data.reset_index()
+    df_list = read_df.values.tolist()
+    df_list = [ i for i in df_list if int(i[7][0]) < 1 ]
+    filter_df = pd.DataFrame(data=df_list,columns=read_df.columns)
+
+    json_data = filter_df.to_json(orient ='records')
+
     data = []
     data = json.loads(json_data)
-    print(data)
+    
     context = {"data":data}
 
     return render(request,'admin_dashboard.html',context)

@@ -50,6 +50,10 @@
           {% comment %} <a href="{% url 'article' url=news.url %}"><p class='news-content-title'>{{news.title}}</p></a> {% endcomment %}
       </li>
       <li class='news-tone-card'>
+      <div class="tone-card">
+              <div class='positive-block'>Published Date</div>
+              <p class='tone-percentage'>{{news.published_time_ago}}</p>
+          </div>
           <div class="tone-card">
               <div class='positive-block'>Postive</div>
               <p class='tone-percentage'>{{news.POSITIVE}}</p>
