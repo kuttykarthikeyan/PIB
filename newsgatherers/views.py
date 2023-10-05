@@ -66,6 +66,8 @@ def admin_dashboard(request):
     json_data = data.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_data)
+    
+    context = {"data":data}
 
     context = {"data":data,"all_data":latest_news}
 
