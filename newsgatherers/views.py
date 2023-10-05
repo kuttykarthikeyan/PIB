@@ -49,7 +49,7 @@ def signup(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('home')
+    return redirect('admin_dashboard')
 
 def admin_dashboard(request):
     context = {}
@@ -57,14 +57,16 @@ def admin_dashboard(request):
     for news in latest_news:
         data = pd.read_csv(news.data, low_memory=False)
         data['id'] = news.id
-        print(data['published_time_ago'])
+        data['POSITIVE'] = round(data['POSITIVE']*100,2)
+        data['NEGATIVE'] = round(data['NEGATIVE']*100,2)
+        data['NEUTRAL'] = round(data['NEUTRAL']*100,2)
+ 
+        
+            
     json_data = data.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_data)
 
-
-   
-    # print(data)
     context = {"data":data,"all_data":latest_news}
 
     return render(request,'admin_dashboard.html',context)
