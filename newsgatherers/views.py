@@ -3,8 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.models import User,auth
 from .models import *
 import pandas as pd
+from newspaper import Article
 import json
-
+import datetime
+from newsgatherers.scripts.urlmapper import *
 def home(request):
     return render(request, 'home.html')
 
@@ -22,6 +24,7 @@ def login(request):
     return render(request, 'login.html')
 
 def signup(request):
+
     if request.method == 'POST':
         firstname = request.POST['firstname']
         lastname = request.POST['lastname']
@@ -66,9 +69,33 @@ def admin_dashboard(request):
     
     context = {"data":data}
 
+
+   
+    # print(data)
+    context = {"data":data,"all_data":latest_news}
+
     return render(request,'admin_dashboard.html',context)
 
 
-def article(request,url):
-    print(url)
-    return render(request,'article.html')
+
+
+
+def article(request,index,id):
+    context={}
+    news = News.objects.get(id=id)
+    data = pd.read_csv(news.data, low_memory=False)
+    json_data = data.reset_index().to_json(orient ='records')
+    data = []
+    data = json.loads(json_data)
+    summary = {}
+    for article in data:
+        if article['index'] == index:
+            article_data = article
+            
+            url = article_data['url']
+            summary = get_summary_of_particular_news(url)
+            print(summary)
+            context={"summary":summary}
+            break
+    
+    return render(request,'article.html',context)

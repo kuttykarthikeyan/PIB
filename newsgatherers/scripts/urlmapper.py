@@ -1,5 +1,5 @@
 from newspaper import Article
-
+import nltk
 
 #A new article from TOI
 
@@ -7,7 +7,7 @@ url = 'https://news.google.com/rss/articles/CBMicmh0dHBzOi8vd3d3Lm1pbGxlbm5pdW1w
 #For different language newspaper refer above table
 
 def get_summary_of_particular_news(url):
-    
+    nltk.download('punkt')
     final_dict = {}
     toi_article = Article(url, language="en") # en for English
 
@@ -37,9 +37,8 @@ def get_summary_of_particular_news(url):
     # Article's publish_date:"
     final_dict['publish_date'] = toi_article.publish_date
     
+    print(final_dict)
     return final_dict
 
 
 
-r = get_summary_of_particular_news(url)
-print(r)
