@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    {% comment %} <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> {% endcomment %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link icon="{% static 'pib.jpg' %}">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,21 +15,7 @@
 </head>
 <body>
     <nav>
-        <div class="nav1">
-    <div class='options-nav1'>
-    <ul>
-        <li><select class='select-religion'>
-            <option>Region</option>
-        </select></li>
-    </ul>
-    <ul>
-        <li><select class='select-Language'>
-            <option>Language</option>
-        </select></li>
-    </ul>
-    <button class='search-button'><i class='fa fa-search'></i></button>
-</div>
-</div>
+
 
 
 <div class='navmiddle'>
@@ -38,12 +25,8 @@
                 <li class='name-goverment'>Goverment of India</li>
                 {% comment %} <image class='asoka'src="{% static 'asoka.jpg'%}" {% endcomment %}
             </ul>
-        </div>
-        <div class="nav2">
- 
-            <button class='button-burger'><i class="fa fa-bars"></i></button>
-            
-        </div>
+        </div> 
+
     </nav>
     {% block content %}
 
