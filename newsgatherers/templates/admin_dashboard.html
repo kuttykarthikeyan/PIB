@@ -55,10 +55,10 @@
           <input value="{{news.url}}" hidden>
       </li>
       <li class='news-tone-card'>
-      <div class="tone-card">
-              <div class='positive-block'>Published Date</div>
+        {% comment %}<div class="tone-card">
+              { <div class='positive-block'>Published Date</div>
               <p class='tone-percentage'>{{news.published_time_ago}}</p>
-          </div>
+          </div> {% endcomment %}
           <div class="tone-card">
               <div class='positive-block'>Postive</div>
               <p class='tone-percentage'>{{news.POSITIVE}}</p>
