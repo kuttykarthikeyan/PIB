@@ -9,7 +9,7 @@ import datetime
 from newsgatherers.scripts.urlmapper import *
 def home(request):
     return render(request, 'home.html')
-
+# Blood donation camp
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -17,7 +17,7 @@ def login(request):
         user = auth.authenticate(username=email, password=password)
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            return redirect('admin_dashboard')
         else:
             messages.info(request, "Invalid Username or Password")
 

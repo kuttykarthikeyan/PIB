@@ -132,8 +132,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-LOGIN_URL = 'home'
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'admin_dashboard'
+LOGIN_REDIRECT_URL = 'admin_dashboard'
 LOGOUT_URL = 'logout'
 LOGOUT_REDIRECT_URL = 'login'
 
