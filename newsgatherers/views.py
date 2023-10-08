@@ -7,9 +7,11 @@ from newspaper import Article
 import json
 import datetime
 from newsgatherers.scripts.urlmapper import *
+from .forms import Eprintsform
+
 def home(request):
     return render(request, 'home.html')
-# Blood donation camp
+
 def login(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -96,3 +98,36 @@ def article(request,index,id):
             break
     
     return render(request,'article.html',context)
+
+def admin_dashboards(request):
+    context = {}
+    latest_news = News.objects.all()
+    for news in latest_news:
+        data = pd.read_csv(news.data, low_memory=False)
+        data['id'] = news.id
+        
+ 
+        
+            
+    json_data = data.reset_index().to_json(orient ='records')
+    data = []
+    data = json.loads(json_data)
+    
+    context = {"data":data}
+
+    context = {"data":data,"all_data":latest_news}
+
+    return render(request,'admin_dashboards.html',context)
+
+def eprints(request):
+    forms = Eprintsform()
+    if request.method == 'POST':
+        forms = Eprintsform(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('eprint')
+    context={'forms':forms}
+    return render(request,'eprints.html',context)
+
+def eprint(request):
+    return render(request,'eprint.html')

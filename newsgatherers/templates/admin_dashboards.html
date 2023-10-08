@@ -36,7 +36,7 @@
         {% comment %}  {% endcomment %}
      
         <div class='news-card header-card'>
-            <h1 class='latest-releases'>Latest Releases</h1>
+            <h1 class='latest-releases'>Youtube Videos</h1>
             <span>___________________________</span>
         </div>
         
@@ -58,7 +58,7 @@
         {% comment %}<div class="tone-card">
                <div class='positive-block'>Published Date</div>
               <p class='tone-percentage'>{{news.published_time_ago}}</p>
-          </div> {% endcomment %}
+          </div> 
           <div class="tone-card">
               <div class='positive-block'>Postive</div>
               <p class='tone-percentage'>{{news.POSITIVE}}</p>
@@ -70,7 +70,7 @@
           <div class="tone-card">
               <div class='negative-block'>Negative</div>
               <p class='tone-percentage'>{{news.NEGATIVE}}</p>
-          </div>
+          </div>{% endcomment %}
       </li>
     </ul>
    

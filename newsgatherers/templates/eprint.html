@@ -42,48 +42,9 @@
     <img class='pib_cover' src='{% static  "pib_cover_new.png" %}' alt='loading'/>
     <div class='content-handler'>
       <div class='contents article_contents'>
-        {% if summary %}
-        <div class='article-header'>
-          <h1 class='article-title'>{{summary.Title}}</h1>
-          <img class='article-image' src='{{summary.Image}}' alt='loading'/>
+            
         </div>
-        <div class='summary-news'>
-          <h1 class="summary-title">Summary</h1>
-          <p class="summary-content">{{summary.Summary_article}}</p>
-        </div>
-        <div class='news-text'>
-          <h1 class="summary-title">Article</h1>
-          <p class="text-content">{{summary.main_text}}</p>
-        </div>
-        <div class='news-tone-cards'>
-            <div class="row">
-                  <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                  <h5 class="card-title">Positive</h5>
-                  <p class="card-text">With supporting text above as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Read more</a>
-                  </div>
-                  </div>
-            </div>
-            <div class="row">
-                  <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                  <h5 class="card-title">Neutral</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Read more</a>
-                  </div>
-                  </div>
-            </div>
-            <div class="row">
-                  <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                  <h5 class="card-title">Negative</h5>
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Read more</a>
-                  </div>
-                  </div>
-            </div>
-      </div>
+        
           <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
           <script>
             M.AutoInit();
@@ -92,7 +53,7 @@
     var instances = M.Collapsible.init(elems);
   });
           </script>
-{% endif %}
+
 </div>
 </div>
 </div>

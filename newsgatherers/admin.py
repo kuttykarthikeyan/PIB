@@ -4,3 +4,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(News)
+admin.site.register(youtube)
+admin.site.register(Eprints)

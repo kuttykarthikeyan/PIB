@@ -19,8 +19,8 @@
         <li class='side-nav-active '><a class='active-a' href="{% url 'admin_dashboard' %}"><i class="fa fa-table-columns"></i></i>
             Dashboard</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-laptop"></i>Media Websites</a></li>
-            <li><a href="{% url 'admin_dashboards' %}"><i class="fa fa-circle-play"></i>Youtube Videos</a></li>
-            <li><a href="{% url 'eprints' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
+            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-circle-play"></i>Youtube Videos</a></li>
+            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>Social Media Analysis</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-chart-line"></i>Future Trends</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-users"></i>Reports</a></li>
@@ -36,9 +36,72 @@
         {% comment %}  {% endcomment %}
      
         <div class='news-card header-card'>
-            <h1 class='latest-releases'>Latest Releases</h1>
+            <h1 class='latest-releases'>E-prints</h1>
             <span>___________________________</span>
         </div>
+        <form action="{% url 'eprints' %}" method="POST">
+        {% csrf_token %}
+        <input type="file" multiple>
+        <p>Drag your files here or click in this area.</p>
+        <button type="submit" href="admin_dashboard">Upload</button>
+        </form>
+        <style>
+            form{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -250px;
+  width: 500px;
+  height: 200px;
+  border: 4px dashed #fff;
+}
+form p{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 170px;
+  color: #ffffff;
+  font-family: Arial;
+}
+form input{
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+}
+form button{
+  margin: 0;
+  color: #fff;
+  background: #16a085;
+  border: none;
+  width: 508px;
+  height: 35px;
+  margin-top: -20px;
+  margin-left: -4px;
+  border-radius: 4px;
+  border-bottom: 4px solid #117A60;
+  transition: all .2s ease;
+  outline: none;
+}
+form button:hover{
+  background: #149174;
+	color: #0C5645;
+}
+form button:active{
+  border:0;
+}
+        </style>
+        <script>
+            $(document).ready(function(){
+  $('form input').change(function () {
+    $('form p').text(this.files.length + " file(s) selected");
+  });
+});
+        </script>
         
              
               {% for news in data%}
@@ -55,22 +118,7 @@
           <input value="{{news.url}}" hidden>
       </li>
       <li class='news-tone-card'>
-        {% comment %}<div class="tone-card">
-               <div class='positive-block'>Published Date</div>
-              <p class='tone-percentage'>{{news.published_time_ago}}</p>
-          </div> {% endcomment %}
-          <div class="tone-card">
-              <div class='positive-block'>Postive</div>
-              <p class='tone-percentage'>{{news.POSITIVE}}</p>
-          </div>
-          <div class="tone-card">
-              <div class='neutral-block'>Neutral</div>
-              <p class='tone-percentage'>{{news.NEUTRAL}}</p>
-          </div>
-          <div class="tone-card">
-              <div class='negative-block'>Negative</div>
-              <p class='tone-percentage'>{{news.NEGATIVE}}</p>
-          </div>
+        
       </li>
     </ul>
    
