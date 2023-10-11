@@ -9,12 +9,12 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from celery import Celery
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'newsgatherers',
     'social_django',
+    'rest_framework',
+    'apis',
 ]
 
 MIDDLEWARE = [
@@ -140,3 +142,11 @@ LOGOUT_REDIRECT_URL = 'login'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '502992725608-t4nsj0jn5g6mpvbn3g4sjjviv704s9m1.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6373"
+CELERY_RESULT_BACKEND = "redis://localhost:6373"
+
+# CELERY_BROKER_URL = "amqp://myuser:mypassword@localhost:6379/myvhost"
+# CELERY_RESULT_BACKEND = "redis://localhost:6379"

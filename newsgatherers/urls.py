@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin_dashboard/',views.admin_dashboard,name='admin_dashboard'),
     path('admin_dashboards/',views.admin_dashboards,name='admin_dashboards'),
     path('article/<int:index>/<int:id>',views.article,name='article'),
-    path('eprints',views.eprints,name='eprints'),
-    path('eprint',views.eprint,name='eprint'),
+    path('youtube_data_home/',views.youtube_data_home,name='youtube_data_home'),
+    path('youtube_data_analysis/<int:id>',views.youtube_data_analysis,name='youtube_data_analysis'),
+
+
 ]

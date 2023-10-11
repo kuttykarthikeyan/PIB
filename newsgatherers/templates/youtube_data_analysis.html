@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <h1>Home Page</h1>
+    <p> This is the home page</p>
+    <form method="post">
+        {% csrf_token %}
+<input type="text" name="id" id="id" class="form-control" value='{{youtube_video.id}}' > 
+    </form>
+    {% if youtube_video %}
+<h1>hello</h1>
+
+    {% endif %}
+
+    <script>
+        const id = document.getElementById('id').value;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+    fetch('/youtube_video_data_analysis/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+    })
+});  
+        </script>
+        {% endblock %}
+        
+        {% comment %} .catch(error => console.log('Error: ', error)); {% endcomment %}

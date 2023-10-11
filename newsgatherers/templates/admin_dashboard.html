@@ -19,8 +19,8 @@
         <li class='side-nav-active '><a class='active-a' href="{% url 'admin_dashboard' %}"><i class="fa fa-table-columns"></i></i>
             Dashboard</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-laptop"></i>Media Websites</a></li>
-            <li><a href="{% url 'admin_dashboards' %}"><i class="fa fa-circle-play"></i>Youtube Videos</a></li>
-            <li><a href="{% url 'eprints' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
+            <li><a href="{% url 'youtube_data_home' %}"><i class="fa fa-circle-play"></i>Youtube Videos</a></li>
+            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>Social Media Analysis</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-chart-line"></i>Future Trends</a></li>
         <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-users"></i>Reports</a></li>
@@ -39,6 +39,7 @@
             <h1 class='latest-releases'>Latest Releases</h1>
             <span>___________________________</span>
         </div>
+      
         
              
               {% for news in data%}
