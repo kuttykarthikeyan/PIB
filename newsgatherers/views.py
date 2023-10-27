@@ -122,7 +122,9 @@ def admin_dashboards(request):
 def eprints(request):
     forms = Eprintsform()
     if request.method == 'POST':
-        forms = Eprintsform(request.POST)
+        print("requws",request.FILES)
+        forms = Eprintsform(request.POST,request.FILES)
+        print('form',forms)
         if forms.is_valid():
             forms.save()
             return redirect('eprint')
@@ -130,4 +132,12 @@ def eprints(request):
     return render(request,'eprints.html',context)
 
 def eprint(request):
-    return render(request,'eprint.html')
+    prints = Eprints.objects.all()
+    context = {'prints':prints}
+    return render(request,'eprint.html',context)
+
+def newsanalysis(request):
+    return render(request,'newsanalysis.html')
+
+def youtubes(request):
+    return render(request,'youtube.html')

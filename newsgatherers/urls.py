@@ -11,4 +11,6 @@ urlpatterns = [
     path('article/<int:index>/<int:id>',views.article,name='article'),
     path('eprints',views.eprints,name='eprints'),
     path('eprint',views.eprint,name='eprint'),
+    path('newsanalysis',views.newsanalysis,name='newsanalysis'),
+    path('youtubes',views.youtubes,name='youtubes'),
 ]
