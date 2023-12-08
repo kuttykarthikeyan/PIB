@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<style>
+    form{
+        display: none;
+    }
+</style>
+<div><h4>Youtube data Analysis</h4></div>
+    
+    <form method="post">
+        {% csrf_token %}
+<input type="text" name="id" id="id" class="form-control" value='{{youtube_video.id}}' hidden> 
+    </form>
+
+
+
+<div id='dataHandler'></div>
+    <script>
+        const id = document.getElementById('id').value;
+        const dataHandler = document.getElementById('dataHandler');
+document.addEventListener('DOMContentLoaded', function() {
+    const formData = new FormData();
+    console.log('loading')
+    formData.append('id', id);
+    formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+    fetch('/youtube_video_data_analysis/', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+    })
+});  
+        </script>
+        {% endblock %}
+        
+        {% comment %} .catch(error => console.log('Error: ', error)); {% endcomment %}
