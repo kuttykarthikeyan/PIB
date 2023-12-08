@@ -23,3 +23,6 @@ class youtube(models.Model):
 class Eprints(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to="images/")
 
+class URL(models.Model):
+    URLs = models.URLField(max_length=300)
+

@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(News)
 admin.site.register(youtube)
 admin.site.register(Eprints)
+admin.site.register(URL)

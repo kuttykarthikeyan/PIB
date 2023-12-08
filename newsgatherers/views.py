@@ -140,4 +140,4 @@ def newsanalysis(request):
     return render(request,'newsanalysis.html')
 
 def youtubes(request):
-    return render(request,'youtube.html')
+    return render(request,'youtubes.html')
