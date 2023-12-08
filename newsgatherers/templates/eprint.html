@@ -3,27 +3,20 @@
 {% load static %}
 
 {% block content %}
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Adamina&family=Inter:wght@200;400&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Adamina&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Adamina&family=Roboto&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=AR+One+Sans&family=Adamina&family=Inter&family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 
 <section class='parent-section'>
+  
   <div class='side-nav'>
     <ul class='admin-dashboard-list'>
       <li class='side-nav-active '><a class='active-a' href="{% url 'admin_dashboard' %}"><i class="fa fa-table-columns"></i></i>
@@ -33,17 +26,736 @@
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>E-prints</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-newspaper"></i>Social Media Analysis</a></li>
             <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-chart-line"></i>Future Trends</a></li>
-            <li><a href="{% url 'admin_dashboard' %}"><i class="fa fa-users"></i>Reports</a></li>
+            <li><a href="{% url 'newsanalysis' %}"><i class="fa fa-users"></i>News Analysis</a></li>
             
     </ul>
 </div>
-
-<div class='right-section'>
+    
+    <div class='right-section'>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <img src="{% static 'cut1.jpg' %}" alt="loading">
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <img src="{% static 'cut2.jpg' %}" alt="loading">
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <img src="{% static 'cut3.jpg' %}" alt="loading">
+        </div>
+      </div>
     <img class='pib_cover' src='{% static  "pib_cover_new.png" %}' alt='loading'/>
     <div class='content-handler'>
+      {% for print in prints %} 
       <div class='contents article_contents'>
+        <h1 class="content-head">OCR With Object Detection</h1>
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+        <div class="content">
+        <div class="content-image">
+            {% if print.image %}
+          <img src="{{ print.image.url }}" class="image">
+          {% endif %}
+          </div>
+          <div style="margin-right: 130px;margin-top: 30px;">
+            <h6 style="font-size: medium;margin-bottom: 20px;">Json Response</h6>
+            <pre>
+        <code>
             
+            {
+                "time": 0.10475283699997817,
+                "image": {
+                    "width": 963,
+                    "height": 1500
+                },
+                "predictions": [
+                    {
+                        "x": 309,
+                        "y": 1094,
+                        "width": 112,
+                        "height": 146,
+                        "confidence": 0.9625078439712524,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 765.5,
+                        "y": 496,
+                        "width": 115,
+                        "height": 492,
+                        "confidence": 0.9602826237678528,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 79.5,
+                        "y": 515,
+                        "width": 115,
+                        "height": 432,
+                        "confidence": 0.9590305089950562,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 883.5,
+                        "y": 306,
+                        "width": 115,
+                        "height": 138,
+                        "confidence": 0.9562961459159851,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 309,
+                        "y": 1334,
+                        "width": 112,
+                        "height": 260,
+                        "confidence": 0.9554420113563538,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 653,
+                        "y": 996.5,
+                        "width": 116,
+                        "height": 335,
+                        "confidence": 0.9540694952011108,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 630.5,
+                        "y": 472.5,
+                        "width": 155,
+                        "height": 365,
+                        "confidence": 0.9521030187606812,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 884.5,
+                        "y": 993,
+                        "width": 113,
+                        "height": 344,
+                        "confidence": 0.9515404105186462,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 884.5,
+                        "y": 1333,
+                        "width": 115,
+                        "height": 260,
+                        "confidence": 0.9504672884941101,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 883.5,
+                        "y": 629.5,
+                        "width": 113,
+                        "height": 221,
+                        "confidence": 0.9499866962432861,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 423.5,
+                        "y": 1095.5,
+                        "width": 113,
+                        "height": 143,
+                        "confidence": 0.9477496147155762,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 540,
+                        "y": 1093,
+                        "width": 112,
+                        "height": 146,
+                        "confidence": 0.9463843107223511,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 194.5,
+                        "y": 1004.5,
+                        "width": 111,
+                        "height": 319,
+                        "confidence": 0.9436240196228027,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 654.5,
+                        "y": 1417,
+                        "width": 109,
+                        "height": 94,
+                        "confidence": 0.9425424933433533,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 482.5,
+                        "y": 1281,
+                        "width": 227,
+                        "height": 154,
+                        "confidence": 0.9424191117286682,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 540,
+                        "y": 1417.5,
+                        "width": 110,
+                        "height": 93,
+                        "confidence": 0.9422293305397034,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 655,
+                        "y": 709,
+                        "width": 110,
+                        "height": 72,
+                        "confidence": 0.9402996301651001,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 194,
+                        "y": 1346.5,
+                        "width": 112,
+                        "height": 233,
+                        "confidence": 0.9377455711364746,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 424,
+                        "y": 1416,
+                        "width": 108,
+                        "height": 94,
+                        "confidence": 0.9373826384544373,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 79.5,
+                        "y": 1159,
+                        "width": 117,
+                        "height": 610,
+                        "confidence": 0.9343768954277039,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 770,
+                        "y": 1417,
+                        "width": 110,
+                        "height": 92,
+                        "confidence": 0.9329700469970703,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 426,
+                        "y": 710,
+                        "width": 108,
+                        "height": 74,
+                        "confidence": 0.928559422492981,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 194.5,
+                        "y": 709,
+                        "width": 109,
+                        "height": 74,
+                        "confidence": 0.917747437953949,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 539.5,
+                        "y": 708.5,
+                        "width": 109,
+                        "height": 73,
+                        "confidence": 0.9155694246292114,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 352.5,
+                        "y": 390,
+                        "width": 411,
+                        "height": 202,
+                        "confidence": 0.9133362174034119,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 310,
+                        "y": 710.5,
+                        "width": 110,
+                        "height": 71,
+                        "confidence": 0.9117382764816284,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 79,
+                        "y": 71.5,
+                        "width": 116,
+                        "height": 117,
+                        "confidence": 0.9114066362380981,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 767.5,
+                        "y": 1050,
+                        "width": 113,
+                        "height": 226,
+                        "confidence": 0.9062768816947937,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 711.5,
+                        "y": 1276,
+                        "width": 231,
+                        "height": 144,
+                        "confidence": 0.9033176898956299,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 883.5,
+                        "y": 64.5,
+                        "width": 117,
+                        "height": 117,
+                        "confidence": 0.8783793449401855,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 273.5,
+                        "y": 981.5,
+                        "width": 31,
+                        "height": 47,
+                        "confidence": 0.8357422351837158,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 405,
+                        "y": 979.5,
+                        "width": 78,
+                        "height": 67,
+                        "confidence": 0.7970103621482849,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 880.5,
+                        "y": 445.5,
+                        "width": 99,
+                        "height": 119,
+                        "confidence": 0.6303574442863464,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 551.5,
+                        "y": 984,
+                        "width": 71,
+                        "height": 58,
+                        "confidence": 0.626028835773468,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    },
+                    {
+                        "x": 345.5,
+                        "y": 579.5,
+                        "width": 423,
+                        "height": 161,
+                        "confidence": 0.5929998159408569,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 440.5,
+                        "y": 896.5,
+                        "width": 163,
+                        "height": 99,
+                        "confidence": 0.40276357531547546,
+                        "class": "imagesrotation",
+                        "class_id": 0
+                    },
+                    {
+                        "x": 765,
+                        "y": 872,
+                        "width": 92,
+                        "height": 88,
+                        "confidence": 0.321146696805954,
+                        "class": "textarearotation",
+                        "class_id": 1
+                    }
+                ]
+            }
+
+        </code>
+    </pre>
+          </div>
+          <style>
+    /* Define the styles for the code block */
+    pre {
+        border: 1px solid #ccc;
+        background-color: #f4f4f4;
+        padding: 10px;
+        overflow: auto; /* Enable scrolling */
+        white-space: pre-wrap; /* Preserve line breaks and wrap text */
+        max-height: 300px; /* Set a maximum height for the scrollable area */
+        width: 400px;
+    }
+
+    code {
+        display: block;
+        font-family: "Courier New", monospace;
+        color: #333;
+    }
+</style>
+          </div>
+          <div id="wrapper">
+            <h1>Sentiment Analysis</h1>
+  <table id="keywords" cellspacing="0" cellpadding="0">
+    <thead>
+      <tr>
+        <th><span>Text</span></th>
+        <th><span>Positive</span></th>
+        <th><span>Neutral</span></th>
+        <th><span>Negative</span></th>
+        <th><span>Department</span></th>
+        <th><span>View Text</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="lalign">Goverment Policy</td>
+        <td>90%</td>
+        <td>10%</td>
+        <td>0%</td>
+        <td>Central Government <span></span></td>
+        <td>
+          <center><a href="" data-toggle="modal" id="modalOne" data-target="#exampleModalCenter"><i class="fas fa-eye fa-1x"
+                type="button"></i></a></center>
+                </td>
+              </tr>
+              <tr>
+                <td class="lalign">Terrorist Attack</td>
+                <td>0%</td>
+        <td>20%</td>
+        <td>80%</td>
+        <td>Ministry of Defence</td>
+        <td>
+            <center><a href="" data-toggle="modal" id="modalOne" data-target="#exampleModalCenter1"><i class="fas fa-eye fa-1x"
+                  type="button"></i></a></center>
+        </td>
+      </tr>
+      <tr>
+        <td class="lalign">Neet exam date</td>
+        <td>70%</td>
+        <td>30%</td>
+        <td>0%</td>
+        <td>Ministry of Education</td>
+        <td>
+          <center><a href="" data-toggle="modal" id="modalOne" data-target="#exampleModalCenter2"><i class="fas fa-eye fa-1x"
+                type="button"></i></a></center>
+                </td >
+      </tr>
+      
+    </tbody>
+  </table>
+          </div> 
+          <style>
+              @import url('https://fonts.googleapis.com/css?family=Amarante');
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+html { overflow-y: scroll; }
+body { 
+  background: #eee url('https://i.imgur.com/eeQeRmk.png'); /* https://subtlepatterns.com/weave/ */
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+  line-height: 1;
+  color: #585858;
+  padding: 22px 10px;
+  padding-bottom: 55px;
+}
+
+::selection { background: #5f74a0; color: #fff; }
+::-moz-selection { background: #5f74a0; color: #fff; }
+::-webkit-selection { background: #5f74a0; color: #fff; }
+
+br { display: block; line-height: 1.6em; } 
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+ol, ul { list-style: none; }
+
+input, textarea { 
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none; 
+}
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+strong, b { font-weight: bold; } 
+
+table { border-collapse: collapse; border-spacing: 0; }
+img { border: 0; max-width: 100%; }
+
+h1 { 
+  font-family: 'Amarante', Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 3.6em;
+  line-height: 1.7em;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+/** page structure **/
+#wrapper {
+  display: block;
+  width: 850px;
+  background: #fff;
+  margin: 0 auto;
+  padding: 10px 17px;
+}
+
+#keywords {
+  margin: 0 auto;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+
+#keywords thead {
+  cursor: pointer;
+  background: #c9dff0;
+}
+#keywords thead tr th { 
+  font-weight: bold;
+  padding: 12px 30px;
+  padding-left: 42px;
+}
+#keywords thead tr th span { 
+  padding-right: 20px;
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+}
+
+#keywords thead tr th.headerSortUp, #keywords thead tr th.headerSortDown {
+  background: #acc8dd;
+}
+
+#keywords thead tr th.headerSortUp span {
+  background-image: url('https://i.imgur.com/SP99ZPJ.png');
+}
+#keywords thead tr th.headerSortDown span {
+  background-image: url('https://i.imgur.com/RkA9MBo.png');
+}
+
+
+#keywords tbody tr { 
+  color: #555;
+}
+#keywords tbody tr td {
+  text-align: center;
+  padding: 15px 10px;
+}
+#keywords tbody tr td.lalign {
+  text-align: left;
+}
+          </style>
+          <script>
+            HTML CSS JSResult Skip Results Iframe
+$(function(){
+  $('#keywords').tablesorter(); 
+});
+          </script>
+  <div>
+    <div>
+    
+    </div>
+  </div>
+          <div class="pagination-wrapper" style="padding-left: 300px;">
+  <div class="pagination">
+    <a class="prev page-numbers" href="javascript:;">prev</a>
+    <a class="page-numbers" href="javascript:;">1</a>
+    <a class="page-numbers" href="javascript:;">2</a>
+    <a class="page-numbers" href="javascript:;">3</a>
+    <a class="next page-numbers" href="javascript:;">next</a>
+  </div>
+          </div>
+          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
+          <style>
+            //----------  responsive breakpoints
+//------------------------------------------------------------------------------
+@mixin breakpoint ($value) {
+  @if $value == 'phone' {
+    @media only screen and (min-width: 120px) and (max-width: 767px) { @content; }
+  } @else if $value == 'tablet' {
+    @media only screen and (min-width: 768px) and (max-width: 1024px) { @content; }
+  } @else if $value == 'touch' {
+    @media only screen and (min-width: 120px) and (max-width: 1024px) { @content; }
+  } @else if $value == 'desktop' {
+    @media only screen and (min-width: 1025px) { @content; }
+  } @else {
+    @media only screen and (max-width: $value) { @content; }
+  }
+}
+
+// Colors
+$white: #fff;
+$black: #000;
+$grey: #595959;
+$grey-dark: #2b2b2b;
+$grey-light: #eee;
+$green: #86c023;
+$blue: #017ac7;
+
+// Transition
+$duration: 400ms;
+$easing: ease;
+
+//----------  reset
+//------------------------------------------------------------------------------
+htm,
+body {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+//----------  pagination
+//------------------------------------------------------------------------------
+.pagination-wrapper {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.pagination {
+	display: inline-block;
+	height: 70px;
+	margin-top: 70px;
+	padding: 0 25px;
+	border-radius: 35px;
+	background-color: $grey-light;
+
+	@include breakpoint(1199px) {
+		height: 50px;
+		margin-top: 50px;
+		padding: 0 10px;
+		border-radius: 25px;
+	}
+}
+
+.page-numbers {
+	display: block;
+	padding: 0 25px;
+	float: left;
+	transition: $duration $easing;
+	color: $grey;
+	font-size: 20px;
+	letter-spacing: 0.1em;
+	line-height: 70px;
+
+	&:hover,
+	&.current {
+		background-color: $green;
+		color: $white;
+	}
+
+	&.prev:hover,
+	&.next:hover {
+		background-color: transparent;
+    color: $green;
+	}
+
+	@include breakpoint(1199px) {
+		padding: 0 15px;
+		font-size: 16px;
+		line-height: 50px;
+	}
+
+	@include breakpoint(touch) {
+		padding: 0 14px;
+		display: none;
+
+		&:nth-of-type(2) {
+			position: relative;
+			padding-right: 50px;
+
+			&::after {
+				content: '...';
+				position: absolute;
+				font-size: 25px;
+				top: 0;
+				left: 45px;
+			}
+		}
+
+		&:nth-child(-n+3),
+		&:nth-last-child(-n+3) {
+			display: block;
+		}
+
+		&:nth-last-child(-n+4) {
+			padding-right: 14px;
+
+			&::after {
+				content: none;
+			}
+		}
+	}
+}
+          </style>
         </div>
+      {% endfor %}
         
           <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
           <script>
@@ -108,6 +820,27 @@
   .news-tone-cards{
     display: flex;
 
+  }
+  .image{
+    width: 60%;height: 70%;margin-top: 20px;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 10px;
+    margin-left: 50px;
+  }
+  .content-output{
+    width: 400px;
+    height: 30%;
+    margin-right: 160px;
+    margin-top: 20px;
+    font-size: 8px;
+  }
+  .content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .content-head{
+    color: #3f040e;
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
   }
 </style>
 

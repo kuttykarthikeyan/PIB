@@ -24,6 +24,8 @@ class Eprints(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to="images/")
 
 class youtube_csv(models.Model):
+class URL(models.Model):
+    URLs = models.URLField(max_length=300)
 
     data = models.FileField(upload_to='csv_files/')
     published_time = models.DateTimeField()
