@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Adamina&family=Inter:wght@200;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% block content %}
+
+{% comment %}  {% endcomment %}
+<style>
+    h1{
+        {% comment %} font-size: 20px; {% endcomment %}
+        color: #000000;
+        text-align: center;
+        margin-top: 30px;
+    }
+    .container{
+        width: 100%;
+        min-height: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    #video{
+        display: none;
+        width: 40%;
+        height: 60%;
+    
+    }
+</style>
+{% comment %}  {% endcomment %}
+<h1><center><strong>Text to Video</strong></center></h1>
+    <div class="container">
+        <h2>Prime Minister greets people on Nuakhai
+            Posted On: 20 SEP 2023 8:06PM by PIB Delhi
+            The Prime Minister has greeted the people on the auspicious occasion of Nuakhai.</h2>
+<center><button id="butoon" class="btn btn-primary" onClick="showVideo()">Convert to Video</button></center>
+            <video controls autoplay id='video'>
+                <source src="{% static  'video.mp4' %}" type="video/mp4">
+
+              </video>
+    </div>
+
+
+<script>
+    function showVideo(){
+      video =  document.getElementById('video')
+      console.log(video)
+      container = document.querySelector('.container')
+      container.style.height = '70%'
+        video.style.display = 'block'
+        button = document.getElementById('butoon')
+        button.style.display = 'none'  
+    }
+</script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

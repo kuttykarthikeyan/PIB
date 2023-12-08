@@ -3,22 +3,27 @@
 
 
 {% block content %}
-    <h1>Home Page</h1>
-    <p> This is the home page</p>
+<style>
+    form{
+        display: none;
+    }
+</style>
+<div><h4>Youtube data Analysis</h4></div>
+    
     <form method="post">
         {% csrf_token %}
-<input type="text" name="id" id="id" class="form-control" value='{{youtube_video.id}}' > 
+<input type="text" name="id" id="id" class="form-control" value='{{youtube_video.id}}' hidden> 
     </form>
-    {% if youtube_video %}
-<h1>hello</h1>
 
-    {% endif %}
 
+
+<div id='dataHandler'></div>
     <script>
         const id = document.getElementById('id').value;
-
+        const dataHandler = document.getElementById('dataHandler');
 document.addEventListener('DOMContentLoaded', function() {
     const formData = new FormData();
+    console.log('loading')
     formData.append('id', id);
     formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
 

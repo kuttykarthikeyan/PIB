@@ -11,6 +11,6 @@ urlpatterns = [
     path('article/<int:index>/<int:id>',views.article,name='article'),
     path('youtube_data_home/',views.youtube_data_home,name='youtube_data_home'),
     path('youtube_data_analysis/<int:id>',views.youtube_data_analysis,name='youtube_data_analysis'),
-
+    path('text_video/',views.text_video,name='text_video'),
 
 ]

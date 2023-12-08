@@ -177,16 +177,14 @@ def youtube_data_analysis(request,id):
     context = {'youtube_video':youtube_video}
     print(context)
     return render(request,'youtube_data_analysis.html',context)
+
 def admin_dashboards(request):
     context = {}
     latest_news = News.objects.all()
     for news in latest_news:
         data = pd.read_csv(news.data, low_memory=False)
         data['id'] = news.id
-        
- 
-        
-            
+
     json_data = data.reset_index().to_json(orient ='records')
     data = []
     data = json.loads(json_data)
@@ -209,3 +207,7 @@ def eprints(request):
 
 def eprint(request):
     return render(request,'eprint.html')
+
+
+def text_video(request):
+    return render(request,'text_video.html')

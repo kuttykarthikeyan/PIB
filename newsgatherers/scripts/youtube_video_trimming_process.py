@@ -92,15 +92,16 @@ def youtube_video_trimming_process(video_url):
         print(video_analysis_dataframe)
         video_analysis_dataframe_neg = video_analysis_dataframe.query('SENTIMENT_ANALYSIS_RESULT == "NEG"')
         r = video_analysis_dataframe_neg
+        print(type(r))
         # spliting_negative_clip(video_url,r)
         return video_analysis_dataframe
     except Exception as e:
         print("errorrrrrrrrrrrrrrrrrrr === ",str(e))    
         print("Subtitles are disabled for this video")
-        
+
+    
    
 
-r = youtube_video_trimming_process(url)
     
 
 def spliting_negative_clip(url,r):
