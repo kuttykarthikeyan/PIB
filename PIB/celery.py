@@ -15,7 +15,8 @@ from celery.schedules import timedelta
 app.conf.beat_schedule = {
     "scrap_youtube_data": {
         "task": "newsgatherers.tasks.scrap_youtube_data",
-        "schedule": crontab(minute="*/2"),
+        "task": "newsgatherers.tasks.scrap_news_data",
+        "schedule": crontab(minute="*/1"),
         # 'schedule': crontab(hour='*/1'),
     },
 }

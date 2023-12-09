@@ -4,6 +4,8 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from tempfile import NamedTemporaryFile
 from django.core.files import File
+
+from newsgatherers.scripts.scrap_news_data import collect_data_for_state
 from .models import *
 import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -49,9 +51,50 @@ def scrap_youtube_data():
             duration_of_video = content["duration_of_video"]
             channel_name = content["channel_name"]
             type_of_platform = content["type_of_platform"]
-            
-            youtube_csv_data.objects.create(title=title,views=views,thumbnail=thumbnail,link=link,published_time_ago=published_time_ago,duration_of_video=duration_of_video,channel_name=channel_name,type_of_platform=type_of_platform)
-             
+            try:
+                youtube_video_data = youtube_video_trimming_process(link)
+                json_youtube_csv_content = youtube_video_data.to_json(orient='records')
+                youtube_data_list = json.dumps(json_youtube_csv_content)
+            except Exception as e:
+                print("error occured while analysing video -->"+str(e))
+            youtube_data_obj = youtube_data.objects.create(title=title,views=views,thumbnail=thumbnail,link=link,published_time_ago=published_time_ago,duration_of_video=duration_of_video,channel_name=channel_name,type_of_platform=type_of_platform)
+            if youtube_data_list:
+                youtube_data_obj.analyzed_data = youtube_data_list
+                youtube_data_obj.save()
     except Exception as e:
-        print(str(e))
+        print("error occured while scraping youtube data --> "+str(e))
     
+@shared_task
+def scrap_news_data():
+    try:
+        news_csv_content = collect_data_for_state()
+        print(type(news_csv_content))
+
+        for news in news_csv_content:
+            print(news)
+        
+        # json_news_csv_content = news_csv_content.to_json(orient='records')
+        # news_data_list = json.loads(json_news_csv_content)
+        news_data_list = json.dumps(news_csv_content)
+        for cont in news_data_list:
+    
+            title = cont["title"]
+            description = cont["description"]
+            published_date = cont["published_date"]
+            url = cont["url"]
+            publisher = cont["publisher"]
+            published_time_ago = cont["published_time_ago"]
+            State = cont["State"]
+            Department = cont["Department"]
+            POSITIVE = cont["POSITIVE"]
+            NEUTRAL = cont["NEUTRAL"]
+            NEGATIVE = cont["NEGATIVE"]
+            SENTIMENT_ANALYSIS_RESULT = cont["SENTIMENT_ANALYSIS_RESULT"]
+ 
+            news_data_obj = News.objects.create(title=title,description=description,published_date=published_date,url=url,publisher=publisher,published_time_ago=published_time_ago,State=State,Department=Department,POSITIVE=POSITIVE,NEUTRAL=NEUTRAL,NEGATIVE=NEGATIVE,SENTIMENT_ANALYSIS_RESULT=SENTIMENT_ANALYSIS_RESULT)
+            news_data_obj.save()
+
+    except Exception as e:
+        print("error occured in news scrapping"+str(e))
+
+

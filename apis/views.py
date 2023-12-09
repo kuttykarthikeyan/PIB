@@ -30,7 +30,7 @@ def youtube_video_data_analysis(request):
         print(request.POST)
         id = request.POST.get('id')
         
-        youtube_video = youtube_csv_data.objects.get(id=id)
+        youtube_video = youtube_data.objects.get(id=id)
         youtube_video_url = youtube_video.link
         youtube_video_data = youtube_video_trimming_process(youtube_video_url)
         json_youtube_csv_content = youtube_video_data.to_json(orient='records')

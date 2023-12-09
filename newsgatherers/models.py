@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+import jsonfield
 # Create your models here.
 
 class News(models.Model):
@@ -37,7 +38,7 @@ class youtube_csv(models.Model):
 class URL(models.Model):
     URLs = models.URLField(max_length=300)
 
-class youtube_csv_data(models.Model):
+class youtube_data(models.Model):
     
     title = models.CharField(max_length=700,null=True,blank=True)
     views = models.CharField(max_length=200,null=True,blank=True)
@@ -47,6 +48,6 @@ class youtube_csv_data(models.Model):
     duration_of_video = models.CharField(max_length=200,null=True,blank=True)
     channel_name = models.CharField(max_length=500,null=True,blank=True)
     type_of_platform = models.CharField(max_length=200,null=True,blank=True)
-    
+    analyzed_data = jsonfield.JSONField(null=True,blank=True)
 
 
