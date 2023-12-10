@@ -118,7 +118,7 @@ def youtube_data_home(request):
 def youtube_data_analysis(request,id):
     print(id)
     youtube_video = youtube_data.objects.get(id=id)
-    context = {'youtube_video':youtube_video}
+    context = {'youtube_data':youtube_video}
     print(context)
     return render(request,'youtube_data_analysis.html',context)
 
