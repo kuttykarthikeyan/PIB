@@ -15,6 +15,7 @@ from asgiref.sync import sync_to_async
 from youtube_transcript_api import YouTubeTranscriptApi
 import asyncio
 from .forms import *
+
 def home(request):
     return render(request, 'home.html')
 
@@ -61,33 +62,13 @@ def logout(request):
 
 def admin_dashboard(request):
     context = {}
-    latest_news = News.objects.all()
-    for news in latest_news:
-        data = pd.read_csv(news.data, low_memory=False)
-        data['id'] = news.id
-        data['POSITIVE'] = round(data['POSITIVE']*100,2)
-        data['NEGATIVE'] = round(data['NEGATIVE']*100,2)
-        data['NEUTRAL'] = round(data['NEUTRAL']*100,2)
- 
-        
-            
-    json_data = data.reset_index().to_json(orient ='records')
-    data = []
-    data = json.loads(json_data)
-    
-    context = {"data":data}
-
-    context = {"data":data,"all_data":latest_news} 
-
+    latest_news = news_obj.objects.all()
+    context = {"data":latest_news} 
     return render(request,'admin_dashboard.html',context)
-
-
-
-
 
 def article(request,index,id):
     context={}
-    news = News.objects.get(id=id)
+    news = news_obj.objects.get(id=id)
     data = pd.read_csv(news.data, low_memory=False)
     json_data = data.reset_index().to_json(orient ='records')
     data = []
@@ -96,19 +77,18 @@ def article(request,index,id):
     for article in data:
         if article['index'] == index:
             article_data = article
-            
             url = article_data['url']
             summary = get_summary_of_particular_news(url)
             print(summary)
             context={"summary":summary}
             break
-    
     return render(request,'article.html',context)
+
 
 def youtube_data_home(request):
     context={}
     try:
-        data = youtube_data.objects.filter(channel_name='indiatoday')
+        data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
         context = {"data":data}
     except Exception as e:
         print(str(e))
@@ -117,44 +97,29 @@ def youtube_data_home(request):
        
 def youtube_data_analysis(request,id):
     print(id)
-    youtube_video = youtube_data.objects.get(id=id)
+    youtube_video = news_obj.objects.get(id=id)
     context = {'youtube_data':youtube_video}
     print(context)
     return render(request,'youtube_data_analysis.html',context)
 
-def admin_dashboards(request):
-    context = {}
-    latest_news = News.objects.all()
-    for news in latest_news:
-        data = pd.read_csv(news.data, low_memory=False)
-        data['id'] = news.id
 
-    json_data = data.reset_index().to_json(orient ='records')
-    data = []
-    data = json.loads(json_data)
-    
-    context = {"data":data}
 
-    context = {"data":data,"all_data":latest_news}
+# def eprints(request):
+#     forms = Eprintsform()
+#     if request.method == 'POST':
+#         print("requws",request.FILES)
+#         forms = Eprintsform(request.POST,request.FILES)
+#         print('form',forms)
+#         if forms.is_valid():
+#             forms.save()
+#             return redirect('eprint')
+#     context={'forms':forms}
+#     return render(request,'eprints.html',context)
 
-    return render(request,'admin_dashboards.html',context)
-
-def eprints(request):
-    forms = Eprintsform()
-    if request.method == 'POST':
-        print("requws",request.FILES)
-        forms = Eprintsform(request.POST,request.FILES)
-        print('form',forms)
-        if forms.is_valid():
-            forms.save()
-            return redirect('eprint')
-    context={'forms':forms}
-    return render(request,'eprints.html',context)
-
-def eprint(request):
-    prints = Eprints.objects.all()
-    context = {'prints':prints}
-    return render(request,'eprint.html',context)
+# def eprint(request):
+#     prints = Eprints.objects.all()
+#     context = {'prints':prints}
+#     return render(request,'eprint.html',context)
 
 
 def text_video(request):
@@ -162,5 +127,5 @@ def text_video(request):
 def newsanalysis(request):
     return render(request,'newsanalysis.html')
 
-def youtubes(request):
-    return render(request,'youtubes.html')
+# def youtubes(request):
+#     return render(request,'youtubes.html')

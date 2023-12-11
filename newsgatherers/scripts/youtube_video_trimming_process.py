@@ -4,10 +4,11 @@ import os
 API_URL = "https://api-inference.huggingface.co/models/finiteautomata/bertweet-base-sentiment-analysis"
 headers = {"Authorization": "Bearer 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"}
  
-from transformers import pipeline
+
  
 def sentiment_analysis(data):
     # Load the sentiment analysis pipeline
+    from transformers import pipeline
     sentiment_pipeline = pipeline("sentiment-analysis", model="finiteautomata/bertweet-base-sentiment-analysis")
  
     # Define the sentiment labels
