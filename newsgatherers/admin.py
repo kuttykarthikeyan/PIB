@@ -3,9 +3,8 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(News)
-admin.site.register(youtube_csv)
-admin.site.register(youtube_data)
-admin.site.register(youtube)
+admin.site.register(news_cluster_head)
+admin.site.register(news_obj)
+# admin.site.register(News)
+# admin.site.register(youtube_data)
 admin.site.register(Eprints)
-admin.site.register(URL)

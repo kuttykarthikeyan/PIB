@@ -3,51 +3,69 @@ import datetime
 import jsonfield
 # Create your models here.
 
-class News(models.Model):
-    data = models.FileField()
-    title = models.CharField(max_length=200)
-    published_time = models.DateTimeField()
-    source = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    is_positive = models.BooleanField()
-    is_latest = models.BooleanField()
+class news_cluster_head(models.Model):
 
-class youtube(models.Model):
-    data = models.FileField()
     title = models.CharField(max_length=200)
-    published_time = models.DateTimeField()
+    department = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
     source = models.CharField(max_length=200)
-    url = models.CharField(max_length=200)
-    is_positive = models.BooleanField()
     is_latest = models.BooleanField()
-
+    sentiment_report = jsonfield.JSONField(null=True,blank=True)
+    cluster_obj = models.ManyToManyField('news_obj')
+   
+    
 class Eprints(models.Model):
+    image = models.ImageField(null=True, blank=True, upload_to="images/")    
+
+class news_obj(models.Model):
+
+    title = models.CharField(max_length=200,null=True,blank=True)
+    department = models.CharField(max_length=200,null=True,blank=True)
+    state = models.CharField(max_length=200,null=True,blank=True)
     image = models.ImageField(null=True, blank=True, upload_to="images/")
-
-class youtube_csv(models.Model):
-
-    data = models.FileField(upload_to='csv_files/')
-    published_time = models.DateTimeField()
-    
-    def save_published_date(self, published_date):
-        published_date = datetime.datetime.strptime(published_date, '%Y-%m-%d %H:%M:%S')
-        self.published_time = published_date
-        self.save()
-
-
-class URL(models.Model):
-    URLs = models.URLField(max_length=300)
-
-class youtube_data(models.Model):
-    
-    title = models.CharField(max_length=700,null=True,blank=True)
+    is_clustered = models.BooleanField(default=False)
+    source_choices = (('website','website'),('youtube','youtube'),('others','others'))
+    source_type = models.CharField(max_length=200,choices=source_choices)
+    source_name = models.CharField(max_length=200,null=True,blank=True)
+    source_url = models.CharField(max_length=200,null=True,blank=True)
+    link = models.CharField(max_length=800,null=True,blank=True)
+    published_time = models.DateTimeField(null=True,blank=True)
+    is_positive = models.BooleanField(default=False)
+    is_latest = models.BooleanField(default=False)
     views = models.CharField(max_length=200,null=True,blank=True)
     thumbnail = models.CharField(max_length=900,null=True,blank=True)
-    link = models.CharField(max_length=800,null=True,blank=True)
     published_time_ago = models.CharField(max_length=200,null=True,blank=True)
     duration_of_video = models.CharField(max_length=200,null=True,blank=True)
     channel_name = models.CharField(max_length=500,null=True,blank=True)
     type_of_platform = models.CharField(max_length=200,null=True,blank=True)
-    analyzed_data = jsonfield.JSONField(null=True,blank=True)
+    sentiment_analysis = jsonfield.JSONField(null=True,blank=True)
+    summary_json = jsonfield.JSONField(null=True,blank=True)
+
+    def __self__(self):
+        return self.title
+
+# class News(models.Model):
+
+#     data = models.FileField()
+#     title = models.CharField(max_length=200)
+#     published_time = models.DateTimeField()
+#     source = models.CharField(max_length=200)
+#     url = models.CharField(max_length=200)
+#     is_positive = models.BooleanField()
+#     is_latest = models.BooleanField()
+
+
+# class youtube_data(models.Model):
+    
+#     title = models.CharField(max_length=700,null=True,blank=True)
+#     views = models.CharField(max_length=200,null=True,blank=True)
+#     thumbnail = models.CharField(max_length=900,null=True,blank=True)
+#     link = models.CharField(max_length=800,null=True,blank=True)
+#     published_time_ago = models.CharField(max_length=200,null=True,blank=True)
+#     duration_of_video = models.CharField(max_length=200,null=True,blank=True)
+#     channel_name = models.CharField(max_length=500,null=True,blank=True)
+#     type_of_platform = models.CharField(max_length=200,null=True,blank=True)
+#     sentiment_analysis = jsonfield.JSONField(null=True,blank=True)
+#     summary_json = jsonfield.JSONField(null=True,blank=True)
 
 

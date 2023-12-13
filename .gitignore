@@ -245,3 +245,5 @@ celerybeat.pid
 
 scripts/data/.~lock.staffData.csv#
 dump.rdb
+
+redis-windows

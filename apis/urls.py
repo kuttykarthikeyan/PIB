@@ -17,4 +17,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('youtube_video_data_analysis/',youtube_video_data_analysis,name='youtube_video_data_analysis'),
+    path('save_youtube_data/',save_youtube_data,name='save_youtube_data'),
 ]

@@ -63,32 +63,13 @@ def logout(request):
 
 def admin_dashboard(request):
     context = {}
-    latest_news = News.objects.all()
-    for news in latest_news:
-        data = pd.read_csv(news.data, low_memory=False)
-        data['id'] = news.id
-        data['POSITIVE'] = round(data['POSITIVE']*100,2)
-        data['NEGATIVE'] = round(data['NEGATIVE']*100,2)
-        data['NEUTRAL'] = round(data['NEUTRAL']*100,2)
- 
-        
-    json_data = data.to_json(orient ='records')
-    data = []
-    data = json.loads(json_data)
-    
-    context = {"data":data}
-
-    context = {"data":data,"all_data":latest_news} 
-
+    latest_news = news_obj.objects.all()
+    context = {"data":latest_news} 
     return render(request,'admin_dashboard.html',context)
-
-
-
-
 
 def article(request,index,id):
     context={}
-    news = News.objects.get(id=id)
+    news = news_obj.objects.get(id=id)
     data = pd.read_csv(news.data, low_memory=False)
     json_data = data.reset_index().to_json(orient ='records')
     data = []
@@ -97,19 +78,18 @@ def article(request,index,id):
     for article in data:
         if article['index'] == index:
             article_data = article
-            
             url = article_data['url']
             summary = get_summary_of_particular_news(url)
             print(summary)
             context={"summary":summary}
             break
-    
     return render(request,'article.html',context)
+
 
 def youtube_data_home(request):
     context={}
     try:
-        data = youtube_data.objects.filter(channel_name='indiatoday')
+        data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
         context = {"data":data}
     except Exception as e:
         print(str(e))
@@ -118,44 +98,29 @@ def youtube_data_home(request):
        
 def youtube_data_analysis(request,id):
     print(id)
-    youtube_video = youtube_data.objects.get(id=id)
-    context = {'youtube_video':youtube_video}
+    youtube_video = news_obj.objects.get(id=id)
+    context = {'youtube_data':youtube_video}
     print(context)
     return render(request,'youtube_data_analysis.html',context)
 
-def admin_dashboards(request):
-    context = {}
-    latest_news = News.objects.all()
-    for news in latest_news:
-        data = pd.read_csv(news.data, low_memory=False)
-        data['id'] = news.id
 
-    json_data = data.reset_index().to_json(orient ='records')
-    data = []
-    data = json.loads(json_data)
-    
-    context = {"data":data}
 
-    context = {"data":data,"all_data":latest_news}
+# def eprints(request):
+#     forms = Eprintsform()
+#     if request.method == 'POST':
+#         print("requws",request.FILES)
+#         forms = Eprintsform(request.POST,request.FILES)
+#         print('form',forms)
+#         if forms.is_valid():
+#             forms.save()
+#             return redirect('eprint')
+#     context={'forms':forms}
+#     return render(request,'eprints.html',context)
 
-    return render(request,'admin_dashboards.html',context)
-
-def eprints(request):
-    forms = Eprintsform()
-    if request.method == 'POST':
-        print("requws",request.FILES)
-        forms = Eprintsform(request.POST,request.FILES)
-        print('form',forms)
-        if forms.is_valid():
-            forms.save()
-            return redirect('eprint')
-    context={'forms':forms}
-    return render(request,'eprints.html',context)
-
-def eprint(request):
-    prints = Eprints.objects.all()
-    context = {'prints':prints}
-    return render(request,'eprint.html',context)
+# def eprint(request):
+#     prints = Eprints.objects.all()
+#     context = {'prints':prints}
+#     return render(request,'eprint.html',context)
 
 
 def text_video(request):
@@ -163,23 +128,5 @@ def text_video(request):
 def newsanalysis(request):
     return render(request,'newsanalysis.html')
 
-def youtubes(request):
-    return render(request,'youtubes.html')
-
-def dash(request):
-    return render(request,'dash.html')
-
-def filters(request):
-    data = news_data.objects.all()
-    state = request.POST.get('state')
-    published_date = request.POST.get('published_date')
-    publisher = request.POST.get('publisher')
-    published_time_ago = request.POST.get('published_time_ago')
-    department = request.POST.get('department')
-    positive = request.POST.get('positive')
-    neutral = request.POST.get('neutral')
-    negative = request.POST.get('negative')
-    sentiment_analysis_result = request.POST.get('sentiment_analysis_result')
-    result = data.filter(Q(state=state) | Q(published_date=published_date) | Q(publisher=publisher) | Q(published_time_ago=published_time_ago) | Q(department=department) | Q(positive=positive) | Q(neutral=neutral) | Q(negative=negative) | Q(sentiment_analysis_result=sentiment_analysis_result))
-    print(result)
-    
+# def youtubes(request):
+#     return render(request,'youtubes.html')
