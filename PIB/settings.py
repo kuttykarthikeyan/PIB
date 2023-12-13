@@ -145,8 +145,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 
 # Celery settings
-CELERY_BROKER_URL = "redis://localhost:6322"
-CELERY_RESULT_BACKEND = "redis://localhost:6322"
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 # CELERY_BROKER_URL = "amqp://myuser:mypassword@localhost:6379/myvhost"
 # CELERY_RESULT_BACKEND = "redis://localhost:6379"

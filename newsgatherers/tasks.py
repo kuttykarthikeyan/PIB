@@ -35,46 +35,16 @@ def render_latest_news(id):
        print(str(e))
 
 @shared_task
-def scrap_youtube_data():
+def scrap_youtube_data(data):
     try:
-        youtube_csv_content = scrap_data_from_youtube()
-        json_youtube_csv_content = youtube_csv_content.to_json(orient='records')
-        youtube_data_list = json.loads(json_youtube_csv_content)
-        for content in youtube_data_list:
-            title = content["title"]
-            views = content["views"]
-            thumbnail = content["thumbnail"]
-            link = content["link"]
-            published_time_ago = content["published_time_ago"]
-            duration_of_video = content["duration_of_video"]
-            channel_name = content["channel_name"]
-            type_of_platform = content["type_of_platform"]
-            youtube_data_obj = news_obj.objects.create(title=title,views=views,thumbnail=thumbnail,link=link,
-                                                        published_time_ago=published_time_ago,duration_of_video=duration_of_video,
-                                                        channel_name=channel_name,type_of_platform=type_of_platform,source_type='youtube')
-            try:
-                youtube_video_data = youtube_video_trimming_process(link)
-                summary_json = youtube_video_data.loc[:,['subtitle','SENTIMENT_ANALYSIS_RESULT']].to_json()
-                youtube_data_list = youtube_video_data.to_json(orient='records')
-                print(youtube_data_list)
-                print(summary_json)
-                if youtube_data_list:
-                    print('hi im analysed list')
-                    youtube_data_obj.sentiment_analysis = youtube_data_list
-                    youtube_data_obj.summary_json=summary_json
-                    youtube_data_obj.save()
-                    print('saved with analysis data')
-                else:
-                    print('no data to analyse')
-            except Exception as e:
-                print("error occured while analysing video -->"+str(e))
-                # youtube_data_list = json.dumps(youtube_video_data)
-            
-            youtube_data_obj.save()
-            print('saved without analysis data')
-            
+        data = json.loads(data)
+        for youtube_obj in data:
+            youtube_data_obj = news_obj.objects.create(title=youtube_obj.title,views=youtube_obj.views,thumbnail=youtube_obj.thumbnail,link=youtube_obj.link,
+                                                        published_time_ago=youtube_obj.published_time_ago,duration_of_video=youtube_obj.duration_of_video,
+                                                        channel_name=youtube_obj.channel_name,type_of_platform=youtube_obj.type_of_platform,
+                                                        source_type='youtube',sentiment_analysis=youtube_obj.sentiment_analysis,summary_json=youtube_obj.summary_json)       
     except Exception as e:
-        print("error occured while scraping youtube data --> "+str(e))
+        print("error occured while saving youtube data at task--> "+str(e))
     
 @shared_task
 def scrap_news_data():

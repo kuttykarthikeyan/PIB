@@ -14,7 +14,7 @@ def start(os_type):
     processes = []
 
     if os_type == 'windows':
-        redis_command = "redis-server --port 6322"
+        # redis_command = "redis-server"
         beat_command = "celery -A PIB beat -l info"
         worker_command = "celery -A PIB worker -l info"
     else:
@@ -23,7 +23,7 @@ def start(os_type):
         worker_command = f"python -m celery -A PIB worker"
 
     # Start Redis in the background
-    processes.append(run_command(redis_command, background=True))
+        processes.append(run_command(redis_command, background=True))
 
     # Start Celery Beat in the background
     processes.append(run_command(beat_command, background=True))
