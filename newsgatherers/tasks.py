@@ -5,7 +5,8 @@ from django.contrib import messages
 from tempfile import NamedTemporaryFile
 from django.core.files import File
 
-from newsgatherers.scripts.scrap_news_data import collect_data_for_state
+
+from newsgatherers.scripts.scrap_news_data import collect_data_for_state,news_scarpe_from_gnews_final
 from .models import *
 import pandas as pd
 from youtube_transcript_api import YouTubeTranscriptApi
@@ -14,7 +15,7 @@ from .scripts.scrap_youtube_data import *
 
 from newspaper import Article
 import json
-import datetime
+from datetime import datetime
 
 
 @shared_task
@@ -37,6 +38,7 @@ def render_latest_news(id):
 @shared_task
 def scrap_youtube_data():
     try:
+        print('#######################')
         youtube_csv_content = scrap_data_from_youtube()
        
         json_youtube_csv_content = youtube_csv_content.to_json(orient='records')

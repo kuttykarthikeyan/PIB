@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -15,6 +16,7 @@ from asgiref.sync import sync_to_async
 from youtube_transcript_api import YouTubeTranscriptApi
 import asyncio
 from .forms import *
+
 def home(request):
     return render(request, 'home.html')
 
@@ -70,8 +72,7 @@ def admin_dashboard(request):
         data['NEUTRAL'] = round(data['NEUTRAL']*100,2)
  
         
-            
-    json_data = data.reset_index().to_json(orient ='records')
+    json_data = data.to_json(orient ='records')
     data = []
     data = json.loads(json_data)
     
@@ -164,3 +165,21 @@ def newsanalysis(request):
 
 def youtubes(request):
     return render(request,'youtubes.html')
+
+def dash(request):
+    return render(request,'dash.html')
+
+def filters(request):
+    data = news_data.objects.all()
+    state = request.POST.get('state')
+    published_date = request.POST.get('published_date')
+    publisher = request.POST.get('publisher')
+    published_time_ago = request.POST.get('published_time_ago')
+    department = request.POST.get('department')
+    positive = request.POST.get('positive')
+    neutral = request.POST.get('neutral')
+    negative = request.POST.get('negative')
+    sentiment_analysis_result = request.POST.get('sentiment_analysis_result')
+    result = data.filter(Q(state=state) | Q(published_date=published_date) | Q(publisher=publisher) | Q(published_time_ago=published_time_ago) | Q(department=department) | Q(positive=positive) | Q(neutral=neutral) | Q(negative=negative) | Q(sentiment_analysis_result=sentiment_analysis_result))
+    print(result)
+    
