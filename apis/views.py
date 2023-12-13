@@ -1,14 +1,18 @@
 from django.shortcuts import render
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
+from rest_framework.response import Response
 from .models import *
 import pandas as pd
+from rest_framework import status
 from newspaper import Article
 import json
+from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from django.views import View
 import datetime
+from newsgatherers.tasks import *
 
 
 from newsgatherers.scripts.youtube_video_trimming_process import sentiment_analysis
@@ -43,4 +47,17 @@ def youtube_video_data_analysis(request):
         }
         return JsonResponse(response_data, safe=False)
     return JsonResponse({'success': False})
-    
+
+@api_view(['POST'])
+def save_youtube_data(request):
+    if request.method == "POST":
+        try:
+            if request.data:
+                data = request.data
+                scrap_youtube_data(data).delay()
+            else:
+                print('no data recieved')
+                return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': 'no data recieved'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print('error occured on storing data at api endpoint--->'+str(e))
+            return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
