@@ -16,4 +16,7 @@ urlpatterns = [
 #     path('eprint',views.eprint,name='eprint'),
     path('newsanalysis',views.newsanalysis,name='newsanalysis'),
 #     path('youtubes',views.youtubes,name='youtubes'),
+    path('youtubes',views.youtubes,name='youtubes'),
+    path('dash',views.dash,name='dash'),
+    path('filters',views.filters,name='filters'),
 ]
