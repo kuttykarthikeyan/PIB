@@ -247,3 +247,4 @@ scripts/data/.~lock.staffData.csv#
 dump.rdb
 
 redis-windows
+__pycache__/
