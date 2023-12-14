@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'social_django',
     'rest_framework',
     'apis',
+    'ocr',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = [BASE_DIR / "newsgatherers/static/",]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

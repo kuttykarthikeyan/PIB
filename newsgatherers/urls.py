@@ -12,8 +12,11 @@ urlpatterns = [
     path('youtube_videos/',views.youtube_data_home,name='youtube_data_home'),
     path('youtube_video_analysis/<int:id>',views.youtube_data_analysis,name='youtube_data_analysis'),
     path('text_video/',views.text_video,name='text_video'),
-#     path('eprints',views.eprints,name='eprints'),
+    # path('eprints',views.eprints,name='eprints'),
 #     path('eprint',views.eprint,name='eprint'),
     path('newsanalysis',views.newsanalysis,name='newsanalysis'),
 #     path('youtubes',views.youtubes,name='youtubes'),
+    # path('youtubes',views.youtubes,name='youtubes'),
+    # path('dash',views.dash,name='dash'),
+    # path('filters',views.filters,name='filters'),
 ]
