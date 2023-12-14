@@ -24,7 +24,7 @@ urlpatterns = [
     path('', include('newsgatherers.urls')),
     path('social-auth/', include('social_django.urls', namespace='social')),
     path('', include("apis.urls")),
-    path('ocr/',include('ocr.urls')),
+    # path('ocr/',include('ocr.urls')),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
