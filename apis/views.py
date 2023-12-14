@@ -61,3 +61,4 @@ def save_youtube_data(request):
         except Exception as e:
             print('error occured on storing data at api endpoint--->'+str(e))
             return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        
