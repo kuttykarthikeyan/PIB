@@ -54,11 +54,29 @@ def save_youtube_data(request):
         try:
             if request.data:
                 data = request.data
-                scrap_youtube_data(data).delay()
+                scrap_youtube_data.delay(data)
+                return JsonResponse({'status': True,'data': 'data recieved'})
             else:
                 print('no data recieved')
                 return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': 'no data recieved'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             print('error occured on storing data at api endpoint--->'+str(e))
             return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
-        
+    return JsonResponse({'success': True})
+
+
+@api_view(['POST'])
+def scrap_news_clustered_data(request):
+     if request.method =="POST":
+        try:
+                if request.data:
+                    data = request.data
+                    scrap_news_cluster_data.delay(data)
+                    return JsonResponse({'status': True,'data': 'data recieved'})
+                else:
+                    print('no data recieved')
+                    return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': 'no data recieved'}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            print('error occured on storing data at api endpoint--->'+str(e))
+            return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+     return JsonResponse({'success': True})

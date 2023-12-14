@@ -5,13 +5,29 @@ import jsonfield
 
 class news_cluster_head(models.Model):
 
-    title = models.CharField(max_length=200)
-    department = models.CharField(max_length=200)
-    state = models.CharField(max_length=200)
-    source = models.CharField(max_length=200)
-    is_latest = models.BooleanField()
-    sentiment_report = jsonfield.JSONField(null=True,blank=True)
-    cluster_obj = models.ManyToManyField('news_obj')
+    title = models.CharField(max_length=800, null=False, blank=False, default='Your Default Title')
+    description = models.TextField(null=True,blank=True)
+    published_date = models.DateField(null=True,blank=True)
+    url = models.URLField(null=True,blank=True)
+    publisher = models.CharField(max_length=255,null=True,blank=True)
+    image = models.URLField(null=True,blank=True)
+    main_text = models.TextField(null=True,blank=True)
+    summary_article = models.TextField(null=True,blank=True)
+    positive_sentence = models.TextField(null=True,blank=True)
+    neutral_sentence = models.TextField(null=True,blank=True)
+    negative_sentence = models.TextField(null=True,blank=True)
+    published_time_ago = models.CharField(max_length=255,null=True,blank=True)
+    state = models.CharField(max_length=255,null=True,blank=True)
+    department = models.CharField(max_length=255,null=True,blank=True)
+    POSITIVE = models.CharField(max_length=255,null=True,blank=True)
+    NEUTRAL = models.CharField(max_length=255,null=True,blank=True)
+    NEGATIVE = models.CharField(max_length=255,null=True,blank=True)
+    sentiment_analysis_result = jsonfield.JSONField(null=True,blank=True)
+    website_data_cluster_obj = models.ManyToManyField("news_obj",related_name="website_data_cluster_obj")
+    youtube_data_cluster_obj = models.ManyToManyField("news_obj",related_name="youtube_data_cluster_obj")
+
+    def __str__(self):
+        return self.title
    
     
 class Eprints(models.Model):
@@ -19,11 +35,20 @@ class Eprints(models.Model):
 
 class news_obj(models.Model):
 
-    title = models.CharField(max_length=200,null=True,blank=True)
+    title = models.CharField(max_length=800, null=False, blank=False, default='Your Default Title')
+    description = models.TextField(null=True,blank=True)
+    published_date = models.CharField(null=True,blank=True,max_length=30)
+    url = models.CharField(max_length=200,null=True,blank=True)
+    main_text = models.TextField(null=True,blank=True)
+    summary_article = models.TextField(null=True,blank=True)
+    positive_sentence = models.TextField(null=True,blank=True)
+    neutral_sentence = models.TextField(null=True,blank=True)
+    negative_sentence = models.TextField(null=True,blank=True)
     department = models.CharField(max_length=200,null=True,blank=True)
     state = models.CharField(max_length=200,null=True,blank=True)
-    image = models.ImageField(null=True, blank=True, upload_to="images/")
+    image = models.CharField(max_length=200,null=True,blank=True)
     is_clustered = models.BooleanField(default=False)
+    is_cluster_head = models.BooleanField(default=False)
     source_choices = (('website','website'),('youtube','youtube'),('others','others'))
     source_type = models.CharField(max_length=200,choices=source_choices)
     source_name = models.CharField(max_length=200,null=True,blank=True)
@@ -67,5 +92,6 @@ class news_obj(models.Model):
 #     type_of_platform = models.CharField(max_length=200,null=True,blank=True)
 #     sentiment_analysis = jsonfield.JSONField(null=True,blank=True)
 #     summary_json = jsonfield.JSONField(null=True,blank=True)
+
 
 
