@@ -16,6 +16,7 @@ from asgiref.sync import sync_to_async
 from youtube_transcript_api import YouTubeTranscriptApi
 import asyncio
 from .forms import *
+from django.utils.translation import gettext as _
 
 def home(request):
     return render(request, 'home.html')
@@ -133,3 +134,8 @@ def newsanalysis(request):
 
 def dash(request):
     return render(request,'dash.html')
+
+def lang(request):
+    welcome_message = _("Welcome to our website!")
+    context = {'welcome_message': welcome_message}
+    return render(request, 'lang.html',context)

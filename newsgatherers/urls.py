@@ -19,4 +19,6 @@ urlpatterns = [
     # path('youtubes',views.youtubes,name='youtubes'),
     path('dash',views.dash,name='dash'),
     # path('filters',views.filters,name='filters'),
+    path('lang',views.lang,name='lang'),
+    
 ]
