@@ -46,12 +46,45 @@
                           
                             <h3 class="text-2xl font-bold text-justify mb-3">Video Analysis </h3>
                            
-                            <canvas id="myChart"></canvas>
-                            <div class="analysed-data-container"></div>
+                            
+                           {% comment %}  {% endcomment %}
+                         
+                            <div class="analysed-data-container">
+                            </div>
+                            <form method="post">
+                              {% csrf_token %} 
+                              <input  value="{{youtube_data.link}}" name="obj_id" />
+                              <input hidden value="{{youtube_data.id}}" name="obj_id" />
+                              <button type="submit" id="negativeClips" class="btn mt-6">Negative Clips</button>
+                            </form>
+                             
+                            {% comment %}  {% endcomment %}
+                            {% comment %} <div class="carousel w-full">
+                              <div id="item1" class="carousel-item w-full">
+                                <video  controls src="" class="w-full" ><video/>
+                              </div> 
+                              <div id="item2" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div> 
+                              <div id="item3" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div> 
+                              <div id="item4" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div>
+                            </div> 
+                            <div class="flex justify-center w-full py-2 gap-2">
+                              <a href="#item1" class="btn btn-xs">1</a> 
+                              <a href="#item2" class="btn btn-xs">2</a> 
+                              <a href="#item3" class="btn btn-xs">3</a> 
+                              <a href="#item4" class="btn btn-xs">4</a>
+                            </div> {% endcomment %}
+                            {% comment %}  {% endcomment %}
                           </div>
-                        </div>
+                          </div>
+                       
                       </div> 
-                    </div> 
+                    </div>
                 </div>
             </div>
 
@@ -59,6 +92,7 @@
 
         <style>
           {% comment %}  {% endcomment %}
+
           .container {
             display: flex;
             justify-content: space-between;
@@ -66,6 +100,10 @@
             margin: 20px auto;
            
         }
+       /* #myChart{
+          width: 40% !important;
+          height: 40% !important;
+        } */
 .sentiment-data-container{
  
   opacity: 1 !important;
@@ -81,7 +119,7 @@
         .analysed-data-container{
           display: flex;
           flex-wrap: wrap;  
-       justify-content: space-around; 
+          justify-content: justify; 
           color:black;
           background-color: #f2f2f2;
         }
@@ -139,12 +177,13 @@
                             width: 0; /* Set the width to 0 to hide the scrollbar */
                         }
                 }
-        </style> 
-        
+        </style>         
+      
         <script>
-         
+          
 
-         let myChart = document.getElementById('myChart').getContext('2d');
+        
+        
 
           
           document.addEventListener('DOMContentLoaded', function() {

@@ -17,6 +17,8 @@ urlpatterns = [
     path('newsanalysis',views.newsanalysis,name='newsanalysis'),
 #     path('youtubes',views.youtubes,name='youtubes'),
     # path('youtubes',views.youtubes,name='youtubes'),
-    # path('dash',views.dash,name='dash'),
+    path('dash',views.dash,name='dash'),
     # path('filters',views.filters,name='filters'),
+    path('lang',views.lang,name='lang'),
+    
 ]
