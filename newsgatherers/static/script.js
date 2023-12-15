@@ -1,16 +1,70 @@
+let dataList = [];
+for (let i = 0; i < 9; i++) {
+  let randomNumber = Math.floor(Math.random() * (91) + 10);
+  dataList.push(randomNumber);  
+}
+
+const A = [
+  'Andhra Pradesh',
+  'Arunachal Pradesh',
+  'Assam',
+  'Bihar',
+  'Chhattisgarh',
+  'Goa',
+  'Gujarat',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jharkhand',
+  'Karnataka',
+  'Kerala',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Manipur',
+  'Meghalaya',
+  'Mizoram',
+  'Nagaland',
+  'Odisha',
+  'Punjab',
+  'Rajasthan',
+  'Sikkim',
+  'Tamil Nadu',
+  'Telangana',
+  'Tripura',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'West Bengal'
+];
+let stateList = [];
+for (let i = 0; i < 9; i++) {
+  let randomNumber = Math.floor(Math.random() * (29) + 1);
+  const St = A[randomNumber];
+  stateList.push(St)
+}
+
+
 var options = {
   chart: {
     type: 'bar'
   },
   series: [{
     name: 'sales',
-    data: [30,40,45,50,49,60,70,91,125]
+    data: dataList
   }],
   xaxis: {
-    categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+    categories: stateList
   }
 }
 
+let lineList = [];
+for (let i = 0; i < 6; i++) {
+  let randomNumber = Math.floor(Math.random() * (91) + 10);
+  lineList.push(randomNumber);  
+}
+let lineList1 = [];
+for (let i = 0; i < 6; i++) {
+  let randomNumber = Math.floor(Math.random() * (91) + 10);
+  lineList1.push(randomNumber);  
+}
 var options1 = {
   chart: {
     height: 350,
@@ -23,12 +77,12 @@ var options1 = {
   colors: ["#FF1654", "#247BA0"],
   series: [
     {
-      name: "Series A",
-      data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+      name: "Negative",
+      data: lineList
     },
     {
-      name: "Series B",
-      data: [20, 29, 37, 36, 44, 45, 50, 58]
+      name: "Positive",
+      data: lineList1
     }
   ],
   stroke: {
@@ -40,7 +94,7 @@ var options1 = {
     }
   },
   xaxis: {
-    categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+    categories: ['1hr','2hr','3hr','4hr','5hr','6hr']
   },
   yaxis: [
     {
@@ -57,7 +111,7 @@ var options1 = {
         }
       },
       title: {
-        text: "Series A",
+        text: "Negative",
         style: {
           color: "#FF1654"
         }
@@ -78,7 +132,7 @@ var options1 = {
         }
       },
       title: {
-        text: "Series B",
+        text: "Positive",
         style: {
           color: "#247BA0"
         }
@@ -96,62 +150,23 @@ var options1 = {
     horizontalAlign: "left",
     offsetX: 40
   }
+  
 };
+let pieList = [];
+for (let i = 0; i < 3; i++) {
+  let randomNumber = Math.floor(Math.random() * (91) + 10);
+  pieList.push(randomNumber);  
+}
 
 var options2 = {
   chart: {
-    height: 280,
-    type: "radialBar",
+    type: 'donut'
   },
-  series: [67, 84, 97, 61],
-  plotOptions: {
-    radialBar: {
-      dataLabels: {
-        total: {
-          show: true,
-          label: 'TOTAL'
-        }
-      }
-    }
-  },
-  labels: ['TEAM A', 'TEAM B', 'TEAM C', 'TEAM D']
+  series: pieList,
+  labels: ['Neutral','Positive','Negative']
 };
 
-var options3 = {
-  chart: {
-    height: 280,
-    type: "area"
-  },
-  dataLabels: {
-    enabled: false
-  },
-  series: [
-    {
-      name: "Series 1",
-      data: [45, 52, 38, 45, 19, 23, 2]
-    }
-  ],
-  fill: {
-    type: "gradient",
-    gradient: {
-      shadeIntensity: 1,
-      opacityFrom: 0.7,
-      opacityTo: 0.9,
-      stops: [0, 90, 100]
-    }
-  },
-  xaxis: {
-    categories: [
-      "01 Jan",
-      "02 Jan",
-      "03 Jan",
-      "04 Jan",
-      "05 Jan",
-      "06 Jan",
-      "07 Jan"
-    ]
-  }
-};
+
 window.onload = () =>{
 var bar = new ApexCharts(document.querySelector("#chart"), options);
 bar.render();
@@ -159,6 +174,4 @@ var line = new ApexCharts(document.querySelector("#line"), options1);
 line.render();
 var pie = new ApexCharts(document.querySelector("#pie"), options2);
 pie.render();
-var area = new ApexCharts(document.querySelector("#areas"), options3);
-area.render();
 }
