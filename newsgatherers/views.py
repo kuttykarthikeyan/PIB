@@ -130,3 +130,6 @@ def newsanalysis(request):
 
 # def youtubes(request):
 #     return render(request,'youtubes.html')
+
+def dash(request):
+    return render(request,'dash.html')
