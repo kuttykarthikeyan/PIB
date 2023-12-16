@@ -148,9 +148,12 @@
   <div class="">
       <img src="{{ data.image }}" alt="loading" height="400" width="500" class="rounded-xl">
   </div>
-
   <div class="col-span-2 ml-4">
-    <a href="{{ data.url }}" ><b class="text-3xl">{{ data.title }}</b></a>
+    {% if data.clustered %}
+    <a href="{% url 'article_' pk=data.pk check='1'  %}" ><b class="text-3xl">{{ data.title }}</b></a>
+    {% else %}
+    <a href="{% url 'article_analysis' pk=data.pk check='0'  %}" ><b class="text-3xl">{{ data.title }}</b></a>
+    {% endif %}
     <p class="opacity-60 mt-2 mb-4"> {{ data.published_date }}</p>
     <p class="mb-4"><Strong> {{ data.publisher }}</Strong></p>
     {% if data.description == 'none' %}

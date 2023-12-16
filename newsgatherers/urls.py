@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     path('admin_dashboard/',views.admin_dashboard,name='admin_dashboard'),
     path('cluster/<int:id>',views.cluster,name='cluster'),
+    path('article_analysis/<int:pk>/<int:check>/',views.article_analysis,name='article_analysis'),
     path('article_home',views.article_home,name='article_home'),
     path('article/<int:index>/<int:id>',views.article,name='article'),
     path('youtube_videos/',views.youtube_data_home,name='youtube_data_home'),

@@ -49,9 +49,7 @@ class news_obj(models.Model):
     negative_sentence = models.TextField(null=True,blank=True)
     department = models.CharField(max_length=200,null=True,blank=True)
     state = models.CharField(max_length=200,null=True,blank=True)
-    image = models.CharField(max_length=200,null=True,blank=True)
-    is_clustered = models.BooleanField(default=False)
-    is_cluster_head = models.BooleanField(default=False)
+    image = models.URLField(null=True,blank=True)
     website = 'website'
     youtube = 'youtube'
     eprints = 'eprints'

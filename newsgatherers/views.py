@@ -150,6 +150,28 @@ def cluster(request,id):
     return render (request,'cluster.html',context)
     
 def article_home(request):
-    article = news_cluster_head.objects.all()
-    context = {'article':article}
+    cluster_head = news_cluster_head.objects.all()
+    news_objs = news_obj.objects.filter(source_type='website')
+    context = {'article':cluster_head,'news_objs':news_objs}
     return render(request,'article_home.html',context)
+
+def article_analysis(request,pk, check):
+    try:
+        context = {}
+        print(check)
+        if check == '1':
+                news = news_obj.objects.get(id=pk)
+                context = {'news':news}
+                print(news)
+                print('news_obj --> rendered')
+        else:
+            news = news_cluster_head.objects.get(id=pk)
+            print(news)
+            context = {'news':news}
+            print('news_cluster_head --> rendered')
+
+            return render(request,'article_analysis.html',context)
+    except Exception as e:
+        print(str(e))
+    print('Hii')
+    return render(request,'article_analysis.html',context)
