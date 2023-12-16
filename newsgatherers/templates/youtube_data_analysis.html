@@ -35,7 +35,7 @@
                         <p class="text-justify" id="dataSummary"></p>
                     </div>
                 </div>
-        
+         
                <div class="rectangle">
                     <div class="article">
                       <div class="hero h-auto">
@@ -51,13 +51,16 @@
                          
                             <div class="analysed-data-container">
                             </div>
-                            <form method="post">
-                              {% csrf_token %} 
-                              <input  value="{{youtube_data.link}}" name="obj_id" />
-                              <input hidden value="{{youtube_data.id}}" name="obj_id" />
-                              <button type="submit" id="negativeClips" class="btn mt-6">Negative Clips</button>
-                            </form>
-                             
+                            
+                              <button type="submit" id="negativeClips" onClick="getNegativeclips({{youtube_data.id}})" class="btn mt-6">Negative Clips</button>
+                              <video id="myvideo" width="450">
+                                <source src="/newsgatherers/static/negative_14356_2.mp4"
+                                        type="video/mp4">
+                                <source src="newsgatherers/static/negative_14356_1.mp4"
+                                        type="video/ogg"> 
+                            </video>
+                              <div id="videosContainer" class="carousel w-full">
+                              </div>
                             {% comment %}  {% endcomment %}
                             {% comment %} <div class="carousel w-full">
                               <div id="item1" class="carousel-item w-full">
@@ -179,10 +182,14 @@
                 }
         </style>         
       
+
+       
+
+         
+       
         <script>
           
-
-        
+          
         
 
           
@@ -237,6 +244,42 @@
             }
         });
         
+
+       
+
+        const getNegativeclips = async (id) => {
+          try {
+            const response = await fetch(`http://10.1.75.142:8000/get_negative_clips/${id}`, {
+              method: "GET",
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        
+            const parseRes = await response.json();
+        
+            
+           data = JSON.parse(parseRes.data);
+           console.log(data);
+           container = document.getElementById('videosContainer');
+            data.forEach((filename)=>{
+
+              const video = document.createElement('video');
+              video.setAttribute('controls',true);
+              video.setAttribute('width',`320`);
+              video.setAttribute('height',`240`);
+              video.setAttribute('src','newsgatherers/static/negative_14356_1.mp4')
+            //  video.setAttribute('src',`newsgatherers/static/${filename}`)
+              video.type = 'video/mp4';
+             
+              container.appendChild(video);
+            })
+            
+          } catch (error) {
+            console.error('Fetch error:', error);
+            console.error('Error stack:', error.stack);
+          }
+        };
         </script> 
         {% endblock %}
         

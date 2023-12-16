@@ -151,6 +151,5 @@ def scrap_news_cluster_data(data):
 def get_negative_videos_task(url,obj_id):
     
     video_locations = spliting_negative_clip(url,obj_id)
-    print()
-    
+    print(video_locations)
     return video_locations

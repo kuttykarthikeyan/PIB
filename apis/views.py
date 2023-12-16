@@ -80,3 +80,13 @@ def scrap_news_clustered_data(request):
             print('error occured on storing data at api endpoint--->'+str(e))
             return Response({'status': status.HTTP_400_BAD_REQUEST, 'data': str(e)}, status=status.HTTP_400_BAD_REQUEST)
      return JsonResponse({'success': True})
+
+@api_view(['GET'])
+def get_negative_clips(request,id):
+    try:
+        url = news_obj.objects.get(id=id).link
+        crop_negative_clips = get_negative_videos_task(url,id)
+        return JsonResponse({'status': True,'data': crop_negative_clips})
+    except Exception as e:
+        print(str(e))
+        return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})

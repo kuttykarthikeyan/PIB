@@ -70,7 +70,7 @@ def delete_contents_of_directory(directory_path):
         
 def crop_video(input_video_path, start_time, end_time, output_file):
     from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip
-    output_directory = "videos/"
+    output_directory = "newsgatherers/static/"
 
     # Create the output directory if it doesn't exist
     os.makedirs(output_directory, exist_ok=True)
@@ -187,17 +187,17 @@ def spliting_negative_clip(url,id):
         os.remove("downloaded_youtube_video/downloaded_video.mp4.webm")
     except subprocess.CalledProcessError as e:
         print(f"Error during conversion: {e}")
-    video_locations = []
+    videos = []
     if len(list_trim_video) != 0:
         
         for i,j in tqdm(enumerate(list_trim_video)):
             
             crop_video("downloaded_youtube_video/downloaded_video.mp4",start_time=j[0],end_time=j[1],output_file="negative_"+str(id)+ "_" +str(i+1)+".mp4")
-            location = "videos/" + "negative_"+str(id)+"_"+str(i+1)+".mp4"
-            video_locations.append(location)
-            print(location)
+            video_filename = "negative_"+str(id)+"_"+str(i+1)+".mp4"
+            videos.append(video_filename)
+            print(video_filename)
         crop_video("downloaded_youtube_video/downloaded_video.mp4",start_time=0,end_time=list(r["end_time"])[-1],output_file=str(id)+ "_" +"full_video.mp4")
 
         os.remove("downloaded_youtube_video/downloaded_video.mp4")
         print("successfully!!!!!!!!!")
-        return json.dumps(video_locations)
+        return json.dumps(videos)
