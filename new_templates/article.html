@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<div class="flex justify-between max-h-[45px] bg-[#48ADA5] ">
+  <div class="flex items-center ml-12">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+    </svg>
+  </div>
+  <div class="flex items-center px-20 gap-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+    </svg>
+    
+      <button class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+    <button class="text-white hover:opacity-70 p-2 mx-2">
+      <div class="dropdown ">
+        <div tabindex="0" role="button" class="mt-1 px-10 ">
+          <div class="grid grid-cols-2">
+            <div>
+              Theme
+            </div>
+            <div>
+              <svg class="h-2.5 ms-3 mt-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52 text-black">
+          <li><a>Green</a></li>
+          <li><a>Blue</a></li>
+        </ul>
+      </div>
+    </button>
+
+    <button class="text-white hover:opacity-70">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="mt-1">
+          <div class="grid grid-cols-2">
+            <div>
+              TamilNadu
+            </div>
+            <div>
+              <svg class="h-2.5 ms-3 mt-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box  text-black">
+          <li><a>Kerala</a></li>
+          <li><a>Gujarat</a></li>
+        </ul>
+      </div>
+    </button>
+    <button class="text-white hover:opacity-70">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="mt-1">
+          <div class="grid grid-cols-2">
+            <div>
+              English
+            </div>
+            <div>
+              <svg class="h-2.5 ms-3 mt-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box  text-black">
+          <li><a>Tamil</a></li>
+          <li><a>Hindi</a></li>
+        </ul>
+      </div>
+    </button>
+  </div>
+</div>
+  <!-- navbar-2 -->
+  <div class="navbar bg-base-100 bg-white-500 h-24 pr-12">
+    <div class="flex-1">
+      <img src="https://4.bp.blogspot.com/-abhM9jw9s44/TBNyEnxpVsI/AAAAAAAAACE/JWrUlBnPiJs/s1600/govt_of_ind_logo.png" height="38" width="48" class="ml-8 mr-2" alt="loading">
+
+      <div class="ml-2">
+        <p class="text-2xl font-bold">Press Informations Bureau</p>
+        <p class="text-md">Government of India</p>
+      </div>
+    </div>
+    <div class="flex-none">
+      <button class="btn btn-square btn-ghost mr-10">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-36 h-11 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- navbar-3 -->
+  <div class="flex m-auto w-full bg-[#F99426]">
+    <ul class="flex justify-between w-full px-24 py-3">
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">Dashboard</button></li>
+      <li><button class="text-white hover:opacity-70 p-2 bg-[#fdba74] rounded-md shadow-md">Media Website</button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">Youtube Video</button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">E-prints</button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">Social Media Analysis</button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">Future Trends</button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2">Report</button></li>
+    </ul>
+  </div>
+
+  <div class="flex container gap-10 mt-10">
+    
+    <div class="dropdown ml-28">
+      <div tabindex="0" role="button" class="btn mt-1 px-10 font-bold">
+        ALL
+        
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>Prime minister</a></li>
+        <li><a>Chief minister</a></li>
+      </ul>
+    </div>
+    <div class="dropdown ">
+      <div tabindex="0" role="button" class="btn mt-1 px-10 font-bold">
+        POSITIVE
+        
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>NEGATIVE</a></li>
+        <li><a>NEUTRAL</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+<!-- block content -->
+
+<div class="bg-gray-100 p-6 m-10 mt-20 mx-28">
+
+    <div class="flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    
+      <div class="bg-gray-100 p-6 flex items-center justify-center">
+        <div class="relative">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0zjliZqqXXi8YgTmMpFjPCyo0fsqhqAIEg&usqp=CAU" alt="loading" height="500" width="250">
+          <div class="absolute bottom-0 inset-x-0 flex justify-center bg-black text-white px-2 py-1 opacity-70">
+            <span class="text-xs">1/30</span>
+          </div>
+        </div>
+      </div>
+    
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+    
+    <div class="flex items-center justify-center">
+      <p class="text-3xl font-serif">Hindustan Times</p>
+    </div>
+    <div class="flex items-center justify-center">
+      <p class="text-lg font-serif">Language: <span class="text-blue-200">English</span></p>
+    </div>
+    <div class="flex items-center justify-center">
+      <p class="text-lg font-sans">Date: <span class="text-blue-200">15.12.2023</span></p>
+    </div>
+
+
+    <div class="flex justify-center items-center">
+      <div class="pt-6 mr-4">70% - Positive</div>
+        <div class="w-96 mt-8 bg-red-500 rounded-full h-4 dark:bg-gray-700 relative">
+          <!-- <div class="absolute top-0 left-0 bg-gray-600 h-full rounded-full" style="width: 30%"></div> -->
+          <div class="absolute top-0 left-0 bg-green-400 h-full rounded-full" style="width: 70%"></div>
+      </div>
+      <div class="pt-6 ml-4">Negative - 30%</div>
+    </div>
+
+    <div class="bg-white p-14 mx-28 mt-10 rounded-2xl">
+        <div class="grid grid-cols-2">
+          <div>
+            <div class="flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            
+              <div class="bg-white px-3 py-6 flex items-center justify-center">
+                <div class="relative">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0zjliZqqXXi8YgTmMpFjPCyo0fsqhqAIEg&usqp=CAU" alt="loading" height="300" width="200">
+                  <div class="absolute bottom-0 inset-x-0 flex justify-center bg-black text-white px-2 py-1 opacity-70">
+                    <span class="text-xs">1/30</span>
+                  </div>
+                </div>
+              </div>
+            
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <div class="mt-6">
+              <p class="text-3xl font-bold font-sans">The NaMoment</p>
+            </div>
+            <div class="mt-8 ">
+              <P class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel facilis dolorem inventore excepturi laboriosam ullam ipsum harum ratione et odit ipsam tempore cupiditate, asperiores illo distinctio a neque recusandae.</P>
+
+              <p class="mt-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum sequi voluptas velit, blanditiis pariatur, placeat necessitatibus tenetur excepturi aliquam tempore tempora ad impedit sed! Aspernatur ratione et doloremque corrupti eius?</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- endblock -->
+
+  <!-- FOOTER -->
+  <footer class="bg-light text-center text-lg-start fixed-bottom mt-10">
+    <div class="text-center justify-center p-2 bg-[#48ADA5] p-3 flex" style=" color: white;">
+        <div>
+          Made with
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-heart-fill ml-1 mt-1 mr-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+            </svg>
+        </div>
+        <div>
+          at iQube
+        </div>
+
+    </div>
+</footer>
+  
+</body>
+</html>

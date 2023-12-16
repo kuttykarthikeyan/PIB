@@ -15,6 +15,7 @@ from .tasks import *
 from newsgatherers.scripts.youtube_video_trimming_process import sentiment_analysis
 from asgiref.sync import sync_to_async
 from youtube_transcript_api import YouTubeTranscriptApi
+from .scripts.youtube_video_trimming_process import *
 import asyncio
 from .forms import *
 from django.utils.translation import gettext as _
@@ -65,7 +66,7 @@ def logout(request):
 
 def admin_dashboard(request):
     context = {}
-    latest_news = news_obj.objects.all()
+    latest_news = news_obj.objects.filter(source_type='website').order_by('-id')
     context = {"data":latest_news} 
     return render(request,'admin_dashboard.html',context)
 
@@ -98,7 +99,8 @@ def article(request):
 def youtube_data_home(request):
     context={}
     try:
-        data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
+        # data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
+        data = news_obj.objects.filter(source_type='youtube')
         context = {"data":data}
     except Exception as e:
         print(str(e))
@@ -106,12 +108,14 @@ def youtube_data_home(request):
 
        
 def youtube_data_analysis(request,id):
-    print(id)
-    youtube_video = news_obj.objects.get(id=id)
-    context = {'youtube_data':youtube_video}
-    print(context)
-    return render(request,'youtube_data_analysis.html',context)
-
+    try:
+        youtube_video = news_obj.objects.get(id=id)
+        context = {'youtube_data':youtube_video}
+        print(context)
+        return render(request,'youtube_data_analysis.html',context)
+    except Exception as e:
+        print(str(e))
+    return render(request,'youtube_data_analysis.html')
 
 
 # def eprints(request):
@@ -142,4 +146,16 @@ def dash(request):
     return render(request,'dash.html')
 
 def lang(request):
-    return render(request,'base1.html')
+    welcome_message = _("Welcome to our website!")
+    context = {'welcome_message': welcome_message}
+    return render(request, 'lang.html',context)
+
+def cluster(request,id):
+    news = news_cluster_head.objects.get(id=id)
+    context = {'news':news,'news_description':news_description,'news_image':news_image,'news_published_date':news_published_date}
+    return render (request,'cluster.html',context)
+    
+def article_home(request):
+    article = news_cluster_head.objects.all()
+    context = {'article':article}
+    return render(request,'article_home.html',context)
