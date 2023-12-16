@@ -248,3 +248,6 @@ dump.rdb
 
 redis-windows
 __pycache__/
+downloaded_youtube_video/
+
+*.mp4

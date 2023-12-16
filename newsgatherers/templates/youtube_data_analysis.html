@@ -35,7 +35,7 @@
                         <p class="text-justify" id="dataSummary"></p>
                     </div>
                 </div>
-        
+         
                <div class="rectangle">
                     <div class="article">
                       <div class="hero h-auto">
@@ -46,12 +46,48 @@
                           
                             <h3 class="text-2xl font-bold text-justify mb-3">Video Analysis </h3>
                            
-                            <canvas id="myChart"></canvas>
-                            <div class="analysed-data-container"></div>
+                            
+                           {% comment %}  {% endcomment %}
+                         
+                            <div class="analysed-data-container">
+                            </div>
+                            
+                              <button type="submit" id="negativeClips" onClick="getNegativeclips({{youtube_data.id}})" class="btn mt-6">Negative Clips</button>
+                              <video id="myvideo" width="450">
+                                <source src="/newsgatherers/static/negative_14356_2.mp4"
+                                        type="video/mp4">
+                                <source src="newsgatherers/static/negative_14356_1.mp4"
+                                        type="video/ogg"> 
+                            </video>
+                              <div id="videosContainer" class="carousel w-full">
+                              </div>
+                            {% comment %}  {% endcomment %}
+                            {% comment %} <div class="carousel w-full">
+                              <div id="item1" class="carousel-item w-full">
+                                <video  controls src="" class="w-full" ><video/>
+                              </div> 
+                              <div id="item2" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div> 
+                              <div id="item3" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div> 
+                              <div id="item4" class="carousel-item w-full">
+                                <img src="" class="w-full" />
+                              </div>
+                            </div> 
+                            <div class="flex justify-center w-full py-2 gap-2">
+                              <a href="#item1" class="btn btn-xs">1</a> 
+                              <a href="#item2" class="btn btn-xs">2</a> 
+                              <a href="#item3" class="btn btn-xs">3</a> 
+                              <a href="#item4" class="btn btn-xs">4</a>
+                            </div> {% endcomment %}
+                            {% comment %}  {% endcomment %}
                           </div>
-                        </div>
+                          </div>
+                       
                       </div> 
-                    </div> 
+                    </div>
                 </div>
             </div>
 
@@ -59,6 +95,7 @@
 
         <style>
           {% comment %}  {% endcomment %}
+
           .container {
             display: flex;
             justify-content: space-between;
@@ -66,6 +103,10 @@
             margin: 20px auto;
            
         }
+       /* #myChart{
+          width: 40% !important;
+          height: 40% !important;
+        } */
 .sentiment-data-container{
  
   opacity: 1 !important;
@@ -81,7 +122,7 @@
         .analysed-data-container{
           display: flex;
           flex-wrap: wrap;  
-       justify-content: space-around; 
+          justify-content: justify; 
           color:black;
           background-color: #f2f2f2;
         }
@@ -139,12 +180,17 @@
                             width: 0; /* Set the width to 0 to hide the scrollbar */
                         }
                 }
-        </style> 
-        
-        <script>
-         
+        </style>         
+      
 
-         let myChart = document.getElementById('myChart').getContext('2d');
+       
+
+         
+       
+        <script>
+          
+          
+        
 
           
           document.addEventListener('DOMContentLoaded', function() {
@@ -198,6 +244,42 @@
             }
         });
         
+
+       
+
+        const getNegativeclips = async (id) => {
+          try {
+            const response = await fetch(`http://10.1.75.142:8000/get_negative_clips/${id}`, {
+              method: "GET",
+            });
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+        
+            const parseRes = await response.json();
+        
+            
+           data = JSON.parse(parseRes.data);
+           console.log(data);
+           container = document.getElementById('videosContainer');
+            data.forEach((filename)=>{
+
+              const video = document.createElement('video');
+              video.setAttribute('controls',true);
+              video.setAttribute('width',`320`);
+              video.setAttribute('height',`240`);
+              video.setAttribute('src','newsgatherers/static/negative_14356_1.mp4')
+            //  video.setAttribute('src',`newsgatherers/static/${filename}`)
+              video.type = 'video/mp4';
+             
+              container.appendChild(video);
+            })
+            
+          } catch (error) {
+            console.error('Fetch error:', error);
+            console.error('Error stack:', error.stack);
+          }
+        };
         </script> 
         {% endblock %}
         
