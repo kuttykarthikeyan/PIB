@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,7 +147,7 @@
     </div>
   </div>
 
-
+{% block content %}
 <!-- block content -->
 <div class="bg-gray-100 px-36 mx-10 mt-20 mx-28 rounded-3xl">
 
@@ -269,6 +271,7 @@
 
 </div>
 <!-- endblock -->
+{% endblock %}
 
   <!-- FOOTER -->
   <footer class="bg-light text-center text-lg-start fixed-bottom mt-10">

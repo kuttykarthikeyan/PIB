@@ -1,54 +1,33 @@
-{% extends "base.html" %}
+{% extends 'base.html'%}
 {% load static %}
 
 
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-<div class='news-card header-card'>
-    <h1 class='latest-releases'>Youtube Analysis</h1>
-    <span>___________________________</span>
-</div>
 
-
-     
-      {% for news in data%}
-      <div class='news-card' >
-          <ul class='news-contents-list'>
-              <li class=" ">
+  <div class="flex flex-col gap-1">
+    <!-- second card 1 -->
+    {% for youtube_video in data %}
+    <div class="mx-24 bg-gray-200 grid grid-cols-3 gap-3 px-28 rounded-xl ">
+      
+      <div class="col-span-2 ml-4 py-10">
+        <p class="mb-4 text-3xl"><Strong>{{youtube_video.channel_name}}</Strong></p> 
+        <a class="text-2xl" href="{% url 'youtube_data_analysis' id=youtube_video.id %}">{{youtube_video.title}}</a>
+        
+        <p class="opacity-60 mt-2 mb-4">{{youtube_video.published_time_ago}}</p>
+        
+        <button class="btn btn-outline btn-error mt-5">Negative</button>
+      </div>
+      <div class="rounded-md">
+        <div class="px-4 rounded-md">
+    {% if youtube_video.thumbnail %}
+          <img src="{{youtube_video.thumbnail}}" alt="loading" height="800" width="600" class="rounded-2xl my-8">
+      {% elif youtube_video.image %}
+      <img src="{{youtube_video.image}}" alt="loading" height="800" width="600" class="rounded-2xl my-8">
+      {% endif %}
+        </div>
+      </div>
+    </div>
+     {% endfor %} 
+    {% endblock %}
+   
   
-  
-  <p class='news-content-publisher'>{{news.channel_name}}</p>
-  
-</li>
-<li>
-  <a class='url_handler channel-details' href='{% url "youtube_data_analysis" id=news.id %}' ><p class='news-content-title'>{{news.title}}</p><p class='published_time news-content-publisher'>{{news.published_time_ago}}</p></a>
-  
-</li>
-{% comment %} <li class='news-tone-card'>
-<div class="tone-card">
-        <div class='positive-block'>Published Date</div>
-      <p class='tone-percentage'>{{news.published_time_ago}}</p>
-  </div>  
-  <div class="tone-card">
-      <div class='positive-block'>Postive</div>
-      <p class='tone-percentage'>{{news.POSITIVE}}</p>
-  </div>
-  <div class="tone-card">
-      <div class='neutral-block'>Neutral</div>
-      <p class='tone-percentage'>{{news.NEUTRAL}}</p>
-  </div>
-  <div class="tone-card">
-      <div class='negative-block'>Negative</div>
-      <p class='tone-percentage'>{{news.NEGATIVE}}</p>
-  </div>
-</li> {% endcomment %}
-</ul>
-
-<div class='news-image-card'>
-   <img class='news-image' src='{{news.thumbnail}}' alt='loading'/> 
-</div> 
-
-</div>
-{% endfor %}
-{% endblock %}
-

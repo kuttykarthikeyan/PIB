@@ -18,9 +18,31 @@ from .scripts.youtube_video_trimming_process import *
 import asyncio
 from .forms import *
 from django.utils.translation import gettext as _
+from django.http import JsonResponse
 
 def home(request):
-    return render(request, 'home.html')
+    clusters = news_cluster_head.objects.all()
+    context = {'clusters':clusters}
+    return render(request, 'Home.html',context)
+
+
+def cluster_related(request,cls_id):
+    cluster_objs = news_cluster_head.objects.filter(id=cls_id)
+    news=news_obj.objects.all()
+    print(cluster_objs)
+    for i in cluster_objs:
+        news_objs = i.website_data_cluster_obj.all()
+        print(news_objs)
+    context = {'news_objs':news_objs,}
+    for j in news_objs:
+            print(j.id)
+            print('\n')
+            print(j.title)
+            context[j.id]=j.title
+
+    return render(request,'cluster_related.html',{'cntxt':context.values(),'cluster_obj': cluster_objs,'news':news})
+
+
 
 def login(request):
     if request.method == 'POST':
@@ -92,7 +114,7 @@ def youtube_data_home(request):
     context={}
     try:
         # data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
-        data = news_obj.objects.filter(source_type='youtube')
+        data = news_obj.objects.filter(source_type='youtube',clustered=False)
         context = {"data":data}
     except Exception as e:
         print(str(e))
@@ -104,10 +126,10 @@ def youtube_data_analysis(request,id):
         youtube_video = news_obj.objects.get(id=id)
         context = {'youtube_data':youtube_video}
         print(context)
-        return render(request,'youtube_data_analysis.html',context)
+        return render(request,'youtube_analysis.html',context)
     except Exception as e:
         print(str(e))
-    return render(request,'youtube_data_analysis.html')
+    return render(request,'youtube_analysis.html')
 
 
 # def eprints(request):
@@ -150,9 +172,12 @@ def cluster(request,id):
     return render (request,'cluster.html',context)
     
 def article_home(request):
-    cluster_head = news_cluster_head.objects.all()
+    cluster_head = news_cluster_head.objects.all().order_by('-id')
     news_objs = news_obj.objects.filter(source_type='website')
     context = {'article':cluster_head,'news_objs':news_objs}
+
+    # data = {'message': 'Backend processing successful'}
+
     return render(request,'article_home.html',context)
 
 def article_analysis(request,pk, check):
@@ -175,3 +200,14 @@ def article_analysis(request,pk, check):
         print(str(e))
     print('Hii')
     return render(request,'article_analysis.html',context)
+
+
+def report(request):
+    return render(request,'report.html')
+
+
+def eprints(request):
+    return render(request,'onclick_Eprints.html')
+
+def eprint_analysis(request):
+    return render(request,'eprint_analysis.html')

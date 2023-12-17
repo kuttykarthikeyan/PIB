@@ -13,7 +13,15 @@ from django.http import JsonResponse
 from django.views import View
 import datetime
 from newsgatherers.tasks import *
-
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from collections import Counter
+from wordcloud import WordCloud
+import seaborn as sns
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.sentiment import SentimentIntensityAnalyzer
 
 from newsgatherers.scripts.youtube_video_trimming_process import sentiment_analysis
 from asgiref.sync import sync_to_async
@@ -89,4 +97,34 @@ def get_negative_clips(request,id):
         return JsonResponse({'status': True,'data': crop_negative_clips})
     except Exception as e:
         print(str(e))
+        return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})
+
+@api_view(['GET'])
+def get_word_cloud(request,json):
+    try:
+        if not data:
+            return JsonResponse({'status': False, 'data': 'no data recieved'})
+        else:
+
+            print(data)
+            print(type(data))
+            data = json.loads(json)
+            # nltk.download('vader_lexicon')
+
+            def tokenize_and_clean(text):
+                words = word_tokenize(str(text).lower())
+                stop_words = set(stopwords.words('english'))
+                return [word for word in words if word.isalpha() and word not in stop_words]
+            print("image comedfffffffff wordcloud")
+            
+            l = tokenize_and_clean(data)
+            all_words = ' '.join(l)
+            print("image comejjjjjjjjj wordcloud")
+
+            wordcloud = WordCloud(width=800, height=400, max_words=200, background_color='white').generate(all_words)
+            print("image come wordcloud")
+            wordcloud.to_file("static/wordcloud_image.png")
+            print("image come saved")
+            return JsonResponse({'status': True,'data': '/static/wordcloud_image.png'})
+    except Exception as e:
         return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})

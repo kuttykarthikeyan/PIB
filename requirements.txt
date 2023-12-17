@@ -185,6 +185,7 @@ wcwidth==0.2.12
 webdriver-manager==4.0.1
 websockets==12.0
 Werkzeug==3.0.1
+whitenoise==6.6.0
 wrapt==1.14.1
 wsproto==1.2.0
 youtube-transcript-api==0.6.1

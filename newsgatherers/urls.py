@@ -20,7 +20,14 @@ urlpatterns = [
 #     path('youtubes',views.youtubes,name='youtubes'),
     # path('youtubes',views.youtubes,name='youtubes'),
     path('dash',views.dash,name='dash'),
+
     # path('filters',views.filters,name='filters'),
     path('lang',views.lang,name='lang'),
+    path('report',views.report,name='report'),
+    path('eprints',views.eprints,name='eprints'),
+    path('eprint_analysis',views.eprint_analysis,name='eprint_analysis'),
+
+
+    path('cluster_related/<int:cls_id>',views.cluster_related,name='cluster_related'),
     
 ]

@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- block content -->
+{% block content %}
+
+
+<input value="{{youtube_data.sentiment_analysis}}" hidden id="sentiment_analysis_input"></input>
+<div class="bg-gray-100 p-6 m-10 mx-28 rounded-2xl grid grid-cols-2 gap-5">
+  <div>
+    <div>
+      <p class="md:default text-3xl font-semibold ml-6">{{youtube_data.title}}</p>
+      {% if youtube_data.image %}
+      <img src="{{youtube_data.image}}" alt="loading" class="rounded-lg mt-10 ml-6" height="700" width="500">
+      <div class="mt-1 text-lg ml-6 font-serif">
+        <p id="summary"></p>
+      </div>
+      {% elif youtube_data.thumbnail %}
+      <div class="mt-1 text-lg ml-6 font-serif">
+        <p id="summary"></p>
+      </div>
+      {% endif %}
+
+      <div class="mt-6">
+        <p>Positive sentence:</p>
+        <p class="text-green-500"> {{ youtube_data.positive_sentence }}</p>
+      </div>
+
+      <div class="mt-6">
+        <p>Negative sentence:</p>
+        <p class="text-red-500"> {{ youtube_data.negative_sentence }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="bg-white px-5 py-5 mt-3 rounded-xl mx-7">
+        <div class="mx-4">
+          <div class="text-md mt-0">
+            <p class="text-xl"><strong>CAUTION:</strong></p>
+            <ol>
+              <li>1.Click the "Negative Video Clips" button.</li>
+              <li>2.Wait unitl the Video clip loads.</li>
+              <li>3.After loading play icon will appear.</li>
+
+              <p class="mt-1">note: <span class="text-red-500">be cautious of sensitive content</span></p>
+            </ol>
+          </div>
+        <div class="flex mt-2 justify-center ">
+            <button id="getNegativeclips" class="bg-red-500 text-white rounded-lg p-2 px-8" onClick="getNegativeclips({{youtube_data.id}})">Negative Video Clips</button>
+        </div>
+        <div class="px-5 mt-2 flex justify-center w-fill" id="videosContainer">
+          <span id="loading" hidden class="loading loading-dots loading-lg"></span>
+        </div> 
+      </div>
+    </div>
+    <p class="ml-10 mt-10 font-bold text-xl">WORD CLOUD</p>
+    <div class="rounded-lg px-16 mx-4">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzUzIMEcD1U-QY5vlSajwFm2LZ3HERDU-SPd5V0_JKVr0bro2uuVg8iIEwke9tE5IdsTI&usqp=CAU" alt="loading" height="500" width="900" class="mt-10">
+    </div> 
+   <br> 
+    <div class="grid grid-cols-2 gap-2">
+      <div class="ml-10">
+        <p class="mt-8 font-bold text-xl">GRAPH:</p>
+        <img src="https://media.istockphoto.com/id/1144573725/photo/financial-business-charts-graphs-and-diagrams-3d-illustration-render.jpg?b=1&s=612x612&w=0&k=20&c=Hh3iTZpX-nqLnuG_hJhH5b9ncAAQQ0Rg4hRoxWKvJYg=" alt="loading" height="500" width="500" class="mt-10">
+      </div>
+
+      <div class="ml-10">
+        <p class="font-bold text-xl mt-8">PIE CHART:</p>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrQHJCr1xdZBFQmAVCXT8OX6K-2LkJU3_x1Q&usqp=CAU" alt="loading" class="mt-10" height="700" width="300">
+      </div> 
+    </div>
+  </div>
+</div>
+<!-- endblock -->
+<script>
+
+
+  document.addEventListener('DOMContentLoaded',async function() {
+    var sentiment_analysis = document.getElementById('sentiment_analysis_input').value;
+    console.log(sentiment_analysis);
+    parsed_analysis = JSON.parse(sentiment_analysis);
+    summary = document.getElementById('summary');
+    summaryArray = [];
+    parsed_analysis.forEach((data)=>{
+      summaryArray.push(data.subtitle);
+  
+    })
+
+    if(summaryArray.length > 0){
+     summary.innerHTML = summaryArray.join(""); 
+    }
+    else{
+      summary.innerHTML = "No summary found";
+    }
+    console.log(summary.innerHTML)
+    try {
+      const subtitles = summary.innerHTML;
+      const jsonSubtitles = JSON.stringify(subtitles);
+      console.log('sending request to get word cloud')
+      const response = await fetch(`http://10.1.75.142:8000/get_word_cloud/${jsonSubtitles}`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const parseRes = await response.json();
+    } catch (error) {
+      console.error('Fetch error:', error);
+      console.error('Error stack:', error.stack); 
+    }
+  });
+
+
+  const getNegativeclips = async (id) => {
+    const getNegativeclips = document.getElementById('getNegativeclips');
+    const loading = document.getElementById('loading');
+    getNegativeclips.setAttribute('hidden',true);
+    loading.removeAttribute('hidden');
+    
+    
+    try {
+      const response = await fetch(`http://10.1.75.142:8000/get_negative_clips/${id}`, {
+        method: "GET",
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const parseRes = await response.json();
+      loading.setAttribute('hidden',true);
+      
+     data = JSON.parse(parseRes.data);
+     console.log(data);
+     container = document.getElementById('videosContainer');
+     container.classList.add("carousel")
+     container.classList.add("w-full")
+      data.forEach((filename,index)=>{
+        console.log(index)
+        const videoContainer2 = document.createElement('div');
+        videoContainer2.classList.add("carousel-item")
+        videoContainer2.classList.add("relative")
+        videoContainer2.classList.add("w-full")
+        const controls = document.createElement('div');
+        controls.classList.add("absolute")
+        controls.classList.add("flex")
+        controls.classList.add("justify-between")
+        controls.classList.add("transform")
+        controls.classList.add("-translate-y-1/2")
+        controls.classList.add("left-5")
+        controls.classList.add("right-5")
+        controls.classList.add("top-1/2")
+        const left = document.createElement('a');
+        left.classList.add("btn")
+        left.classList.add("btn-circle")
+        const right = document.createElement('a');
+        right.classList.add("btn")
+        right.classList.add("btn-circle")
+        const video = document.createElement('video');
+        video.classList.add("w-full") 
+        video.setAttribute('controls',true);
+        video.setAttribute('width',`667`);
+        video.setAttribute('height',`765`);
+       
+       // video.setAttribute('src','newsgatherers/static/negative_14356_1.mp4')
+      video.setAttribute('src',`/static/${filename}`)
+      //video.setAttribute('autoplay','true')
+      video.setAttribute('loop','true')
+      video.setAttribute('muted','true')
+      
+        video.type = 'video/mp4';
+       container.appendChild(videoContainer2);
+       videoContainer2.appendChild(video);
+       videoContainer2.appendChild(controls);
+       controls.appendChild(left);
+       controls.appendChild(right);
+        left.innerHTML = '❮';
+        right.innerHTML = '❯';
+        if (index == 0){
+          videoContainer2.setAttribute('id','slide1')
+          left.setAttribute('href',`#slide${data.length}`)
+          right.setAttribute('href',`#slide${index + 2}`)
+        }
+        else if(index == 1){
+          videoContainer2.setAttribute('id',`slide2`)
+          left.setAttribute('href',`#slide${index}`)
+          right.setAttribute('href',`#slide${index + 2}`)
+        }
+        else if(index == data.length - 1){
+        //  videoContainer2.setAttribute('id',`slide${index+1}`)
+          left.setAttribute('href',`#slide${index - 1}`)
+          right.setAttribute('href',`#slide1`)
+        }
+        else{
+          videoContainer2.setAttribute('id',`slide${index+1}`)
+          right.setAttribute('href',`#slide${index + 2}`)
+          left.setAttribute('href',`#slide${index - 1}`)
+        }
+
+      })
+      
+    } catch (error) {
+      console.error('Fetch error:', error);
+      console.error('Error stack:', error.stack);
+    }
+  };
+</script>
+{% endblock %}
+
+<div class="carousel w-full">
+  <div id="slide1" class="carousel-item relative w-full">
+    <img src="https://daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.jpg" class="w-full" />
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide4" class="btn btn-circle">❮</a> 
+      <a href="#slide2" class="btn btn-circle">❯</a>
+    </div>
+  </div>
+</div>

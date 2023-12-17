@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,10 +146,90 @@
     </div>
   </div>
 
-
+{% block content %}
 <!-- block content -->
 
+<div class="bg-gray-100 p-6 m-10 mt-20 mx-28">
+
+    <div class="flex items-center justify-center">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+      </svg>
+    
+      <div class="bg-gray-100 p-6 flex items-center justify-center">
+        <div class="relative">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0zjliZqqXXi8YgTmMpFjPCyo0fsqhqAIEg&usqp=CAU" alt="loading" height="500" width="250">
+          <div class="absolute bottom-0 inset-x-0 flex justify-center bg-black text-white px-2 py-1 opacity-70">
+            <span class="text-xs">1/30</span>
+          </div>
+        </div>
+      </div>
+    
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+      </svg>
+    </div>
+    
+    <div class="flex items-center justify-center">
+      <p class="text-3xl font-serif">Hindustan Times</p>
+    </div>
+    <div class="flex items-center justify-center">
+      <p class="text-lg font-serif">Language: <span class="text-blue-200">English</span></p>
+    </div>
+    <div class="flex items-center justify-center">
+      <p class="text-lg font-sans">Date: <span class="text-blue-200">15.12.2023</span></p>
+    </div>
+
+
+    <div class="flex justify-center items-center">
+      <div class="pt-6 mr-4">70% - Positive</div>
+        <div class="w-96 mt-8 bg-red-500 rounded-full h-4 dark:bg-gray-700 relative">
+          <!-- <div class="absolute top-0 left-0 bg-gray-600 h-full rounded-full" style="width: 30%"></div> -->
+          <div class="absolute top-0 left-0 bg-green-400 h-full rounded-full" style="width: 70%"></div>
+      </div>
+      <div class="pt-6 ml-4">Negative - 30%</div>
+    </div>
+
+    <div class="bg-white p-14 mx-28 mt-10 rounded-2xl">
+        <div class="grid grid-cols-2">
+          <div>
+            <div class="flex items-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+              </svg>
+            
+              <div class="bg-white px-3 py-6 flex items-center justify-center">
+                <div class="relative">
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0zjliZqqXXi8YgTmMpFjPCyo0fsqhqAIEg&usqp=CAU" alt="loading" height="300" width="200">
+                  <div class="absolute bottom-0 inset-x-0 flex justify-center bg-black text-white px-2 py-1 opacity-70">
+                    <span class="text-xs">1/30</span>
+                  </div>
+                </div>
+              </div>
+            
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-10 h-10 text-gray-500 font-bold bg-gray-200 rounded-full p-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+              </svg>
+            </div>
+          </div>
+
+          <div>
+            <div class="mt-6">
+              <p class="text-3xl font-bold font-sans">The NaMoment</p>
+            </div>
+            <div class="mt-8 ">
+              <P class="mt-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum vel facilis dolorem inventore excepturi laboriosam ullam ipsum harum ratione et odit ipsam tempore cupiditate, asperiores illo distinctio a neque recusandae.</P>
+
+              <p class="mt-6">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum sequi voluptas velit, blanditiis pariatur, placeat necessitatibus tenetur excepturi aliquam tempore tempora ad impedit sed! Aspernatur ratione et doloremque corrupti eius?</p>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</div>
+
 <!-- endblock -->
+{% endblock %}
 
   <!-- FOOTER -->
   <footer class="bg-light text-center text-lg-start fixed-bottom mt-10">
