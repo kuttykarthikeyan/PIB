@@ -5,7 +5,7 @@ class DailyOCR(models.Model):
     json_result = models.JSONField()
     languauge = models.CharField(max_length=30,null=True)
     file = models.FileField(upload_to='ocr/',null=True)
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=40,null=True,blank=True)
     
 
 class Page(models.Model):
@@ -15,5 +15,5 @@ class Page(models.Model):
 
 class OCRResult(models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE, related_name='results')
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25,null=True,blank=True)
     file = models.FileField(upload_to='ocr/')

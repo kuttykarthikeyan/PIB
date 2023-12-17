@@ -28,20 +28,18 @@ def home(request):
 
 
 def cluster_related(request,cls_id):
-    cluster_objs = news_cluster_head.objects.filter(id=cls_id)
-    news=news_obj.objects.all()
-    print(cluster_objs)
-    for i in cluster_objs:
-        news_objs = i.website_data_cluster_obj.all()
-        print(news_objs)
-    context = {'news_objs':news_objs,}
-    for j in news_objs:
-            print(j.id)
-            print('\n')
-            print(j.title)
-            context[j.id]=j.title
+    try:
+        cluster_head = news_cluster_head.objects.filter(id=cls_id)
+        website_cluster_objs = cluster_head.website_data_cluster_obj.all()
+        youtube_cluster_objs = cluster_head.youtube_data_cluster_obj.all()
+        print(website_cluster_objs)
+        print(youtube_cluster_objs)
 
-    return render(request,'cluster_related.html',{'cntxt':context.values(),'cluster_obj': cluster_objs,'news':news})
+    except Exception as e:
+        print(str(e))
+    print(cls_id)
+    return render(request,'cluster_related.html')
+    # return render(request,'cluster_related.html',{'cntxt':context.values(),'cluster_obj': cluster_objs,'news':news})
 
 
 
@@ -126,7 +124,7 @@ def youtube_data_home(request):
         context = {"data":data}
     except Exception as e:
         print(str(e))
-    return render(request,'youtube.html',context)
+    return render(request,'youtube_home.html',context)
 
        
 def youtube_data_analysis(request,id):
