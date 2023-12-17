@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
+from requests import request
 from .models import *
 import pandas as pd
 from newspaper import Article
@@ -91,23 +92,30 @@ def admin_dashboard(request):
     context = {"data":latest_news} 
     return render(request,'admin_dashboard.html',context)
 
-def article(request,index,id):
-    context={}
-    news = news_obj.objects.get(id=id)
-    data = pd.read_csv(news.data, low_memory=False)
-    json_data = data.reset_index().to_json(orient ='records')
-    data = []
-    data = json.loads(json_data)
-    summary = {}
-    for article in data:
-        if article['index'] == index:
-            article_data = article
-            url = article_data['url']
-            summary = get_summary_of_particular_news(url)
-            print(summary)
-            context={"summary":summary}
-            break
-    return render(request,'article.html',context)
+def cluster(request,id):
+    new_all_data = news_cluster_head.objects.filter(id = id)
+    context = {'news_all_data':new_all_data}
+    return render(request,'cluster.html',context)
+    # return render(request,context)
+    
+    
+def article(request):
+    # context={}
+    # news = news_obj.objects.get(id=id)
+    # data = pd.read_csv(news.data, low_memory=False)
+    # json_data = data.reset_index().to_json(orient ='records')
+    # data = []
+    # data = json.loads(json_data)
+    # summary = {}
+    # for article in data:
+    #     if article['index'] == index:
+    #         article_data = article
+    #         url = article_data['url']
+    #         summary = get_summary_of_particular_news(url)
+    #         print(summary)
+    #         context={"summary":summary}
+    #         break
+    return render(request,'articles.html')
 
 
 def youtube_data_home(request):
@@ -118,7 +126,7 @@ def youtube_data_home(request):
         context = {"data":data}
     except Exception as e:
         print(str(e))
-    return render(request,'youtube_home.html',context)
+    return render(request,'youtube.html',context)
 
        
 def youtube_data_analysis(request,id):
@@ -144,10 +152,8 @@ def youtube_data_analysis(request,id):
 #     context={'forms':forms}
 #     return render(request,'eprints.html',context)
 
-# def eprint(request):
-#     prints = Eprints.objects.all()
-#     context = {'prints':prints}
-#     return render(request,'eprint.html',context)
+def eprint(request):
+    return render(request,'E-prints.html')
 
 
 def text_video(request):
