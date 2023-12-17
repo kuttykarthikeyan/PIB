@@ -15,7 +15,7 @@ from nltk.tokenize import sent_tokenize
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from . models import *
 import datetime
-
+from celery import shared_task
 
 language_selection_dict = { "english_newspapers" : 'en' ,'telugu_newspapers' : 'te','hindi_newspapers':'hi' }
 
@@ -175,7 +175,7 @@ def e_print_function(newspaper_lang):
    
     global language_selection_dict
  
-    model = YOLO(r"./model_ocr/model_article_only.pt")
+    model = YOLO(r"./ocr/model_ocr/model_article_only.pt")
  
  
     # folder_path = Path("pdfs/" + newspaper_lang)
@@ -206,7 +206,7 @@ def e_print_function(newspaper_lang):
             # cv2.imwrite("OCR_results/" + file_name + "_pdf" + "/page_"+str(id+1)+"/full_image.jpg", results_image)
             cv2.imwrite("/media/ocr/" +"/page_"+str(id+1)+".jpg", results_image)
 
-            page_obj = Page.objects.create(ocr_object=paper,file = "/media/ocr/" +"/page_"+str(id+1)+".jpg",page_number = page.number)
+            page_obj = Page.objects.create(ocr_object=paper,file = "/ocr/" + page_name,page_number = page.number)
 
  
             boxes = results[0].boxes.numpy().xyxy
@@ -223,7 +223,7 @@ def e_print_function(newspaper_lang):
                     x1, y1, x2, y2 = map(int, [x1, y1, x2, y2])
                     cropped_image = input_image[y1:y2, x1:x2]
                    
-                    if newspaper_lang == 'english_newspapers':
+                    if newspaper_lang == 'english':
                         image_to_text = image_to_text_OCR(cropped_image)
                        
                     if newspaper_lang == 'telugu_newspapers':
@@ -243,7 +243,7 @@ def e_print_function(newspaper_lang):
                         print("trueeee")
                         art_dict["article_" + str(art_num)] = analysis_text
                         cv2.imwrite("/media/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png", cropped_image)
-                        OCRResult.objects.create(page=page_obj,name=str(art_num),file="/media/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png")
+                        OCRResult.objects.create(page=page_obj,name=str(art_num),file="/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png")
                         art_num += 1
            
             pages_dict["page_"+str(id+1)] = art_dict
