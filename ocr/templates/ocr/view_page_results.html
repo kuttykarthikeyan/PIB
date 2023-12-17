@@ -147,22 +147,11 @@
 <div class="bg-gray-100 px-36 mx-10 mt-20 mx-28 rounded-3xl">
 
       <div class="grid grid-cols-4 opacity-50 py-20 ml-10">
-        {% for paper in papers %}
-          <a href="{% url 'view-pages' paper.id %}">
+        {% for result in results %}
           <div class="relative m-5">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSf0zjliZqqXXi8YgTmMpFjPCyo0fsqhqAIEg&usqp=CAU" alt="Your Image" class="h-96 w-72 opacity-50 saturate-50 fill-neutral-50">
-            <div class="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center">
-              <p class="text-black  font-bold mr-14">{{paper.name}} - {{paper.languauge}} - {{paper.date}}</p>
-            </div>
-            <br>
-            {% comment %} <div class="absolute text-black flex items-center justify-center">
-              <p>Language: {{paper.languauge}}</p>
-            </div>
-            <div class="absolute text-black   flex items-center justify-center">
-              <p>Date: {{paper.date}} </p>
-            </div> {% endcomment %}
+            <img src="{{result.file.url}}" alt="Your Image" class="h-96 w-72 opacity-50 saturate-50 fill-neutral-50">
+            
           </div>
-        </a>
         {% endfor%}
           
       </div>
