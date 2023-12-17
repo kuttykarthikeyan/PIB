@@ -5,6 +5,7 @@ from django.contrib.auth.models import User,auth
 from requests import request
 from .models import *
 import pandas as pd
+import requests
 from newspaper import Article
 import json
 from django.http import JsonResponse
@@ -18,6 +19,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from .scripts.youtube_video_trimming_process import *
 import asyncio
 from .forms import *
+from .serializers import *
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 
@@ -122,9 +124,10 @@ def youtube_data_home(request):
         # data = news_obj.objects.filter(channel_name='indiatoday',source_type='youtube')
         data = news_obj.objects.filter(source_type='youtube',clustered=False)
         context = {"data":data}
+        return render(request,'youtube_home.html',context)
     except Exception as e:
-        print(str(e))
-    return render(request,'youtube_home.html',context)
+      print(str(e))
+    return render(request,'youtube_home.html')
 
        
 def youtube_data_analysis(request,id):
