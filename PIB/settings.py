@@ -163,4 +163,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
+IS_PRODUCTION = os.environ.get('IS_PRODUCTION',False)
+if IS_PRODUCTION:
+    PYTESSERACT_LOCATION = os.environ.get('PYTESSERACT_LOCATION')
 
+CSRF_TRUSTED_ORIGINS = ["http://10.1.76.148"]

@@ -1,0 +1,12 @@
+web:
+  container_name: pib
+  restart: always
+  build: .
+  ports:
+    - 23030:8000
+  expose:
+    - 8000
+  env_file: production.env
+  volumes:
+    - pib:/usr/src/app/media
+  command: sh /usr/src/app/run_web.sh

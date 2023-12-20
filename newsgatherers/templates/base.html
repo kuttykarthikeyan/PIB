@@ -76,8 +76,7 @@
         <p class="text-md">Government of India</p>
       </div>
     </div>
-    <div class="flex-none">
-      <div id="google_translate_element"></div>
+    <div class="flex-none" id="google-trans">
     </div>
   </div>
   <div id="google_translate_element"></div>
@@ -152,10 +151,11 @@
   
 </body>
 <script type="text/javascript">
-  function googleTranslateElementInit() {
-    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-  }
-  </script>
-  
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google-trans');
+}
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 </html>
