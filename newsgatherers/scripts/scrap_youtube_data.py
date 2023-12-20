@@ -1,6 +1,46 @@
 import pandas as pd
 from tqdm import tqdm
+import spacy
 
+def is_government_related(news_text):
+    # List of government-related keywords
+    government_keywords = [
+        'government', 'governance', 'public service', 'public office', 'public sector', 'public policy',
+        'political', 'politics', 'politician', 'democracy', 'election', 'political party', 'citizen', 'civic',
+        'state', 'national', 'federal', 'municipal', 'local government', 'public official', 'public servant',
+        'executive', 'administration', 'president', 'prime minister', 'cabinet', 'minister', 'secretary',
+        'commissioner', 'governor', 'mayor', 'official', 'authority', 'policy maker', 'bureaucrat', 'regulator',
+        'legislator', 'lawmaker', 'parliamentarian', 'representative', 'senator', 'congressman', 'congresswoman',
+        'assemblyman', 'assemblywoman', 'diplomat', 'embassy', 'consulate', 'diplomacy', 'ambassador', 'foreign affairs',
+        'international relations', 'treaty', 'summit', 'conference', 'convention', 'protocol', 'trade agreement',
+        'bilateral', 'multilateral', 'trilateral', 'executive order', 'presidential decree', 'government agency',
+        'department', 'ministry', 'bureau', 'office', 'commission', 'board', 'authority', 'committee', 'task force',
+        'regulatory body', 'ombudsman', 'civil service', 'treasury', 'finance', 'budget', 'taxation', 'education',
+        'health', 'public health', 'defense', 'national defense', 'justice', 'judiciary', 'law enforcement',
+        'homeland security', 'border control', 'immigration', 'customs', 'transportation', 'infrastructure',
+        'agriculture', 'environment', 'natural resources', 'energy', 'power', 'labor', 'employment', 'unemployment',
+        'housing', 'urban development', 'rural development', 'commerce', 'trade', 'business', 'industry', 'technology',
+        'information', 'communication', 'telecommunications', 'internet', 'interior', 'veterans affairs',
+        'social services', 'welfare', 'social security', 'culture', 'arts', 'heritage', 'tourism', 'sports', 'recreation',
+        'science', 'research', 'development', 'innovation', 'sustainability', 'climate change', 'foreign aid', 'aid',
+        'human rights', 'civil liberties', 'constitution', 'constitutional', 'policy analysis', 'government program',
+        'government initiative', 'public initiative', 'public project', 'government expenditure', 'public spending',
+        'government revenue', 'public funds', 'government debt', 'public debt', 'public finance', 'political science'
+    ]
+    
+    nlp = spacy.load("en_core_web_sm")
+
+    doc = nlp(news_text)
+
+    for ent in doc.ents:
+        if ent.label_ in ["ORG", "PERSON", "GPE"]:
+            return True
+
+    for token in doc:
+        if token.text.lower() in government_keywords:
+            return True
+
+    return False
 
 channel_name_list = ["indiatoday","cnnnews18","timesofindia","TheEconomicTimes","TimesNow"]
 def youtube_video_scrape(channel_name):
@@ -43,6 +83,7 @@ def youtube_video_scrape(channel_name):
 
     d = pd.concat(videos_df)
     return d
+    
     
 
 def scrap_data_from_youtube():

@@ -19,29 +19,32 @@ from youtube_transcript_api import YouTubeTranscriptApi
 from .scripts.youtube_video_trimming_process import *
 import asyncio
 from .forms import *
-from .serializers import *
+# from api.serializers import *
 from django.utils.translation import gettext as _
 from django.http import JsonResponse
 
 def home(request):
-    clusters = news_cluster_head.objects.all()
-    context = {'clusters':clusters}
+    clusters = news_cluster_head.objects.all().exclude(image__isnull = True)
+    negative = negative_publisher_today.objects.all()
+    context = {'clusters':clusters,'data_negative':negative}
     return render(request, 'Home.html',context)
 
 
 def cluster_related(request,cls_id):
     try:
-        cluster_head = news_cluster_head.objects.filter(id=cls_id)
+        cluster_head = news_cluster_head.objects.get(id=cls_id)
+        
         website_cluster_objs = cluster_head.website_data_cluster_obj.all()
-        youtube_cluster_objs = cluster_head.youtube_data_cluster_obj.all()
-        print(website_cluster_objs)
-        print(youtube_cluster_objs)
-
+        youtube_cluster_objs = cluster_head.youtube_data_cluster_obj.all()            
+        context = {'cluster_head':cluster_head,'website_cluster':website_cluster_objs,
+                    'youtube_cluster' :youtube_cluster_objs }
+        for i in context:
+            print(i)   
+        return render(request,'cluster_related.html',context)
     except Exception as e:
         print(str(e))
-    print(cls_id)
     return render(request,'cluster_related.html')
-    # return render(request,'cluster_related.html',{'cntxt':context.values(),'cluster_obj': cluster_objs,'news':news})
+    
 
 
 
@@ -72,7 +75,8 @@ def signup(request):
                 messages.info('The user already exists')
                 return redirect('signup')
             else:
-                user = User.objects.create_user(email=email,first_name=firstname,last_name=lastname,username=email)
+                user = User.objects.create_user(email=email,first_name=firstname,
+                                                last_name=lastname,username=email)
                 user.set_password(password)
                 user.is_staff=True
                 user.is_superuser=True
@@ -187,17 +191,17 @@ def article_home(request):
 
     return render(request,'article_home.html',context)
 
-def article_analysis(request,pk, check):
+def article_analysis(request,id,check):
     try:
         context = {}
         print(check)
         if check == '1':
-                news = news_obj.objects.get(id=pk)
+                news = news_obj.objects.get(id=id)
                 context = {'news':news}
                 print(news)
                 print('news_obj --> rendered')
         else:
-            news = news_cluster_head.objects.get(id=pk)
+            news = news_cluster_head.objects.get(id=id)
             print(news)
             context = {'news':news}
             print('news_cluster_head --> rendered')
@@ -210,6 +214,12 @@ def article_analysis(request,pk, check):
 
 
 def report(request):
+    try:
+        if request.method == 'POST':
+            print(request.POST)
+    except Exception as e:
+        print(str(e))
+    
     return render(request,'report.html')
 
 
@@ -218,3 +228,6 @@ def eprints(request):
 
 def eprint_analysis(request):
     return render(request,'eprint_analysis.html')
+
+def multi(request):
+    return render

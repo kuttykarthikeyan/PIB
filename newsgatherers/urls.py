@@ -8,7 +8,7 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     path('admin_dashboard/',views.admin_dashboard,name='admin_dashboard'),
     path('cluster/<int:id>',views.cluster,name='cluster'),
-    path('article_analysis/<int:pk>/<int:check>/',views.article_analysis,name='article_analysis'),
+    path('article_analysis/<int:id>/<int:check>',views.article_analysis,name='article_analysis'),
     path('article_home',views.article_home,name='article_home'),
     path('article/<int:index>/<int:id>',views.article,name='article'),
     path('youtube_videos/',views.youtube_data_home,name='youtube_data_home'),
@@ -27,7 +27,8 @@ urlpatterns = [
     path('eprints',views.eprints,name='eprints'),
     path('eprint_analysis',views.eprint_analysis,name='eprint_analysis'),
 
-
+    
     path('cluster_related/<int:cls_id>',views.cluster_related,name='cluster_related'),
+    path('multi',views.multi,name='multi'),
     
 ]

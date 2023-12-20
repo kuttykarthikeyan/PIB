@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block content%}
 <!-- container -->
-<div class="flex container gap-10 mt-10">
+<!-- <div class="flex container gap-10 mt-10">
   <div class=" ml-28">
     <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 " type="button">All <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -15,20 +15,20 @@
       </svg>
       </button>
   </div>
-</div>
+</div> -->
 <!-- first card -->
 
-<div class="container mt-10  grid grid-cols-3 gap-3 px-28 mb-10">
-  <div class="">
-      <img src="{{cluster.image}}" alt="loading" height="400" width="500" class="rounded-xl">
-  </div>
-
+<div class="container mt-10   grid-cols-2 gap-2 px-28 mb-10">
+  <!-- <div class="">
+      <img src="{{cluster_head.image}}" alt="loading" height="400" width="500" class="rounded-xl">
+  </div> -->
+  
   <div class="col-span-2 ml-4">
-    <b class="text-3xl">{{cluster.title}}</b>
-    <p class="opacity-60 mt-2 mb-4">{{cluster.published_date}}</p>
-    <p class="mb-4"><Strong>{{cluster.publisher}}</Strong></p>
-      <p>{{ cluster.description }}</p>
-      <a href="#" class="text-blue-500 underline">Read more</a>
+    <b class="text-3xl">{{cluster_head.title}}</b>
+    <p class="opacity-60 mt-2 mb-4">{{cluster_head.published_date}}</p>
+    <p class="mb-4"><Strong>{{cluster_head.publisher}}</Strong></p>
+      <p>{{ cluster_head.description }}</p>
+      <a href="{% url 'article_analysis' id=cluster_head.id check=1 %}" class="text-blue-500 underline"> >Read more</a>
   </div>
 
 </div>
@@ -37,26 +37,58 @@
 <div class="flex flex-col gap-1">
   <!-- second card 2 -->
 
-
-  <div class="mx-24 bg-gray-200 grid grid-cols-3 gap-3 px-28 rounded-xl ">
+{% for web in website_cluster %}
+  <div class="mx-24 bg-gray-200 grid grid-cols-2 gap-3 px-28 rounded-xl ">
     
     <div class="col-span-2 ml-4 py-10">
-      <p class="mb-4 text-3xl"><Strong>{{i.channel_name}}</Strong></p> 
-      <b class="text-2xl">{{i.title}}</b>
+      <kbd class="kbd kbd-lg">News</kbd>
+      <p class="mb-4 text-3xl"><Strong>{{web.publisher}}</Strong></p> 
+      <b class="text-2xl">{{web.title}}</b>
       
-      <p class="opacity-60 mt-2 mb-4">{{i.published_date}}</p>
-      <p>{{i.description}}{{i.summary_article}}<a href="#" class="text-blue-500 underline">Read more</a>
+      <p class="opacity-60 mt-2 mb-4">{{web.published_date}}</p>
+      <p>{{web.description}}{{web.summary_article}}<a href="{% url 'article_analysis' id=web.id check=0 %}" class="text-blue-500 underline">Read more</a>
       </p>
       <button class="btn btn-outline btn-error mt-5">Negative</button>
     </div>
-    <div class="rounded-md">
-      <div class="px-4 rounded-md">
+    <!-- <div class="rounded-md"> -->
+      <!-- <div class="px-4 rounded-md">
 
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg" alt="loading" height="800" width="600" class="rounded-2xl my-8">
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 
+{% endfor %}
+
+
+c
+{% for utube in youtube_cluster %}
+  <div class="mx-24 bg-gray-200 grid grid-cols-2 gap-3 px-28 rounded-xl ">
+    
+    <div class="col-span-2 ml-4 py-10">
+      <kbd class="kbd kbd-lg">youtube</kbd>
+      <!-- <p class="mb-4 text-3xl"><Strong>{{utube.channel_name}}</Strong></p>  -->
+<br/>
+<br/>
+      <b class="text-2xl">{{utube.title}}</b>
+      
+      <p class="opacity-60 mt-2 mb-4">{{utube.published_time_ago}}</p>
+      <p>Youtube Link<a href="{{utube.url}}" class="text-blue-500 underline">Read more</a>
+      </p>
+      <button class="btn btn-outline btn-error mt-5">Negative</button>
+    </div>
+
+    
+    
+    <!-- <div class="rounded-md"> -->
+      <!-- <div class="px-4 rounded-md">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg" alt="loading" height="800" width="600" class="rounded-2xl my-8">
+      </div> -->
+    <!-- </div> -->
+  </div>
+
+{% endfor %}
 
 <!-- second card 2 -->
   

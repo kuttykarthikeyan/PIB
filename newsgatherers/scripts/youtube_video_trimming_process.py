@@ -151,7 +151,7 @@ def youtube_video_trimming_process(video_url):
         print("Subtitles are disabled for this video")
         
 
-def spliting_negative_clip(url,id):
+def spliting_negative_clip(url,id):   
 
     from tqdm import tqdm
     global r
@@ -169,24 +169,24 @@ def spliting_negative_clip(url,id):
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
-    output_video_path = "downloaded_youtube_video/downloaded_video.mp4"
-    input_video_path ="downloaded_youtube_video/downloaded_video.mp4.webm"
-    ffmpeg_command = [
-        'ffmpeg',
-        '-i', input_video_path,
-        '-c:v', 'copy',
-        '-c:a', 'aac',
-        '-strict', 'experimental',
-        output_video_path
-    ]
+    # output_video_path = "downloaded_youtube_video/downloaded_video.mp4"
+    # input_video_path ="downloaded_youtube_video/downloaded_video.mp4.webm"
+    # ffmpeg_command = [
+    #     'ffmpeg',
+    #     '-i', input_video_path,
+    #     '-c:v', 'copy',
+    #     '-c:a', 'aac',
+    #     '-strict', 'experimental',
+    #     output_video_path
+    # ]
     list_trim_video = list(zip(r["start_time"],r["end_time"]))
-    try:
+    # try:
         
-        subprocess.run(ffmpeg_command, check=True)
-        print("Conversion successful")
-        os.remove("downloaded_youtube_video/downloaded_video.mp4.webm")
-    except subprocess.CalledProcessError as e:
-        print(f"Error during conversion: {e}")
+    #     subprocess.run(ffmpeg_command, check=True)
+    #     print("Conversion successful")
+    #     os.remove("downloaded_youtube_video/downloaded_video.mp4.webm")
+    # except subprocess.CalledProcessError as e:
+    #     print(f"Error during conversion: {e}")
     videos = []
     if len(list_trim_video) != 0:
         

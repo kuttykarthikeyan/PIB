@@ -3,14 +3,24 @@
 <!-- block content -->
 {% extends 'base.html'%}
 {% block content %}
-
+<!-- <div class="w-full flex justify-center">
+  {% for d in data_negative %}
+<div class="carousel rounded-box w-400">
+  <div class="carousel-item w-1/2">
+    <div class="stat">
+      <div class="stat-title">{{d.title}}</div>
+      <div class="stat-value">{{d.NEGATIVE}}</div>
+      <div class="stat-desc">{{d.publisher}}</div>
+    </div>
+  </div> 
+  {%endfor%}
+</div>
+</div> -->
 
 
 {% for cluster in clusters %}
-<div class="grid grid-cols-3 gap-3 px-56 mb-10">
-  <div class="">
-      <img src="{{ cluster.image }}" alt="loading" height="400" width="500" class="rounded-xl">
-  </div>
+<div class="grid grid-cols-2 gap-3 px-80 mb-10">
+ 
 
   <div class="col-span-2 ml-4">
     <b class="text-3xl"><a href="{% url 'cluster_related' cls_id=cluster.id %}">{{cluster.title}}</a></b>

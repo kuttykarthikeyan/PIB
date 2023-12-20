@@ -8,6 +8,8 @@ from pathlib import Path
 from googletrans import Translator
 import json
 import pandas as pd
+from transformers import pipeline
+from langdetect import detect
 import spacy
 import easyocr
 from textblob import TextBlob
@@ -33,35 +35,25 @@ def delete_contents_of_directory(directory_path):
         print(f"Error: {e}")
 
 
-analyzer = SentimentIntensityAnalyzer()
+
+
+zero_shot_classifier = pipeline('zero-shot-classification', model="MoritzLaurer/mDeBERTa-v3-base-mnli-xnli", device=-1)
 def sentiment_analysis(descriptions):
-    global analyzer
+    global zero_shot_classifier
     list_results = []
+    descriptions = [descriptions]
     for text in descriptions:
         results = {}
-        sen_list = ['POSITIVE','NEGATIVE','NEUTRAL']
-        sentiment_score = analyzer.polarity_scores(text)
-        sentiment_intensity = sentiment_score['compound']
-
-        if sentiment_intensity >= 0.3:
-            sentiment = "POSITIVE"
-        elif sentiment_intensity <= -0.5:
-            sentiment = "NEGATIVE"
-        else:
-            sentiment = "NEUTRAL"
-            
-        sen_list.remove(sentiment)
-        
-        sentiment_intensity = abs(sentiment_intensity)
-        
-        results['SENTIMENT_LABEL'] = sentiment
-        results[sentiment] = round(sentiment_intensity * 100,2)
-        results[sen_list[0]] = 0
-        results[sen_list[1]] = 0
-        
-        list_results.append(results)
-        
-        
+        class_names = ["POSITIVE", "NEUTRAL", "NEGATIVE"]
+        answer = zero_shot_classifier(text, class_names, hypothesis_template="The sentiment of this text is {}.")
+        print(answer)
+        sentiment = answer['labels']
+        sentiment_intensity = (answer['scores'])
+        results['SENTIMENT_LABEL'] = sentiment[0]
+        results[sentiment[0].upper()] = round(abs(sentiment_intensity[0]) * 100,2)
+        results[sentiment[1].upper()] = round(abs(sentiment_intensity[1]) * 100,2)
+        results[sentiment[2].upper()] = round(abs(sentiment_intensity[2]) * 100,2)
+        list_results.append(results)  
     return list_results
 
 
@@ -142,29 +134,31 @@ def clean_text(text,lang):
     global language_selection_dict
     df = {}
     # Remove unwanted characters and extra spaces
-    cleaned_text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
-    remove_text = re.sub(r'\s+', ' ', cleaned_text).strip()
-    blob = TextBlob(remove_text)
-    cleaned_text = str(blob.correct())
+    # cleaned_text = re.sub(r'[^a-zA-Z0-9\s]', '', text)
+    # remove_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+    # blob = TextBlob(remove_text)
+    cleaned_text = text
     print("!!!!!!!!!!!!!!!@@@@@@@@@!!!!!!!!!!!!!!!!!!!!",text)
-    if is_government_related(cleaned_text):
+    # if is_government_related(cleaned_text):
+    if 1 == 1:
         print("is_government_related",cleaned_text)
-        sentences_sent_tokenize = sent_tokenize(cleaned_text)
+        # sentences_sent_tokenize = sent_tokenize(cleaned_text)
         sentiment_list = sentiment_analysis(cleaned_text)
         print(sentiment_list)
-        print("!!!!!!22222222223333333333332222222222!!!!!!!",sentences_sent_tokenize)
-        sentences = language_translation(cleaned_text,lang)
-        print(sentences)
+        # print("!!!!!!22222222223333333333332222222222!!!!!!!",sentences_sent_tokenize)
+        # sentences = language_translation(cleaned_text,lang)
+        # print(sentences)
         df["full_text"] = cleaned_text
-        df["sentances"] = sentences_sent_tokenize
+        # df["sentances"] = sentences_sent_tokenize
         sen_result_list = [ i['SENTIMENT_LABEL'] for i in sentiment_list]
         df['SENTIMENT_ANALYSIS_RESULT'] = sen_result_list
         df['POSITIVE'] = [ i['POSITIVE'] for i in sentiment_list]
         df['NEUTRAL'] = [ i['NEUTRAL'] for i in sentiment_list]
         df['NEGATIVE'] = [ i['NEGATIVE'] for i in sentiment_list]
-        df['positive_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "POSITIVE" ]
-        df['negative_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "NEGATIVE" ]
-        df['neutral_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "NEUTRAL" ]
+
+        # df['positive_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "POSITIVE" ]
+        # df['negative_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "NEGATIVE" ]
+        # df['neutral_sentances'] = [ i for i,j in zip(sentences_sent_tokenize,sen_result_list) if j == "NEUTRAL" ]
 
         return df
     else:
@@ -228,18 +222,18 @@ def e_print_function(newspaper_lang):
                        
                     if newspaper_lang == 'telugu_newspapers':
                         image_to_text = ocr_easy(cropped_image,language_selection_dict[newspaper_lang])
-                        image_to_text = language_translation(image_to_text,'english')
+                        # image_to_text = language_translation(image_to_text,'english')
                         print("**********************",image_to_text)
                    
                     if newspaper_lang == 'hindi_newspapers':
                         image_to_text = ocr_easy(cropped_image,language_selection_dict[newspaper_lang])
-                        image_to_text = language_translation(image_to_text,'english')
+                        # image_to_text = language_translation(image_to_text,'english')
                        
                     # print(newspaper_lang.split("_")[0])
                     analysis_text = clean_text(image_to_text,newspaper_lang.split("_")[0])
                     print(analysis_text)
                    
-                    if analysis_text != False:
+                    if 1 == 1:
                         print("trueeee")
                         art_dict["article_" + str(art_num)] = analysis_text
                         cv2.imwrite("/media/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png", cropped_image)

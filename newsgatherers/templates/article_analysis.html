@@ -90,7 +90,7 @@
 <!-- block content -->
 <div class="bg-gray-100 p-6 m-10 mx-28 rounded-3xl">
 <!-- image -->
-{% if news.image == 'none' %}
+<!-- {% if news.image == 'none' %}
 <div class="rounded-sm flex justify-center">
     <div class="px-4 rounded-md">
       
@@ -104,11 +104,11 @@
       <img src="{{ news.image }}" alt="loading" height="800" width="600" class="rounded-2xl mt-16">
     </div>
   </div>
-{% endif %}
+{% endif %} -->
 <!-- heading and title -->
 <div class="p-10">
   <p class="mt-3"><B>
-    T{{ news.publisher }}
+    {{ news.publisher }}
   </B>
   </p>
   <p class="font-bold text-3xl mt-5">{{ news.title }}</p>
@@ -126,15 +126,53 @@
     
    
       <p>{{ news.main_text }} </p>
-    
- 
+      <br/>
+      <p>{{news.summary_article}}</p>
+      <br/>
+      <br/>
+    <input hidden id = "negative" value="{{news.negative_sentence}}"/>
+    <input hidden id = "neutral" value="{{news.neutral_sentence}}"/>
+    <input hidden id = "positive" value="{{news.positive_sentence}}"/>
+ <strong><p>Negative Sentences</p><strong/>
+  <br/>
+  <p id="negativeHandler"></p>
+  <br/>
+  <strong><p>Neutral Sentences</p><strong/>
+    <br/>
+    <p  id="neutralHandler"></p>
+    <br/>
+    <strong><p >Negative Sentences</p><strong/>
+      <br/>
+      <p id="positiveHandler"></p>
+      <br/>
   
     </div>
 
 </div>
 
 </div>
+<script>
+const negative = document.getElementById('negative').value
 
+const positive = document.getElementById('positive').value
+
+const neutral = document.getElementById('neutral').value
+const negativeHandler = document.getElementById('negativeHandler')
+const neutralHandler = document.getElementById('neutralHandler')
+const positiveHandler = document.getElementById('positiveHandler')
+
+document.addEventListener('DOMContentLoaded',function(){
+  negativeHandler.innerHTML = negative
+  positiveHandler.innerHTML = positive
+  neutralHandler.innerHTML = neutral 
+
+
+})
+
+
+
+
+</script>
 
 <!-- endblock -->
 

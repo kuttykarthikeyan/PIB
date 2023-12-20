@@ -99,32 +99,49 @@ def get_negative_clips(request,id):
         print(str(e))
         return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})
 
+def tokenize_and_clean(text):
+        words = word_tokenize(str(text).lower())
+        stop_words = set(stopwords.words('english'))
+        return [word for word in words if word.isalpha() and word not in stop_words]
+
+
 @api_view(['GET'])
-def get_word_cloud(request,json):
+def get_word_cloud(request,id):
     try:
+        print(id)
+        obj = news_obj.objects.get(id=id)
+        sentiment_analysis = obj.sentiment_analysis
+        sentiment_analysis = json.loads(sentiment_analysis)
+        data_array = []
+        for categories in sentiment_analysis:
+            data_array.append(categories['subtitle'])
+        data = " ".join(data_array)
+        print(data)
+        
         if not data:
+            print("##########")
             return JsonResponse({'status': False, 'data': 'no data recieved'})
         else:
-
+            
             print(data)
-            print(type(data))
-            data = json.loads(json)
-            # nltk.download('vader_lexicon')
-
-            def tokenize_and_clean(text):
-                words = word_tokenize(str(text).lower())
-                stop_words = set(stopwords.words('english'))
-                return [word for word in words if word.isalpha() and word not in stop_words]
-            print("image comedfffffffff wordcloud")
+        
+            # data = json.loads(json)
+            nltk.download('vader_lexicon')
+            
+            
+            print("image comedfffffffff wordcloud") 
             
             l = tokenize_and_clean(data)
             all_words = ' '.join(l)
+            
             print("image comejjjjjjjjj wordcloud")
 
             wordcloud = WordCloud(width=800, height=400, max_words=200, background_color='white').generate(all_words)
             print("image come wordcloud")
-            wordcloud.to_file("static/wordcloud_image.png")
+            wordcloud.to_file("newsgatherers/static/wordcloud_image.png")
             print("image come saved")
-            return JsonResponse({'status': True,'data': '/static/wordcloud_image.png'})
+            return JsonResponse({'status': True,'data': 'newsgatherers/static/wordcloud_image.png'})
+
     except Exception as e:
+        print("error occured")
         return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})

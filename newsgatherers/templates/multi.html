@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% block content%}
+<!-- container -->
+<div class="flex container gap-10 mt-10">
+  <div class=" ml-28">
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 " type="button">All <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+      </svg>
+      </button>
+  </div>
+ 
+  <div>
+    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black bg-gray-200 hover:bg-gray-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 " type="button">Positive <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+      </svg>
+      </button>
+  </div>
+</div>
+<!-- first card -->
+
+<div class="container mt-10  grid grid-cols-3 gap-3 px-28 mb-10">
+  <div class="">
+      <img src="{{cluster.image}}" alt="loading" height="400" width="500" class="rounded-xl">
+  </div>
+
+  <div class="col-span-2 ml-4">
+    <b class="text-3xl">{{cluster.title}}</b>
+    <p class="opacity-60 mt-2 mb-4">{{cluster.published_date}}</p>
+    <p class="mb-4"><Strong>{{cluster.publisher}}</Strong></p>
+      <p>{{ cluster.description }}</p>
+      <a href="#" class="text-blue-500 underline">Read more</a>
+  </div>
+
+</div>
+
+<!-- second card -->
+<div class="flex flex-col gap-1">
+  <!-- second card 2 -->
+
+
+  <div class="mx-24 bg-gray-200 grid grid-cols-3 gap-3 px-28 rounded-xl ">
+    
+    <div class="col-span-2 ml-4 py-10">
+      <p class="mb-4 text-3xl"><Strong>{{i.channel_name}}</Strong></p> 
+      <b class="text-2xl">{{i.title}}</b>
+      
+      <p class="opacity-60 mt-2 mb-4">{{i.published_date}}</p>
+      <p>{{i.description}}{{i.summary_article}}<a href="#" class="text-blue-500 underline">Read more</a>
+      </p>
+      <button class="btn btn-outline btn-error mt-5">Negative</button>
+    </div>
+    <div class="rounded-md">
+      <div class="px-4 rounded-md">
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg" alt="loading" height="800" width="600" class="rounded-2xl my-8">
+      </div>
+    </div>
+  </div>
+
+
+<!-- second card 2 -->
+  
+</div>
+{% endblock %}

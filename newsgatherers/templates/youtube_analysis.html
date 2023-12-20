@@ -19,9 +19,13 @@
       <div class="mt-1 text-lg ml-6 font-serif">
         <p id="summary"></p>
       </div>
+      {% else %}
+      <div class="mt-1 text-lg ml-6 font-serif">
+        <p id="summary"></p>
+      </div>
       {% endif %}
 
-      <div class="mt-6">
+      <!-- <div class="mt-6">
         <p>Positive sentence:</p>
         <p class="text-green-500"> {{ youtube_data.positive_sentence }}</p>
       </div>
@@ -29,7 +33,7 @@
       <div class="mt-6">
         <p>Negative sentence:</p>
         <p class="text-red-500"> {{ youtube_data.negative_sentence }}</p>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -56,31 +60,34 @@
     </div>
     <p class="ml-10 mt-10 font-bold text-xl">WORD CLOUD</p>
     <div class="rounded-lg px-16 mx-4">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzUzIMEcD1U-QY5vlSajwFm2LZ3HERDU-SPd5V0_JKVr0bro2uuVg8iIEwke9tE5IdsTI&usqp=CAU" alt="loading" height="500" width="900" class="mt-10">
+      <img id="word_cloud_image" src="" alt="loading" height="500" width="900" class="mt-10">
     </div> 
    <br> 
     <div class="grid grid-cols-2 gap-2">
       <div class="ml-10">
-        <p class="mt-8 font-bold text-xl">GRAPH:</p>
-        <img src="https://media.istockphoto.com/id/1144573725/photo/financial-business-charts-graphs-and-diagrams-3d-illustration-render.jpg?b=1&s=612x612&w=0&k=20&c=Hh3iTZpX-nqLnuG_hJhH5b9ncAAQQ0Rg4hRoxWKvJYg=" alt="loading" height="500" width="500" class="mt-10">
-      </div>
+        <!-- <p class="mt-8 font-bold text-xl">NEGATIVE SENTENCES:</p> -->
+        <p id="negativeSentences"></p>
+        
+      </div> 
 
       <div class="ml-10">
-        <p class="font-bold text-xl mt-8">PIE CHART:</p>
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrQHJCr1xdZBFQmAVCXT8OX6K-2LkJU3_x1Q&usqp=CAU" alt="loading" class="mt-10" height="700" width="300">
+        <!-- <p class="font-bold text-xl mt-8">POSITIVE SENTENCES:</p> -->
+       <p id="positiveSentences"></p>
       </div> 
-    </div>
+    </div> 
   </div>
 </div>
+<button id="cloud_button" hidden onClick="get_word_cloud({{youtube_data.id}})"></button>
 <!-- endblock -->
 <script>
 
 
-  document.addEventListener('DOMContentLoaded',async function() {
+  summary = document.getElementById('summary');
+  console.log(summary)
+  document.addEventListener('DOMContentLoaded',function() {
     var sentiment_analysis = document.getElementById('sentiment_analysis_input').value;
     console.log(sentiment_analysis);
     parsed_analysis = JSON.parse(sentiment_analysis);
-    summary = document.getElementById('summary');
     summaryArray = [];
     parsed_analysis.forEach((data)=>{
       summaryArray.push(data.subtitle);
@@ -88,29 +95,43 @@
     })
 
     if(summaryArray.length > 0){
-     summary.innerHTML = summaryArray.join(""); 
+     summary.innerHTML = summaryArray.join(" "); 
     }
     else{
       summary.innerHTML = "No summary found";
     }
     console.log(summary.innerHTML)
+    click_for_get_cloud()
+    
+  });
+
+const click_for_get_cloud = () =>{
+const button = document.getElementById('cloud_button')
+console.log(button)
+button.click();
+}
+
+  const get_word_cloud = async (id) =>{
     try {
+      console.log(id)
       const subtitles = summary.innerHTML;
-      const jsonSubtitles = JSON.stringify(subtitles);
       console.log('sending request to get word cloud')
-      const response = await fetch(`http://10.1.75.142:8000/get_word_cloud/${jsonSubtitles}`, {
+      const response = await fetch(`http://127.0.0.1:8000/get_word_cloud/${id}`, {
         method: "GET",
       });
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      
       const parseRes = await response.json();
+      console.log(parseRes)
+      image = document.getElementById("word_cloud_image")
+      image.setAttribute("src",`http://127.0.0.1:8000/static/wordcloud_image.png`)
+
     } catch (error) {
       console.error('Fetch error:', error);
       console.error('Error stack:', error.stack); 
     }
-  });
+  }
 
 
   const getNegativeclips = async (id) => {
@@ -121,7 +142,7 @@
     
     
     try {
-      const response = await fetch(`http://10.1.75.142:8000/get_negative_clips/${id}`, {
+      const response = await fetch(`http://127.0.0.1:8000/get_negative_clips/${id}`, {
         method: "GET",
       });
       if (!response.ok) {
@@ -180,15 +201,17 @@
         if (index == 0){
           videoContainer2.setAttribute('id','slide1')
           left.setAttribute('href',`#slide${data.length}`)
+          left.setAttribute('hidden','true')
           right.setAttribute('href',`#slide${index + 2}`)
         }
         else if(index == 1){
           videoContainer2.setAttribute('id',`slide2`)
           left.setAttribute('href',`#slide${index}`)
           right.setAttribute('href',`#slide${index + 2}`)
+          right.setAttribute('hidden','true')
         }
         else if(index == data.length - 1){
-        //  videoContainer2.setAttribute('id',`slide${index+1}`)
+        videoContainer2.setAttribute('id',`slide${index+1}`)
           left.setAttribute('href',`#slide${index - 1}`)
           right.setAttribute('href',`#slide1`)
         }

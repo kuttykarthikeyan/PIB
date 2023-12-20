@@ -251,3 +251,9 @@ __pycache__/
 downloaded_youtube_video/
 
 *.mp4
+
+media/ocr/
+
+newsgatherers/static/
+
+static/

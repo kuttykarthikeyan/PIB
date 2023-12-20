@@ -6,7 +6,6 @@ from django.utils import timezone
 # Create your models here.
 
 class news_cluster_head(models.Model):
-
     title = models.CharField(max_length=800, null=False, blank=False, default='Your Default Title')
     description = models.TextField(null=True,blank=True)
     published_date = models.CharField(max_length=255,null=True,blank=True)
@@ -24,7 +23,7 @@ class news_cluster_head(models.Model):
     POSITIVE = models.CharField(max_length=255,null=True,blank=True)
     NEUTRAL = models.CharField(max_length=255,null=True,blank=True)
     NEGATIVE = models.CharField(max_length=255,null=True,blank=True)
-    sentiment_analysis_result = models.TextField(null=True,blank=True)
+    SENTIMENT_ANALYSIS_RESULT = models.TextField(null=True,blank=True)
     created_time = models.DateTimeField(default=timezone.now())
     website_data_cluster_obj = models.ManyToManyField("news_obj",related_name="website_data_cluster_obj")
     youtube_data_cluster_obj = models.ManyToManyField("news_obj",related_name="youtube_data_cluster_obj")
@@ -84,6 +83,11 @@ class news_obj(models.Model):
 class negative_clippings(models.Model):
     video = models.FileField(upload_to='videos/')
 
+class negative_publisher_today(models.Model):
+    NEGATIVE = models.CharField(null=True,blank=True,max_length=50)
+    publisher = models.CharField(null=True,blank=True,max_length=150)
+    published_date = models.CharField(null=True,blank=True,max_length=200)
+    state = models.CharField(null=True,blank=True,max_length=250)
 # class News(models.Model):
 
 #     data = models.FileField()

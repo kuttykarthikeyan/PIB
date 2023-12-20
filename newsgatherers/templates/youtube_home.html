@@ -7,7 +7,7 @@
   <div class="flex flex-col gap-1">
     <!-- second card 1 -->
     {% for youtube_video in data %}
-    <div class="mx-24 bg-gray-200 grid grid-cols-3 gap-3 px-28 rounded-xl ">
+    <div class="mx-24 bg-gray-200 grid grid-cols-2 gap-3 px-80 mb-10 ">
       
       <div class="col-span-2 ml-4 py-10">
         <p class="mb-4 text-3xl"><Strong>{{youtube_video.channel_name}}</Strong></p> 
@@ -17,15 +17,7 @@
         
         <button class="btn btn-outline btn-error mt-5">Negative</button>
       </div>
-      <div class="rounded-md">
-        <div class="px-4 rounded-md">
-    {% if youtube_video.thumbnail %}
-          <img src="{{youtube_video.thumbnail}}" alt="loading" height="800" width="600" class="rounded-2xl my-8">
-      {% elif youtube_video.image %}
-      <img src="{{youtube_video.image}}" alt="loading" height="800" width="600" class="rounded-2xl my-8">
-      {% endif %}
-        </div>
-      </div>
+    
     </div>
      {% endfor %} 
     {% endblock %}
