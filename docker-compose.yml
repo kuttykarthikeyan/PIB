@@ -1,3 +1,6 @@
+version: '3'
+
+services:
   web:
     container_name: pib
     restart: always
@@ -9,4 +12,4 @@
     env_file: production.env
     volumes:
       - pib:/usr/src/app/media
-    command: sh '/usr/src/app/run_web.sh'
+    command: sh /usr/src/app/run_web.sh
