@@ -16,6 +16,8 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 from . models import *
 import datetime
 from celery import shared_task
+from django.conf import settings
+
 
 language_selection_dict = { "english_newspapers" : 'en' ,'telugu_newspapers' : 'te','hindi_newspapers':'hi' }
 
@@ -120,7 +122,7 @@ def is_government_related(news_text):
 
 def image_to_text_OCR(image_path):
     import pytesseract
-    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    pytesseract.pytesseract.tesseract_cmd = settings.PYTESSERACT_LOCATION
     text = pytesseract.image_to_string(image=image_path)
     return text
  
