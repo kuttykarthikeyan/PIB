@@ -6,6 +6,7 @@ from requests import request
 from .models import *
 import pandas as pd
 import requests
+from .scripts.test import *
 from newspaper import Article
 import json
 from django.http import JsonResponse
@@ -215,12 +216,47 @@ def article_analysis(request,id,check):
 
 def report(request):
     try:
+        keyword = ""
+        url = ""
+        time = 5
+        language = "english"
+        past_no_of_hours = 5
+        keyword = ""
+        site = ""
+        time_ago = 5
+        print('heyy im test')
         if request.method == 'POST':
-            print(request.POST)
+
+            print(request.POST,'im post')
+            keyword = request.POST.get('keyword')
+            url = request.POST.get('urls')
+            time = request.POST.get('time')
+            language = request.POST.get('language')
+            max_results = 10
+            past_no_of_hours = time
+            keyword = keyword
+            site = ""
+            if site != "":
+                site = " site:" + url
+            time_ago = 10
+            if time != 0:
+                time_ago = " when:" + str(time) + "h"
+            prompt =  keyword + site + time_ago
+
+            result = main_function(prompt,language,max_results,past_no_of_hours)
+            # result.to_csv("scrapped_result.csv")
+            result.to_csv(r"D:/Users/Downloads/scrapped_result.csv")
+            
+            print(result)
+            context = {'result':result}
+            return render(request,'test.html',context)
+
     except Exception as e:
         print(str(e))
     
-    return render(request,'report.html')
+    return render(request,'test.html')
+
+
 
 
 def eprints(request):

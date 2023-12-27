@@ -21,5 +21,6 @@ urlpatterns = [
     path('scrap_news_clustered_data/',scrap_news_clustered_data,name='scrap_news_clustered_data'),
     path('get_negative_clips/<int:id>',get_negative_clips,name='get_negative_clips'),
     path('get_word_cloud/<int:id>',get_word_cloud,name='get_word_cloud'),
+    path('get_csv/',get_csv,name='get_csv')
 ]
 

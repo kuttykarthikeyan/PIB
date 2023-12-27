@@ -114,7 +114,7 @@ def is_government_related(news_text):
 
 def image_to_text_OCR(image_path):
     import pytesseract
-    pytesseract.pytesseract.tesseract_cmd = settings.PYTESSERACT_LOCATION
+    pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     text = pytesseract.image_to_string(image=image_path)
     return text
  
@@ -200,7 +200,7 @@ def e_print_function(newspaper_lang):
            
             # os.makedirs("OCR_results/" + file_name + "_pdf" + "/page_"+str(id+1),exist_ok=True)
             # cv2.imwrite("OCR_results/" + file_name + "_pdf" + "/page_"+str(id+1)+"/full_image.jpg", results_image)
-            cv2.imwrite("/media/ocr/" +"/page_"+str(id+1)+".jpg", results_image)
+            cv2.imwrite("media/ocr/" +"/page_"+str(id+1)+".jpg", results_image)
 
             page_obj = Page.objects.create(ocr_object=paper,file = "/ocr/" + page_name,page_number = page.number)
 
@@ -219,7 +219,7 @@ def e_print_function(newspaper_lang):
                     x1, y1, x2, y2 = map(int, [x1, y1, x2, y2])
                     cropped_image = input_image[y1:y2, x1:x2]
                    
-                    if newspaper_lang == 'english':
+                    if newspaper_lang == 'english_newspapers':
                         image_to_text = image_to_text_OCR(cropped_image)
                        
                     if newspaper_lang == 'telugu_newspapers':
@@ -238,14 +238,15 @@ def e_print_function(newspaper_lang):
                     if 1 == 1:
                         print("trueeee")
                         art_dict["article_" + str(art_num)] = analysis_text
-                        cv2.imwrite("/media/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png", cropped_image)
-                        OCRResult.objects.create(page=page_obj,name=str(art_num),file="/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".png")
+                        cv2.imwrite("media/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".jpg", cropped_image)
+                        OCRResult.objects.create(page=page_obj,name=str(art_num),file="/ocr/" + "page_"+str(id+1)+"_article_" + str(art_num) + ".jpg")
                         art_num += 1
            
             pages_dict["page_"+str(id+1)] = art_dict
             art_num = 1      
             img_num = 1
             art_dict = {}
+            break
            
            
            

@@ -1,137 +1,212 @@
+{% block content %}
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Balkan Dashboard</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script type='text/javascript' src='https://www.google.com/jsapi'></script>
-    <script src="{% static 'data.js' %}"></script>
-    <script src="{% static 'script.js' %}"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700"
-      rel="stylesheet"
-    />
-
-    <link rel="stylesheet" type="text/css" href="{% static 'dash.css' %}">
-  </head>
-
-  <body>
-    <div id="wrapper">
-      <div class="content-area">
-        <div class="container-fluid">
-          <div class="text-right mt-3 mb-3 d-fixed">
-          </div>
-            <div class="row mt-5 mb-4">
-              <div class="col-md-6">
-                <div class="box">
-                  <div id="graph-1">
-                    <div id="chart"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="box">
-                  <div id="graph-2"></div>
-                  <div id="line"></div>
-                </div>
-              </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIB</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.20/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<div class="flex justify-between max-h-[45px] bg-[#48ADA5]">
+  <div class="flex items-center ml-12">
+    <a href="{% url 'home' %}">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+    </svg>
+  </a>
+  </div>
+  <div class="flex items-center px-20 gap-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+    </svg>
+    
+      <button class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+      </button>
+    <button class="text-white hover:opacity-70 p-2 mx-2">
+      <div class="dropdown ">
+        <div tabindex="0" role="button" class="mt-1 px-10 ">
+          <div class="grid grid-cols-2">
+            <div>
+              Theme
             </div>
-
-            <div class="row mt-4 mb-4">
-              <div class="col-md-6">
-                <div class="box">
-                  <div id="graph-3"></div>
-                  <div id="pie"></div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="box">
-                  <div id="graph-4"></div>
-                  <div id="visualization">   </div>
-                </div>
-              </div>
+            <div>
+              <svg class="h-2.5 ms-3 mt-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
             </div>
           </div>
         </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box w-52 text-black">
+          <li><a>Green</a></li>
+          <li><a>Blue</a></li>
+        </ul>
+      </div>
+    </button>
+
+    <button class="text-white hover:opacity-70">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="mt-1">
+          <div class="grid grid-cols-2">
+            <div>
+              TamilNadu
+            </div>
+            <div>
+              <svg class="h-2.5 ms-3 mt-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" >
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-white rounded-box  text-black">
+          <li><a>Kerala</a></li>
+          <li><a>Gujarat</a></li>
+        </ul>
+      </div>
+    </button>
+  </div>
+</div>
+<!-- navbar-2 -->
+<div class="navbar bg-base-100 bg-white-500 h-24 pr-12">
+    <div class="flex-1">
+      <img src="https://4.bp.blogspot.com/-abhM9jw9s44/TBNyEnxpVsI/AAAAAAAAACE/JWrUlBnPiJs/s1600/govt_of_ind_logo.png" height="38" width="48" class="ml-8 mr-2" alt="loading">
+
+      <div class="ml-2">
+        <p class="text-2xl font-bold">Press Informations Bureau</p>
+        <p class="text-md">Government of India</p>
       </div>
     </div>
+    
+  <div id="google_translate_element"></div>
+  </div>
+</div>
+
+  <!-- navbar-3 -->
+  <div class="flex m-auto w-full bg-[#F99426]">
+    <ul class="flex justify-between w-full px-24 py-3">
+      <li><button class="text-white hover:opacity-70 p-2 bg-[#fdba74] rounded-md shadow-md" style="font-family:sans-serif;font-weight:700"><a href="{% url 'home' %}">Home</a></button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2"><a href="{% url 'dash' %}">Dashboard</a></button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2"><a href="{% url 'youtube_data_home' %}">Youtube Video</a></button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2"><a href="{% url 'ocr' %}">E-prints</a></button></li>
+      <li><button class="btn-glass text-white hover:opacity-70 p-2"><a href="{% url 'report' %}">Report</a></button></li>
+    </ul>
+  </div>
+  <div class="flex container gap-10 mt-10">
+    
+    {% comment %} <div class="dropdown ml-28">
+      <div tabindex="0" role="button" class="btn mt-1 px-10 font-bold">
+        ALL
+        
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a>Prime minister</a></li>
+        <li><a>Chief minister</a></li>
+      </ul>
+    </div> {% endcomment %}
+    {% comment %} <div class="dropdown ">
+      <div tabindex="0" role="button" class="btn mt-1 px-10 font-bold">
+      Sentiment analysis
+        
+        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </div>
+      <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52" id="filterSelect"  >
+        <li value="option-1"><a>POSITIVE</a></li>
+        <li value="option-2"><a>NEGATIVE</a></li>
+        <li value="option-3"><a>NEUTRAL</a></li>
+      </ul>
+      <div id="filteredData">
+        <!-- Display the filtered data here -->
+    </div>
+    </div> {% endcomment %}
+    {% comment %} <div tabindex="0" role="button" class="btn mt-1 px-10 font-bold">
+      <a href="{% url 'live' %}">
+      Live News Search
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+        </svg>
+      </a>
+      </div> {% endcomment %}
+  </div>
+  
 
 
-  </body>
-  <script>
+<!-- block content -->
 
-    google.load('visualization', '1', {'packages': ['geochart']});
-google.setOnLoadCallback(drawVisualization);
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'dash.css' %}">
+<script src="{% static 'data.js' %}"></script>
+<script src="{% static 'script.js' %}"></script>
+<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+<button class="text-white hover:opacity-70 p-2 bg-[#fdba74] rounded-md shadow-md" style="font-family:sans-serif;font-weight:700"><a href="">Submit</a></button>
+<h2 style="margin-left:20px;margin-top:50px;">Negative Polarity</h2>
+<!-- <iframe title="PIB" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=13029bd9-dbb7-417f-80d3-490e72b88c2f&autoAuth=true&ctid=6b8b8296-bdff-4ad8-93ad-84bcbf3842f5" frameborder="0" allowFullScreen="true"></iframe> -->
+<!-- <div class="desc-1 flex flex-col">
+<div class="desc-1 flex gap-2" style="margin-top:10px;">
+  <div style="height:700px;width:600px;">
+    <div id="chart"></div>
+  </div>
+  <div style="height:700px;width:700px;margin-left:200px;">
+    <div id="pie"></div>
+  </div>
+</div>
+<iframe title="PIB" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=13029bd9-dbb7-417f-80d3-490e72b88c2f&autoAuth=true&ctid=6b8b8296-bdff-4ad8-93ad-84bcbf3842f5" frameborder="0" allowFullScreen="true"></iframe> -->
+{% comment %} <div class="desc-1 flex gap-2">
+<div align="center" style="width:400px;height:400px;margin-left:500px;margin-bottom:700px;">
+  <div id="visualization"></div>
+</div>
+</div>
+</div> {% endcomment %}
+{% endblock %}
+<!-- endblock -->
 
-function drawVisualization() {
-  var data = google.visualization.arrayToDataTable([
-        ['State Code', 'State', 'Positive'],     
-          [ 'IN-UP','Uttar Pradesh', 33],
-    ['IN-MH','Maharashtra', 32],
-    ['IN-BR','Bihar', 31],
-    ['IN-WB','West Bengal', 32],
-    ['IN-MP','Madhya Pradesh', 30],
-    ['IN-TN','Tamil Nadu', 33],
-    ['IN-RJ','Rajasthan', 33],
-    ['IN-KA','Karnataka', 29],
-    ['IN-GJ','Gujarat', 34],
-    ['IN-AP','Andhra Pradesh', 32],
-    ['IN-OR','Orissa', 33],
-    ['IN-TG','Telangana', 33],
-    ['IN-KL','Kerala', 31],
-    ['IN-JH','Jharkhand', 29],
-    ['IN-AS','Assam', 28],
-    ['IN-PB','Punjab', 30],
-    ['IN-CT','Chhattisgarh', 33],
-    ['IN-HR','Haryana', 30],
-    ['IN-JK','Jammu and Kashmir', 20],
-    ['IN-UT','Uttarakhand', 28],
-    ['IN-HP','Himachal Pradesh', 17],
-    ['IN-TR','Tripura', 31],
-    ['IN-ML','Meghalaya', 21],
-    ['IN-MN','Manipur', 22],
-    ['IN-NL','Nagaland', 22],
-    ['IN-GA','Goa', 32],
-    ['IN-AR', 'Arunachal Pradesh', 33],
-    ['IN-MZ','Mizoram', 23],
-    ['IN-SK','Sikkim', 24],
-    ['IN-DL','Delhi', 31],
-    ['IN-PY','Puducherry', 33],
-    ['IN-CH','Chandigarh', 30],
-    ['IN-AN','Andaman and Nicobar Islands', 30],
-    ['IN-DN','Dadra and Nagar Haveli', 30],
-    ['IN-DD','Daman and Diu', 29],
-    ['IN-LD','Lakshadweep', 31]
-  ]);
+  <!-- FOOTER -->
+  <footer class="bg-light text-center text-lg-start fixed-bottom mt-10">
+    <div class="text-center justify-center p-2 bg-[#48ADA5] p-3 flex" style=" color: white;">
+        <div>
+          Made with
+        </div>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-heart-fill ml-1 mt-1 mr-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+            </svg>
+        </div>
+        <div>
+          at iQube
+        </div>
 
+    </div>
+</footer>
+  
+</body>
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
 
-      var opts = {
-        region: 'IN',
-        domain:'IN',
-        displayMode: 'regions',
-        colorAxis: {colors: ['#CBFFA9', '#79AC78', '#1A5D1A']},
-        resolution: 'provinces',
-        /*backgroundColor: '#81d4fa',*/
-        /*datalessRegionColor: '#81d4fa',*/
-        defaultColor: '#f5f5f5',
-        height: 305,
-      };
-      var geochart = new google.visualization.GeoChart(
-          document.getElementById('visualization'));
-      geochart.draw(data, opts);
-    };
-  </script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+  document.getElementById('filterSelect').addEventListener('onChange', function () {
+      var POSITIVE = this.value;
+      print("!!!!!!!!!!!!!!!!!!!!!!!!")
+      fetch(/filter_data/?POSITIVE=${POSITIVE})
+      print("!!!!!!!!!!!!!!!!!!!!!!!")
+          .then(response => response.json())
+          .then(data => {
+              // Update the content dynamically
+              document.getElementById('filteredData').innerHTML = '<p>' + JSON.stringify(data.filtered_data) + '</p>';
+          })
+          .catch(error => console.error('Error:', error));
+  });
+</script>
 </html>

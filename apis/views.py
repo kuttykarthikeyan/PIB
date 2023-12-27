@@ -27,7 +27,7 @@ from newsgatherers.scripts.youtube_video_trimming_process import sentiment_analy
 from asgiref.sync import sync_to_async
 from youtube_transcript_api import YouTubeTranscriptApi
 import asyncio
-
+from newsgatherers.scripts.test import *
 from newsgatherers.models import *
 # Create your views here.
 from newsgatherers.scripts.urlmapper import *
@@ -145,3 +145,43 @@ def get_word_cloud(request,id):
     except Exception as e:
         print("error occured")
         return JsonResponse({'status': False, 'data': 'An error occurred'+str(e)})
+
+@api_view(['POST'])
+def get_csv(request):
+    if request.method == 'POST':
+        try:
+            keyword = ""
+            url = ""
+            time = 5
+            language = "english"
+            past_no_of_hours = 5
+            keyword = ""
+            site = ""
+            time_ago = 5
+            print('heyy im test')
+            if request.method == 'POST':
+
+                print(request.POST,'im post')
+                keyword = request.POST.get('keyword')
+                url = request.POST.get('urls')
+                time = request.POST.get('time')
+                language = request.POST.get('language')
+                max_results = 10
+                past_no_of_hours = time
+                keyword = keyword
+                site = ""
+                if site != "":
+                    site = " site:" + url
+                time_ago = 10
+                if time != 0:
+                    time_ago = " when:" + str(time) + "h"
+                prompt =  keyword + site + time_ago
+
+                result = main_function(prompt,language,max_results,past_no_of_hours)
+                result.to_csv(r"D:/Users/Downloads/scrapped_result.csv")
+                
+                print(result)
+                return JsonResponse({'status': True,'data': result})
+        except Exception as e:
+            print(str(e))
+            return JsonResponse({'status': False,'data': str(e)})
