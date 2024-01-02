@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming with Flask</title>
+</head>
+<body>
+    <h1>Video Streaming with Flask</h1>
+    
+    <img id="video_feed" src="{{ url_for('video_feed') }}" alt="Video Feed">
+    
+    <script>
+        function updateVideo() {
+            const videoFeed = document.getElementById('video_feed');
+            videoFeed.src = "{{ url_for('video_feed') }}?t=" + new Date().getTime();  // Add timestamp to force reload
+        }
+
+        // Update the video feed every 1000 milliseconds (1 second)
+        setInterval(updateVideo, 1000);
+    </script>
+</body>
+</html>
